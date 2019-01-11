@@ -13,19 +13,23 @@ public class ScaleQuiz : MonoBehaviour
                                             
     private int rootNote;
     private System.Random rnd = new System.Random();
+    private string[] currentScale;
 
     public Note notes;
+    public ScaleGenerator scaleGen;
     public Text questionText;
     public Text answerText;
     public Toggle[] keyToggles;
     public Toggle halfToggle;
+    public Dropdown scaleDrop;
      
     public void GenerateQuestion ()
-    {
-
-        //set rootNote of one of the whole notes
-        //int rootNote = wholeNotes[rnd.Next(0, 7)];       
+    { 
+        //set rootNote of one of the whole notes              
         int rootNote = wholeNotes[GenerateRoot()];
+
+        //create a new scale
+        currentScale = scaleGen.GenerateScale( rootNote, scaleDrop.value );
 
         //get  1-4 random values, values range form 1-7, values can't be equal twice in a row
         int totalPositions = rnd.Next (1, 5 );     

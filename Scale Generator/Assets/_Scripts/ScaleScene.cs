@@ -86,8 +86,7 @@ public class ScaleScene : MonoBehaviour
     }
 
     void SetDropdownValues()
-    {
-        Debug.Log( gameObject.name );
+    {        
         scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
         rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
     }
