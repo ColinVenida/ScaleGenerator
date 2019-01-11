@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScaleQuiz : MonoBehaviour
 {
 
-    private int[] quizNotes = { 0, 0, 0, 0 };
+    private int[] quizIndexes = { 0, 0, 0, 0 };
     private int[] wholeNotes = { 0, 2, 3, 5, 7, 8, 10 };  //array of just whole notes
     private int[] majorDistances = { 0, 2, 4, 5, 7, 9, 11 }; //how many half-steps it takes to get from the root note to a given scale Position
                                             //root note + 4 half steps = 3rd note of scale
@@ -24,13 +24,14 @@ public class ScaleQuiz : MonoBehaviour
     public Dropdown scaleDrop;
      
     public void GenerateQuestion ()
-    { 
+    {
         //set rootNote of one of the whole notes              
-        int rootNote = wholeNotes[GenerateRoot()];
+        //int rootNote = wholeNotes[GenerateRoot()];
+        int rootNote = GenerateRoot();
 
         //create a new scale
         currentScale = scaleGen.GenerateScale( rootNote, scaleDrop.value );
-
+       
         //get  1-4 random values, values range form 1-7, values can't be equal twice in a row
         int totalPositions = rnd.Next (1, 5 );     
         
@@ -40,8 +41,8 @@ public class ScaleQuiz : MonoBehaviour
             ShowAnswer();
         }
 
-        //set the first index of quizNotes
-        quizNotes[0] = rnd.Next( 1, 7 );
+        //set the first index of quizIndexes
+        quizIndexes[0] = rnd.Next( 1, 7 );
 
         for ( int i = 1; i < totalPositions; i++ )
         {
@@ -51,39 +52,46 @@ public class ScaleQuiz : MonoBehaviour
             {
                 position = rnd.Next(1, 7);
             }
-            while ( position == quizNotes[i-1] );
+            while ( position == quizIndexes[i-1] );
 
-            quizNotes[i] = position;
+            quizIndexes[i] = position;
             
         }
 
         //zero out the remaining array indexes
-        if (totalPositions < quizNotes.Length)
+        if (totalPositions < quizIndexes.Length)
         {
-            for (int j = totalPositions; j < quizNotes.Length; j++)
+            for (int j = totalPositions; j < quizIndexes.Length; j++)
             {
-                quizNotes[j] = 0;
+                quizIndexes[j] = 0;
             }
         }
-               
+
         //find the associated notes based on random values and replace question and answer text
-        SetQuestionText( rootNote, quizNotes );
-        SetAnswerText( rootNote, quizNotes );
+        SetQuestionText( rootNote, quizIndexes );
+        SetAnswerText( rootNote, quizIndexes );
+                
     }
 
 
-    //function to generate a root note that respects the filters
-    //TODO:  ADD THE HALF-NOTES FILTER
-        // ***NEED TO DETERMINE HOW TO PROPERLY LABEL NOTES****
+    //function to generate a root note that respects the filters    
     private int GenerateRoot ()
     {
-        int root = 0;
 
-        do
-        {
-            root = rnd.Next( 0, 7 );
-        }
-        while ( !keyToggles[root].isOn );
+        //****CURRENT STATE****
+        //Toggles in the Scene do not do anything
+        //number is just randomly generated
+        int root = rnd.Next( 0, 16 );
+        
+
+        //***old code***
+        //int root = 0;
+
+        //do
+        //{
+        //    root = rnd.Next( 0, 7 );
+        //}
+        //while ( !keyToggles[root].isOn );
                 
         return root;
     }
@@ -92,8 +100,9 @@ public class ScaleQuiz : MonoBehaviour
     {
         string strRoot = "";
         string sequence = "";
+        string scale;
 
-        strRoot = notes.GetNoteCodes()[root];
+        strRoot = currentScale[0];
                 
         //add to the question text based on the generated positions
         for ( int i = 0; i < quiz.Length; i++ )
@@ -131,32 +140,39 @@ public class ScaleQuiz : MonoBehaviour
         //remove the last comma
         sequence = sequence.Remove( sequence.Length - 2, 1 );
 
-        questionText.text = "Name the " + sequence + "note(s) in the " + strRoot + " major scale";
+        switch( scaleDrop.value )
+        {
+            case 0:
+                scale = " major scale";
+                break;
+            case 1:
+                scale = " minor scale";
+                break;
+            default:
+                Debug.Log( "default statement in SetQuestionText()" );
+                scale = " major scale";
+                break;
+        }
+        questionText.text = "Name the " + sequence + "note(s) in the " + strRoot + scale;
     }   
 
     private void SetAnswerText ( int root, int[] quiz )
     {
-        string answer = "";
-        int note = 0;
-        
-        for ( int i = 0; i < quiz.Length; i++ )
+        string answer = "";       
+
+        for (int i = 0; i < quiz.Length; i++)
         {
-            if ( quiz[i] == 0 )
+            if (quiz[i] == 0)
             {
                 continue;
             }
 
-            if ( quiz[i] >= 7 )
+            if (quiz[i] >= 7)
             {
-                Debug.Log("quiz[i] >= 7");
-            }
-            note = root + majorDistances[ quiz[i] ];
+                Debug.Log( "quiz[i] >= 7" );
+            }    
 
-            if ( note > 11 )
-            {
-                note = note - 12;
-            }           
-            answer += ( notes.GetNoteCodes()[note] + ", " );
+            answer  += currentScale[ quiz[i] ] + ", ";
         }
 
         //remove the last comma
@@ -183,9 +199,7 @@ public class ScaleQuiz : MonoBehaviour
 	{
         GenerateQuestion();
         answerText.enabled = false;
-	}
-
-    
+	}   
 	
 	// Update is called once per frame
 	void Update () 
