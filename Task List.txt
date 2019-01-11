@@ -1,0 +1,34 @@
+====TASK LIST=====
+
+12/29/18
+
+***implement new note system to [scenes]
+
+
+**Re-evalute what the scenes after the new note system is implemented
+	//what bugs are there?
+	//is everything being saved?
+	//etc.
+
+refactor the Start() and Awake() functions to proper order
+	[done]-list out all the functions that are currently in the Start(), Awake() and OnValueChanged functions		
+	-list out functions that are essential and need to be done first
+	-refactor logic to solve the OnValueChanged problem
+	-put other functions into the Start() function ?
+
+
+
+
+implement feature:  show different scales on the fret board
+	-make a drop down of the scales to use
+
+implement feature:  highlight same notes on user's touch
+
+
+====COMPLETED TASKS====
+
+1/10/19
+implement version control to project
+	-get Git on computer
+	-google how to use Git with Unity
+	-list what files need to be backed up for the project

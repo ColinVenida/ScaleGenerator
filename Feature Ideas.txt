@@ -1,0 +1,31 @@
+Feature Ideas
+
+scale generator
+	-generates 8-notes scales based on user-provided root note, and scale formula
+	-scales to include:
+		-major
+		-minor
+		-harmonic minor
+		-melodic minor
+		
+
+chord quizes
+	-quizes the user about music scales and chord progressions
+		-ex. what is the 5th of C major scale?
+		-what is the 1, 4, 5 in A major?
+	-answers are hidden until the user presses and holds the "show answer" button
+
+	-user can select checkboxes what scale(s) they wished to be quized on
+
+Guitar Fretboard
+	-displays all the whole notes of each string on the guitar up to 14 frets
+		-app procedurally generates and displays notes on each string
+	-user can change the tuning of the each string to change what notes are displayed
+	-user can pick from a pre-set list of common guitar tunings
+		-"Drop D"
+		-"full step down"
+	-user can add/remove strings to accomodate different guitars
+
+	***extra feature***
+		-user can press each note on fret board to have hte app play the tone (midi?)
+		-user can tap each note on the fret board to highlight all the same notes

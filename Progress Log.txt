@@ -1,0 +1,16 @@
+====Progress Log====
+
+1/10/19
+
+Added project to a Git repository!!! :)
+
+fixed issue of NullReferenceException in the ScaleScene
+	//issue was caused be the re-naming the ScaleScene to ScaleScene_temp
+	//renamed the current scene to ScaleScene
+
+I need to implement the new note systems to the other scenes BEFORE I figure out the 
+function pipeline problem.  It is impossible to fix the pipeline problem if the scenes
+don't work
+
+I need to implement the ScaleGenerator class into the QuizScene
+	-design:  ScaleGenerator will create a new scale with every new question

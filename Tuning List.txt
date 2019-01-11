@@ -1,0 +1,21 @@
+====Preset Tuning List====
+
+standard	E A D G B E
+drop d		D A D G B E
+half step down	D# B# C# F# A# D#
+drop c#		C# B# C# F# A# D#
+full step down	D G C F A D
+drop c		C G C F A D
+"DADGAD"	D A D G A D
+"Rain Song" 	D G C G C D
+"Open G"	D G D G B D
+
+standard bass	E A D G
+ukulele island tuning	G C E A
+4 string "Standard Tenor" banjo	C G D A
+4 String "Irish Tenor" banjo	G D A E
+4 String "Chicago Tuning" banjo	D G B E
+
+5 string banjo standard G D G B D
+5 string "Double C" 	G C G C D
+
