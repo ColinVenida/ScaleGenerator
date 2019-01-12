@@ -76,22 +76,52 @@ public class ScaleQuiz : MonoBehaviour
 
     //function to generate a root note that respects the filters    
     private int GenerateRoot ()
-    {
+    {        
+        int key = 0;
+        int root = 0;
 
-        //****CURRENT STATE****
-        //Toggles in the Scene do not do anything
-        //number is just randomly generated
-        int root = rnd.Next( 0, 16 );
-        
+        //find what key to set the quiz in based on the active toggles
+        do
+        {
+            key = rnd.Next( 0, 7 );
+        }
+        while (!keyToggles[key].isOn);
 
-        //***old code***
-        //int root = 0;
+        //convert that Key to another int to give to the ScaleGenerator
+        switch ( key )
+        {
+            case 0:     
+                root = 1;   //set to A natural
+                break;
+            case 1:     
+                root = 4;   //set to B
+                break;
+            case 2:     
+                root = 5;   //set to C
+                break;
+            case 3:
+                root = 8;   //set to D
+                break;
+            case 4:
+                root = 11;    //set to E
+                break;
+            case 5:
+                root = 12;    //set to F
+                break;
+            case 6:
+                root = 15;    //set to G
+                break;            
+            default:
+                Debug.Log( "default statement, defaulting to C" );
+                root = 5;
+                break;
+        }
 
-        //do
-        //{
-        //    root = rnd.Next( 0, 7 );
-        //}
-        //while ( !keyToggles[root].isOn );
+        //if the toggle is on, then add a sharp, flat, or nothing
+        if ( halfToggle.isOn )
+        {
+            root += rnd.Next( -1, 2 );  
+        }       
                 
         return root;
     }
