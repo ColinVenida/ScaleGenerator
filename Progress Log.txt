@@ -1,5 +1,15 @@
 ====Progress Log====
 
+1/12/19
+implemented the new note system to the QuizScene.  The Key toggles AND the sharp/flat option work in the scene!!!
+	//I had to copy the ScaleGenerator GameObject from the ScaleScene and paste it into the QuizScnee
+	//I had to remove the old references to "note" in the QuizScene code
+
+	//I refactored the SetAnswerText(), SetQuestionText(), and GenerateRoot() functions to play nice with
+	//the new ScaleGenerator monobehavior
+
+The next feature to work on is in the FretboardScene
+
 1/10/19
 
 Added project to a Git repository!!! :)

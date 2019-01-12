@@ -16,11 +16,6 @@ NullReferenceException during CalculateFrets() statup
 
 
 *Quiz Scene*
-needs to implement new note system
-error "'Note' is missing the class attribute 'ExtensionOfNativeclass'"
-	//error will be fixed with the new note system.  Copy the ScaleGenerator object from the ScaleScene
-		//and delete the old Note object
-		//***just copy how the ScaleScene is set up
+usable with the new note system
+filter toggles work :)
 
-NullReferenceException during SetQuestionText()
-	//error occurs because the function is looking for the Notes object which is no longer being used

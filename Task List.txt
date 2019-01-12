@@ -1,11 +1,17 @@
 ====TASK LIST=====
 
-12/29/18
+***FretboardScene***
 
-***implement new note system to [scenes]
+implement new note system to FretboardScene
 
+implement feature:  show different scales on the fret board
+	-make a drop down of the scales to use
 
-**Re-evalute what the scenes after the new note system is implemented
+implement feature:  highlight same notes on user's touch
+
+*******
+
+**Re-evalute what the scenes need after the new note system is implemented
 	//what bugs are there?
 	//is everything being saved?
 	//etc.
@@ -17,15 +23,10 @@ refactor the Start() and Awake() functions to proper order
 	-put other functions into the Start() function ?
 
 
-
-
-implement feature:  show different scales on the fret board
-	-make a drop down of the scales to use
-
-implement feature:  highlight same notes on user's touch
-
-
 ====COMPLETED TASKS====
+
+1/12/19
+implemented the new note system to the QuizScene.  The Key toggles AND the sharp/flat option work in the scene!!!
 
 1/10/19
 implement version control to project
