@@ -13,7 +13,9 @@ public class ScaleGenerator : MonoBehaviour
 
     public NoteArray noteArray;    
     
-    // the root and scale values comes from the dropdown objects in the ScaleScene
+    // the root and scale values come from the "root" and "scale" dropdown objects in the Scale, and Fretboard Scenes
+    // ======Programmer Note=====
+        //the "root" and "scale" dropdown values in each scene need to be the same !
     public string[] GenerateScale ( int root, int scale )
     {
 
