@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//NoteArray is a data structure that holds all the notes to be referenced by the ScaleGenerator class
 public class NoteArray : MonoBehaviour
 {
 
@@ -10,7 +11,6 @@ public class NoteArray : MonoBehaviour
     private void Awake ()
     {
         //populate the noteArray 
-
         noteArray[0] = new Note( "A", 0, 2, 2 );
         noteArray[1] = new Note( "B", 0, 1, 2 );
         noteArray[2] = new Note( "C", 0, 2, 1 );
