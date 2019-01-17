@@ -369,43 +369,8 @@ public class ScaleGenerator : MonoBehaviour
         //PlayerPrefs.SetInt( "scaleType", scaleDrop.value );
         //PlayerPrefs.SetInt( "rootNote", rootDrop.value );
 
-        int familyIndex = 0;
-
         //find the familyIndex
-        switch (note)
-        {
-            case 0:
-            case 1:
-            case 2:
-                familyIndex = 0; //set to A
-                break;
-            case 3:
-            case 4:
-                familyIndex = 1; //set to B
-                break;
-            case 5:
-            case 6:
-                familyIndex = 2; //set to C
-                break;
-            case 7:
-            case 8:
-            case 9:
-                familyIndex = 3; //set to D
-                break;
-            case 10:
-            case 11:
-                familyIndex = 4; //set to E
-                break;
-            case 12:
-            case 13:
-                familyIndex = 5; //set to F
-                break;
-            case 14:
-            case 15:
-            case 16:
-                familyIndex = 6; //set to G
-                break;
-        }
+        int familyIndex = FindFamilyIndex ( note );
 
         //adjusting the sharp/flat variable of the first note
         switch (note)
@@ -559,6 +524,49 @@ public class ScaleGenerator : MonoBehaviour
         
 
         return strArray;
-    }    
+    }
+    
+    public int FindFamilyIndex ( int note )
+    {
+        int index = 0;
+
+        //switch ( note )
+        switch (note)
+        {
+            case 0:
+            case 1:
+            case 2:
+                index = 0; //set to A
+                break;
+            case 3:
+            case 4:
+                index = 1; //set to B
+                break;
+            case 5:
+            case 6:
+                index = 2; //set to C
+                break;
+            case 7:
+            case 8:
+            case 9:
+                index = 3; //set to D
+                break;
+            case 10:
+            case 11:
+                index = 4; //set to E
+                break;
+            case 12:
+            case 13:
+                index = 5; //set to F
+                break;
+            case 14:
+            case 15:
+            case 16:
+                index = 6; //set to G
+                break;
+        }
+
+        return index;
+    }
    
 }
