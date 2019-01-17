@@ -10,8 +10,10 @@ public class Fretboard : MonoBehaviour
     public Button AddBtn;
     public Button RemoveBtn;
     public Dropdown presetDrop;
-    
+    public ScaleGenerator scaleGen;
 
+
+    private string[] currentScale;
     private int visibleStrings;
 
     //*REMEMBER*  #1 String goes in index 0!!!!!
@@ -57,7 +59,7 @@ public class Fretboard : MonoBehaviour
     }
 
     
-    public void AddString ()
+    public void AddGuitString ()
     {
         //check visible strings
         if( visibleStrings < 8 )
@@ -71,7 +73,7 @@ public class Fretboard : MonoBehaviour
         
         
 
-    public void RemoveString ()
+    public void RemoveGuitString ()
     {
         //check visible strings
         if (visibleStrings > 4)
@@ -171,6 +173,12 @@ public class Fretboard : MonoBehaviour
     // Use this for initialization
     void Start () 
     {
+        currentScale = scaleGen.GenerateScale( 5, 0 );  //set the currentScale to C Major
+        //for (int i = 0; i < currentScale.Length; i++)
+        //{
+        //    Debug.Log( "currentScale[" + i + "]" + " = " + currentScale[i] );
+        //}
+
         //Debug.Log( "====Fretboard Start() ====" );
         for (int i = 0; i < guitStrings.Length; i++)
         {
