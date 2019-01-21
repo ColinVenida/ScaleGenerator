@@ -28,9 +28,6 @@ public class GuitString : MonoBehaviour
             return;
         }
 
-        //based on the dropdown value, change the text of the fretArray elements
-
-
         //set the preset dropdown to default value (0) if the tuning was changed by the preset button
         if (changePreset)
         {
@@ -48,80 +45,30 @@ public class GuitString : MonoBehaviour
         }
 
         //          *******CURRENT TASK******
-        //calculate the frets based on the GuitString tuning and current scale in the Fretboard
+        //based on the dropdown values of GuitString, scaleDrop, and rootDrop, change the text of the fretArray elements        
 
         //run through the fret board and set the labels to the scale
         Debug.Log( "string " + this.stringNumber + " noteSelect.value = " + noteSelect.value );
 
         //find the starting position in the scale
-        //check whether the noteSelect valu0e is equal to any note in the scale
-                //******idea*****
-                //convert the currentScale[] into an int[] then check the values
-                    //******OR******
-                    //have the generateScale return a Note[] instead of a string[] so we can use the sharp/flat data in other parts of the program
 
-        //check whether the GuitString's tuning is eharmonic to any note in the scale
+        //check whether the noteSelect value is eharmonic to any note in the scale     
         //ie. if the GuitString's tuning is A#, check if there is a Bb note in the scale
+     
 
-        //values come from all the eharmonic notes that the user can select from rootDrop 
-        switch (drop)
-        {
-            case 0:     //Ab
-            case 2:     //A#
-            case 3:     //Bb
-            case 6:     //C#
-            case 7:     //Db
-            case 9:     //D#
-            case 10:    //Eb
-            case 13:    //F#
-            case 14:    //Gb
-            case 16:    //G#
-                isEharmonic = true;
-                break;
-            default:
-                break;
-        }
+        //need code that converts the currentScale's string elements into integers so they can be compared to the dropdown values' integers
+            //need code that actually compares the scale elements and the dropdown values
 
-        //find the starting point of the scale.  Which note should be displayed first?
-        int familyIndex = 0;
+        //what data do I already have??
+            //- the completed scale in string array form
+            // I have the GuitString's tuning in integer form (comes from noteSelect Dropdown)
 
-        //find the familyIndex
-        switch (drop)
-        {
-            case 0:
-            case 1:
-            case 2:
-                familyIndex = 0; //set to A
-                break;
-            case 3:
-            case 4:
-                familyIndex = 1; //set to B
-                break;
-            case 5:
-            case 6:
-                familyIndex = 2; //set to C
-                break;
-            case 7:
-            case 8:
-            case 9:
-                familyIndex = 3; //set to D
-                break;
-            case 10:
-            case 11:
-                familyIndex = 4; //set to E
-                break;
-            case 12:
-            case 13:
-                familyIndex = 5; //set to F
-                break;
-            case 14:
-            case 15:
-            case 16:
-                familyIndex = 6; //set to G
-                break;
-        }
+        //what data do I need
+            //what fret numbers do I put the string array elements on
 
-
+            //I need to know how many frets are there from the tuning value to the first string array element
+                //
+            //I need to know how many frets are in between each string element
 
         // *************old code**************
         ////run through the fret board        
@@ -173,12 +120,44 @@ public class GuitString : MonoBehaviour
 
     }
 
-    //function that determines whether a given note is in a given scale
-    private bool NoteInScale( int note, string[] scale )
+    //function to 
+    private int GetStartIndex ( int tuning )
     {
-        
-        return false;
+        int start = 0;
+
+        //switch statement for whatever value is in the noteSelect dropdown
+        switch ( tuning )
+        {
+            case 0:
+            case 1:
+                //start = A
+                break;
+            case 2:
+                //start = B
+                break;
+            case 3:
+            case 4:
+                //start = C
+                break;
+            case 5:
+            case 6:
+                //start = D
+                break;
+            case 7:            
+                //start = E
+                break;
+            case 8:
+            case 9:
+                //start = F
+                break;
+            case 10:
+            case 11:
+                //start = G
+                break;
+        }
+        return start;
     }
+    
 
     private void SaveTuning( int drop )
     {        

@@ -10,6 +10,8 @@ public class Fretboard : MonoBehaviour
     public Button AddBtn;
     public Button RemoveBtn;
     public Dropdown presetDrop;
+    public Dropdown scaleDrop;
+    public Dropdown rootDrop;
     public ScaleGenerator scaleGen;
 
 
@@ -17,16 +19,16 @@ public class Fretboard : MonoBehaviour
     private int visibleStrings;
 
     //*REMEMBER*  #1 String goes in index 0!!!!!
-    private int[] GUITAR_STANDARD = { 7, 2, 10, 5, 0, 7 };
-    private int[] GUITAR_DROP_D = { 7, 2, 10, 5, 0, 5 };
-    private int[] GUITAR_HALF_DOWN = { 6, 1, 9, 4, 11, 6 };
-    private int[] GUITAR_FULL_DOWN = { 5, 0, 8, 3, 10, 5 };    
-    private int[] GUITAR_OPEN_G = { 5, 2, 10, 5, 10, 5 };    
-    private int[] GUITAR_DADGAD = { 5, 0, 10, 5, 0, 5 };    
-    private int[] GUITAR_RAIN_SONG = { 5, 3, 10, 3, 10, 5 };
+    private int[] GUITAR_STANDARD = { 11, 4, 15, 8, 1, 11 };
+    private int[] GUITAR_DROP_D = { 11, 4, 15, 8, 1, 8 };
+    private int[] GUITAR_HALF_DOWN = { 9, 2, 13, 6, 16, 9 };
+    private int[] GUITAR_FULL_DOWN = { 8, 1, 12, 5, 15, 8 };    
+    private int[] GUITAR_OPEN_G = { 8, 4, 15, 8, 15, 8 };    
+    private int[] GUITAR_DADGAD = { 8, 1, 15, 8, 1, 8 };    
+    private int[] GUITAR_RAIN_SONG = { 8, 5, 15, 5, 15, 8 };
 
-    private int[] BASS_STANDARD = { 10, 5, 0, 7 };
-    private int[] UKULELE_STANDARD = { 0, 7, 3, 10 };
+    private int[] BASS_STANDARD = { 15, 8, 1, 11 };
+    private int[] UKULELE_STANDARD = { 1, 11, 5, 15 };
 
 
     private void ToggleStrings ( int activeStrings )
