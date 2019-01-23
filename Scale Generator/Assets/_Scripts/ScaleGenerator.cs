@@ -11,17 +11,12 @@ public class ScaleGenerator : MonoBehaviour
     private int[] minorFormula = { 0, 2, 1, 2, 2, 1, 2, 2 };
     private int rootNote = 3;
 
-    //public NoteArray noteArray;
-
     // the root and scale values come from the "root" and "scale" dropdown objects in the Scale/Fretboard Scenes
-    
-
-    //public string[] GenerateScale ( int root, int scale )
     //function changes the given noteArray reference
     public void GenerateScale( int root, int scale, NoteArray noteArray )
     {
 
-        //string[] strArray= { "", "", "", "", "", "", "", "" };
+        
 
         //rootNote is also set here incase this method is called before the
         //Awake() method finishes (yes it happens)
@@ -81,8 +76,6 @@ public class ScaleGenerator : MonoBehaviour
         //Debug.Log( "familyIndex = " + familyIndex );
         //Debug.Log( "noteArray[] = " + noteArray.noteArray[familyIndex] );
 
-        //strArray[0] = noteArray.noteArray[familyIndex].GetNote();
-        //strArray[7] = strArray[0];
 
         familyIndex++;
         if (familyIndex > 6)
@@ -165,20 +158,13 @@ public class ScaleGenerator : MonoBehaviour
                         noteArray.noteArray[familyIndex].usedFlat = noteArray.noteArray[familyIndex - 1].usedFlat;
                     }
                 }
-            }// end  ** if (currentScale[j] == 1) **
-
-            //set the element in the array to the newly calculated note
-            //strArray[j] = noteArray.noteArray[familyIndex].GetNote();
-            familyIndex++;
+            }// end  ** if (currentScale[j] == 1) **            
+            
             if (familyIndex > 6)
             {
                 familyIndex = 0;
             }
         }        
-
-        
-
-        //return strArray;
     }
     
     public int FindFamilyIndex ( int note )
