@@ -2276,7 +2276,6 @@ MonoBehaviour:
   scaleDrop: {fileID: 366249069}
   rootDrop: {fileID: 1997135074}
   scaleGen: {fileID: 1764589515}
-  noteArray: {fileID: 1579013119}
 --- !u!114 &543725208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6549,7 +6548,7 @@ GameObject:
   - component: {fileID: 1579013118}
   - component: {fileID: 1579013119}
   m_Layer: 0
-  m_Name: NoteArray
+  m_Name: Notes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7148,6 +7147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091a4e037df71644296402fc324eb524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noteArray: {fileID: 1579013119}
 --- !u!4 &1764589516
 Transform:
   m_ObjectHideFlags: 0

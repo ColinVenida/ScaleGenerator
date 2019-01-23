@@ -994,7 +994,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleGen: {fileID: 1191469253}
-  noteArray: {fileID: 1793263020}
   questionText: {fileID: 268042445}
   answerText: {fileID: 554791291}
   keyToggles:
@@ -3091,6 +3090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091a4e037df71644296402fc324eb524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noteArray: {fileID: 1793263020}
 --- !u!4 &1191469254
 Transform:
   m_ObjectHideFlags: 0
@@ -5230,7 +5230,7 @@ GameObject:
   - component: {fileID: 1793263021}
   - component: {fileID: 1793263020}
   m_Layer: 0
-  m_Name: NoteArray
+  m_Name: Notes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

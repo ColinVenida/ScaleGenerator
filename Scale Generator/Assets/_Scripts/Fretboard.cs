@@ -13,7 +13,6 @@ public class Fretboard : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
     public ScaleGenerator scaleGen;
-    public NoteArray noteArray;
 
 
     private string[] currentScale;
@@ -176,8 +175,7 @@ public class Fretboard : MonoBehaviour
     // Use this for initialization
     void Start () 
     {
-        //currentScale = scaleGen.GenerateScale( 5, 0 );  //set the currentScale to C Major
-        scaleGen.GenerateScale( 5, 0, noteArray );
+        currentScale = scaleGen.GenerateScale( 5, 0 );  //set the currentScale to C Major
         //for (int i = 0; i < currentScale.Length; i++)
         //{
         //    Debug.Log( "currentScale[" + i + "]" + " = " + currentScale[i] );

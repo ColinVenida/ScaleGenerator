@@ -11,28 +11,20 @@ public class ScaleGenerator : MonoBehaviour
     private int[] minorFormula = { 0, 2, 1, 2, 2, 1, 2, 2 };
     private int rootNote = 3;
 
-    //public NoteArray noteArray;
-
-    // the root and scale values come from the "root" and "scale" dropdown objects in the Scale/Fretboard Scenes
+    public NoteArray noteArray;    
     
-
-    //public string[] GenerateScale ( int root, int scale )
-    //function changes the given noteArray reference
-    public void GenerateScale( int root, int scale, NoteArray noteArray )
+    // the root and scale values come from the "root" and "scale" dropdown objects in the Scale, and Fretboard Scenes
+    // ======Programmer Note=====
+        //the "root" and "scale" dropdown values in each scene need to be the same !
+    public string[] GenerateScale ( int root, int scale )
     {
 
-        //string[] strArray= { "", "", "", "", "", "", "", "" };
+        string[] strArray= { "", "", "", "", "", "", "", "" };
 
         //rootNote is also set here incase this method is called before the
         //Awake() method finishes (yes it happens)
         //                              -OnValueChanged event fires when scaleDrop is set during Awake() method
 
-        //reset the sharp/flat booleans
-        for (int i = 0; i < 7; i++)
-        {
-            noteArray.noteArray[i].usedFlat = false;
-            noteArray.noteArray[i].usedSharp = false;
-        }
 
         //set the first value to the root note
         int note = root;
@@ -81,9 +73,8 @@ public class ScaleGenerator : MonoBehaviour
         //Debug.Log( "familyIndex = " + familyIndex );
         //Debug.Log( "noteArray[] = " + noteArray.noteArray[familyIndex] );
 
-        //strArray[0] = noteArray.noteArray[familyIndex].GetNote();
-        //strArray[7] = strArray[0];
-
+        strArray[0] = noteArray.noteArray[familyIndex].GetNote();
+        strArray[7] = strArray[0];
         familyIndex++;
         if (familyIndex > 6)
         {
@@ -168,7 +159,7 @@ public class ScaleGenerator : MonoBehaviour
             }// end  ** if (currentScale[j] == 1) **
 
             //set the element in the array to the newly calculated note
-            //strArray[j] = noteArray.noteArray[familyIndex].GetNote();
+            strArray[j] = noteArray.noteArray[familyIndex].GetNote();
             familyIndex++;
             if (familyIndex > 6)
             {
@@ -176,9 +167,14 @@ public class ScaleGenerator : MonoBehaviour
             }
         }        
 
-        
+        //reset the sharp/flat booleans
+        for (int i = 0; i < 7; i++)
+        {
+            noteArray.noteArray[i].usedFlat = false;
+            noteArray.noteArray[i].usedSharp = false;
+        }
 
-        //return strArray;
+        return strArray;
     }
     
     public int FindFamilyIndex ( int note )
