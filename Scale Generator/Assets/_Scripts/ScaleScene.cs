@@ -9,16 +9,28 @@ public class ScaleScene : MonoBehaviour
     public Text[] notePositions;
     public Text[] displayText;
     public ScaleGenerator scaleGen;
+    public NoteArray noteArray;
 
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
     public void UpdateScale(  )
     {
-        string[] scaleNew = scaleGen.GenerateScale( rootDrop.value, scaleDrop.value );
-        for( int i = 0; i < 8; i++ )
+        //string[] scaleNew = scaleGen.GenerateScale( rootDrop.value, scaleDrop.value );
+        scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
+
+        //**find the starting point of the scale here***
+        int familyIndex = scaleGen.FindFamilyIndex( rootDrop.value );
+
+        for ( int i = 0; i < 8; i++ )
         {
-            displayText[i].text = scaleNew[i];
+            //displayText[i].text = scaleNew[i];
+            displayText[i].text = noteArray.noteArray[familyIndex].GetNote();
+            familyIndex++;
+            if (familyIndex > 6)
+            {
+                familyIndex = 0;
+            }
         }
         UpdateDisplay();
     }
