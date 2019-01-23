@@ -17,6 +17,7 @@ public class ScaleQuiz : MonoBehaviour
 
     public Note notes;
     public ScaleGenerator scaleGen;
+    public NoteArray noteArray;
     public Text questionText;
     public Text answerText;
     public Toggle[] keyToggles;
@@ -25,13 +26,27 @@ public class ScaleQuiz : MonoBehaviour
      
     public void GenerateQuestion ()
     {
-        //set rootNote of one of the whole notes              
-        //int rootNote = wholeNotes[GenerateRoot()];
+        //set rootNote of one of the whole notes 
         int rootNote = GenerateRoot();
 
         //create a new scale
-        currentScale = scaleGen.GenerateScale( rootNote, scaleDrop.value );
-       
+        //currentScale = scaleGen.GenerateScale( rootNote, scaleDrop.value );
+        scaleGen.GenerateScale( rootNote, scaleDrop.value, noteArray );
+
+        //**find the starting point of the scale here***
+        int familyIndex = scaleGen.FindFamilyIndex( rootNote );
+
+        for (int i = 0; i < 8; i++)
+        {
+            //displayText[i].text = scaleNew[i];
+            Debug.Log( "noteArray[" + (i+1) + "] = " + noteArray.noteArray[familyIndex].GetNote() );
+            familyIndex++;
+            if (familyIndex > 6)
+            {
+                familyIndex = 0;
+            }
+        }
+
         //get  1-4 random values, values range form 1-7, values can't be equal twice in a row
         int totalPositions = rnd.Next (1, 5 );     
         
@@ -132,7 +147,11 @@ public class ScaleQuiz : MonoBehaviour
         string sequence = "";
         string scale;
 
-        strRoot = currentScale[0];
+        //strRoot = currentScale[0];
+
+        //find the starting note/root note
+        int familyIndex = scaleGen.FindFamilyIndex( root );
+        strRoot = noteArray.noteArray[familyIndex].GetNote();
                 
         //add to the question text based on the generated positions
         for ( int i = 0; i < quiz.Length; i++ )
@@ -188,10 +207,11 @@ public class ScaleQuiz : MonoBehaviour
 
     private void SetAnswerText ( int root, int[] quiz )
     {
-        string answer = "";       
-
+        string answer = "";
+        int familyIndex = scaleGen.FindFamilyIndex( root );
         for (int i = 0; i < quiz.Length; i++)
         {
+            
             if (quiz[i] == 0)
             {
                 continue;
@@ -200,9 +220,15 @@ public class ScaleQuiz : MonoBehaviour
             if (quiz[i] >= 7)
             {
                 Debug.Log( "quiz[i] >= 7" );
-            }    
+            }
 
-            answer  += currentScale[ quiz[i] ] + ", ";
+            int index = quiz[i] + familyIndex;
+            if ( index > 6 )
+            {
+                index -= 7;
+            }
+            //answer  += currentScale[ quiz[i] ] + ", ";
+            answer += noteArray.noteArray[index].GetNote() + ", ";
         }
 
         //remove the last comma
