@@ -15,9 +15,6 @@ public class ScaleGenerator : MonoBehaviour
     //function changes the given noteArray reference
     public void GenerateScale( int root, int scale, NoteArray noteArray )
     {
-
-        
-
         //rootNote is also set here incase this method is called before the
         //Awake() method finishes (yes it happens)
         //                              -OnValueChanged event fires when scaleDrop is set during Awake() method
@@ -158,13 +155,18 @@ public class ScaleGenerator : MonoBehaviour
                         noteArray.noteArray[familyIndex].usedFlat = noteArray.noteArray[familyIndex - 1].usedFlat;
                     }
                 }
-            }// end  ** if (currentScale[j] == 1) **            
-            
+            }// end  ** if (currentScale[j] == 1) **
+
+            familyIndex++;
             if (familyIndex > 6)
             {
                 familyIndex = 0;
             }
         }        
+
+        
+
+        //return strArray;
     }
     
     public int FindFamilyIndex ( int note )
