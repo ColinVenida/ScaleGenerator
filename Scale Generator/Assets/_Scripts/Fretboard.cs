@@ -74,8 +74,6 @@ public class Fretboard : MonoBehaviour
         presetDrop.value = 0;
     }
         
-        
-
     public void RemoveGuitString ()
     {
         //check visible strings
@@ -137,6 +135,21 @@ public class Fretboard : MonoBehaviour
         PlayerPrefs.SetInt( "presetValue", presetDrop.value );
     }
 
+    //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
+    public void SetScale() 
+    {
+        scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
+
+        //guitStrings[0].CalculateFrets( guitStrings[0].noteSelect.value );
+
+        //update all the string's scales
+        for (int i = 0; i < 8; i++)
+        {
+            guitStrings[i].CalculateFrets( guitStrings[i].noteSelect.value );
+        }
+
+    }
+
     private void WakeupTuning ()
     {
         for( int i = 0; i < guitStrings.Length; i++ )
@@ -176,14 +189,9 @@ public class Fretboard : MonoBehaviour
     // Use this for initialization
     void Start () 
     {
-        //currentScale = scaleGen.GenerateScale( 5, 0 );  //set the currentScale to C Major
+        //set the currentScale to C Major
         scaleGen.GenerateScale( 5, 0, noteArray );
-        //for (int i = 0; i < currentScale.Length; i++)
-        //{
-        //    Debug.Log( "currentScale[" + i + "]" + " = " + currentScale[i] );
-        //}
-
-        //Debug.Log( "====Fretboard Start() ====" );
+        
         for (int i = 0; i < guitStrings.Length; i++)
         {
             switch (i)
@@ -215,7 +223,9 @@ public class Fretboard : MonoBehaviour
             }//end switch
         }//end for
         ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
-        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );    
+        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
+
+        SetScale();
 
 	}
 

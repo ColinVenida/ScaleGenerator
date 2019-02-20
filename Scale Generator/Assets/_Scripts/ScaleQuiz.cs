@@ -29,23 +29,8 @@ public class ScaleQuiz : MonoBehaviour
         //set rootNote of one of the whole notes 
         int rootNote = GenerateRoot();
 
-        //create a new scale
-        //currentScale = scaleGen.GenerateScale( rootNote, scaleDrop.value );
+        //create a new scale        
         scaleGen.GenerateScale( rootNote, scaleDrop.value, noteArray );
-
-        //**find the starting point of the scale here***
-        int familyIndex = scaleGen.FindFamilyIndex( rootNote );
-
-        for (int i = 0; i < 8; i++)
-        {
-            //displayText[i].text = scaleNew[i];
-            Debug.Log( "noteArray[" + (i + 1) + "] = " + noteArray.noteArray[familyIndex].GetNote() );
-            familyIndex++;
-            if (familyIndex > 6)
-            {
-                familyIndex = 0;
-            }
-        }
 
         //get  1-4 random values, values range form 1-7, values can't be equal twice in a row
         int totalPositions = rnd.Next (1, 5 );     

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class GuitString : MonoBehaviour
 {
-    public Fretboard fBoard;
-    public Note notes;
+    public Fretboard fBoard;    
     public NoteArray noteArray;
     public Dropdown noteSelect;
     public Text[] fretArray;
@@ -15,18 +14,18 @@ public class GuitString : MonoBehaviour
 
     public static bool changePreset = true;  //variable for determining if the Preset Dropdown should be reset or not
 
-
-    //TODO:  REFACTOR the notes being calculated based on dropdown values of a given rootNote and scaleType
+    private Note currentTuning;
+        
     public void CalculateFrets( int drop )
     {
-        bool isEharmonic = false;
 
-        //if the dropdown menu is the blank
-        if (drop == 12)
-        {
-            Debug.Log( "drop 12, ending CalculateFrets()" );
-            return;
-        }
+        //  ***BUG***
+        //The ScaleGenerator displays G# major incorrectly
+            //G# major is a theoretical scale (ie. it needs a note with 2 sharps/flats in it)
+            //need code to determine if the scale is theoretical
+
+        bool hasEnharmonic = false;
+        bool includeFamilyNote = false;
 
         //set the preset dropdown to default value (0) if the tuning was changed by the preset button
         if (changePreset)
@@ -35,8 +34,23 @@ public class GuitString : MonoBehaviour
         }
 
         SaveTuning( drop );
-        int currentNote = drop;
-        int currentFret = 0;
+        int currentNote = drop;        
+        int currentFret = 0;   //set currentFret to 0 to represent the first fret
+
+        int[] currentScale;
+        switch( fBoard.scaleDrop.value )
+        {
+            case 0:
+                currentScale = fBoard.scaleGen.GetMajorFormula();
+                break;
+            case 1:
+                currentScale = fBoard.scaleGen.GetMinorFormula();
+                break;
+            default:
+                Debug.Log( "default in the GuitString scale assignment" );
+                currentScale = fBoard.scaleGen.GetMajorFormula();
+                break;
+        }
 
         //blank out the fret board
         for (int i = 0; i < fretArray.Length; i++)
@@ -44,120 +58,200 @@ public class GuitString : MonoBehaviour
             fretArray[i].text = "";
         }
 
-        //          *******CURRENT TASK******
-        //based on the dropdown values of GuitString, scaleDrop, and rootDrop, change the text of the fretArray elements        
+        //set the 12th fret's color to black in case it changed
+        fretArray[11].color = new Color32( 0, 0, 0, 255 );
 
-        //run through the fret board and set the labels to the scale
-        Debug.Log( "string " + this.stringNumber + " noteSelect.value = " + noteSelect.value );
+        SetCurrentTuning( drop );
+   
+        //check whether the GuitString's tuning is enharmonic with any note in the noteArray
+        //ie. if the GuitString is set A#, and the scale has Bb in it
+        hasEnharmonic = CheckEnharmonic( noteSelect.value );
+        
+        
+        //find the family index of the GuitString's tuning
+        //  the familyIndex will represent the open GuitString, then we can find the next fret        
+        int familyIndex = fBoard.scaleGen.FindFamilyIndex( noteSelect.value );
 
-        //find the starting position in the scale
+        //find the interval of currentTuning in relation to the scale
+        int scaleInterval = FindScaleIntervale( fBoard.rootDrop.value, familyIndex );
 
-        //check whether the noteSelect value is eharmonic to any note in the scale     
-        //ie. if the GuitString's tuning is A#, check if there is a Bb note in the scale
-     
+        //check if the note in the current scale is a different "version" than the currentTuning
+        //ie. the tuning is C, and the note in the scale is C#
+        if (currentTuning.usedSharp != noteArray.noteArray[familyIndex].usedSharp || 
+                currentTuning.usedFlat != noteArray.noteArray[familyIndex].usedFlat )
+        {            
+            includeFamilyNote = true;
+        }
 
-        //need code that converts the currentScale's string elements into integers so they can be compared to the dropdown values' integers
-            //need code that actually compares the scale elements and the dropdown values
+       
+        //find out which fret to start on and which notes to display
 
-        //what data do I already have??
-            //- the completed scale in string array form
-            // I have the GuitString's tuning in integer form (comes from noteSelect Dropdown)
+        //if we have to start on the note AFTER the tuning (ie. tuining is A, and we start on B)
+        if ( !includeFamilyNote )
+        {           
+            familyIndex++;  //move the familyIndex to the next note
+            scaleInterval++;    //move the scaleInterval to the next note
+            if (scaleInterval > 7)
+            {
+                scaleInterval = 1;
+            }            
+            if( currentScale[scaleInterval] == 2 )
+            {
+                currentFret++;
+            }
+            
+        }
+        else if ( hasEnharmonic )
+        {
+            familyIndex += 2;
+            scaleInterval += 2;
+            currentFret++;
+            fretArray[11].color = new Color32( 0, 0, 255, 255 );
+        }
+        //if we have to include another version of the currentTuning's note (ie. a sharp or a flat)
+        else
+        {
+            if (currentTuning.usedSharp)
+            {
+                familyIndex++;
+                scaleInterval++;
+            }
+            else if ( !currentTuning.usedFlat && noteArray.noteArray[familyIndex].usedFlat )  //ie. tuning is B, but scale has a Bb in it, like F major scale
+            {
+                familyIndex++;
+                scaleInterval++;                
+            }
+            //if the tuning used a flat, but scale had a natural, then we don't have to adjust the familyIndex, or the scaleInterval
+        }        
 
-        //what data do I need
-            //what fret numbers do I put the string array elements on
+        //check for array bounds
+        if (familyIndex > 6)
+        {
+            familyIndex = 0;
+        }
+        if (scaleInterval > 7)
+        {
+            scaleInterval = 1;
+        }
 
-            //I need to know how many frets are there from the tuning value to the first string array element
-                //
-            //I need to know how many frets are in between each string element
+        //run through the fret board and set the labels to the scale 
+        for (int i = 1; i < 8; i++)
+        {
+            
+            //set the currentFret's text to the note in the scale
+            fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();            
+            familyIndex++;
+            scaleInterval++;
 
-        // *************old code**************
-        ////run through the fret board        
-        //while (currentFret <= 12) 
-        //{
-
-        //    // ****OLD METHOD****
-
-        //    //calculate the next note
-        //    switch (currentNote)
-        //    {
-        //        //in the case where the next whole note is 2 frets away
-        //        case 0:
-        //        case 3:
-        //        case 5:
-        //        case 8:
-        //        case 10:
-        //            currentFret += 2;
-        //            currentNote += 2;
-
-        //            break;
-
-        //        //in the case where the next whole note is 1 fret away
-        //        case 1:
-        //        case 2:
-        //        case 4:
-        //        case 6:
-        //        case 7:
-        //        case 9:
-        //        case 11:
-        //            currentFret += 1;
-        //            currentNote += 1;
-        //            break;
-        //    }//end switch
-
-        //    if (currentNote > 11)
-        //    {
-        //        currentNote = currentNote - 12;
-        //    }
-
-        //    //currentFret - 1 because fret 0 is NOT the open string
-        //    //fretArray[0] is the first fret
-        //    fretArray[currentFret - 1].text = notes.GetNoteCodes()[currentNote];
-
-        //    
-        //}//end while
-
-        // ************* end old code ****************
-
+            //check for array bounds
+            if (familyIndex > 6)
+            {
+                familyIndex = 0;
+            }
+            if (scaleInterval > 7)
+            {
+                scaleInterval = 1;
+            }
+            //move to to the next fret according to the pattern
+            currentFret += currentScale[scaleInterval];            
+        }
     }
 
-    //function to 
-    private int GetStartIndex ( int tuning )
+    //function to check if the given note/tuning has enharmonic notes in the current scale
+    private bool CheckEnharmonic( int tuning )
     {
-        int start = 0;
+        bool hasEnharmonic = false;
+        //if the tuning is an enharmonic note, then check if its equivalent is in the scale
 
-        //switch statement for whatever value is in the noteSelect dropdown
         switch ( tuning )
         {
-            case 0:
-            case 1:
-                //start = A
+            case 0:     // tuning is Ab, check for G#
+                if (fBoard.noteArray.noteArray[6].usedSharp)
+                {
+                    hasEnharmonic = true;
+                }
                 break;
-            case 2:
-                //start = B
+            case 16:    //  tuning is G#, check for Ab
+                if (fBoard.noteArray.noteArray[0].usedFlat)
+                {
+                    hasEnharmonic = true;
+                }
                 break;
-            case 3:
-            case 4:
-                //start = C
+            case 2:     //  tuning is A#, check for Bb
+                if (fBoard.noteArray.noteArray[1].usedFlat)
+                {
+                    hasEnharmonic = true;
+                }
                 break;
-            case 5:
-            case 6:
-                //start = D
+            case 3:     //  tuning is Bb, check for A#
+                if (fBoard.noteArray.noteArray[0].usedSharp)
+                {
+                    hasEnharmonic = true;
+                }
                 break;
-            case 7:            
-                //start = E
+            case 6:     //  tuning is C#, check for Db
+                if (fBoard.noteArray.noteArray[3].usedFlat)
+                {
+                    hasEnharmonic = true;
+                }
                 break;
-            case 8:
-            case 9:
-                //start = F
+            case 7:     //  tuning is Db, check for C#
+                if (fBoard.noteArray.noteArray[2].usedSharp)
+                {
+                    hasEnharmonic = true;
+                }
                 break;
-            case 10:
-            case 11:
-                //start = G
+            case 9:     //  tuning is D#, check for Eb
+                if (fBoard.noteArray.noteArray[4].usedFlat)
+                {
+                    hasEnharmonic = true;
+                }
+                break;
+            case 10:    //  tuning is Eb, check for Db
+                if (fBoard.noteArray.noteArray[3].usedSharp)
+                {
+                    hasEnharmonic = true;
+                }
+                break;
+            case 13:    //  tuning is F#, check for Gb
+                if (fBoard.noteArray.noteArray[6].usedFlat)
+                {
+                    hasEnharmonic = true;
+                }
+                break;
+            case 14:    //  tuning is Gb, check for F#
+                if (fBoard.noteArray.noteArray[5].usedSharp)
+                {
+                    hasEnharmonic = true;
+                }
+                break;
+            default:
                 break;
         }
-        return start;
+        
+        return hasEnharmonic;
     }
-    
+
+    //function that returns the root note's interval of the given family index
+        //ie. what interval/position is "A" in the C scale (A is the 6th note in C scales)
+    private int FindScaleIntervale( int root, int familyIndex )
+    {
+        int interval = 0;        
+        //find the FamilyIndex of the root note
+        int rootFamily = fBoard.scaleGen.FindFamilyIndex( root );        
+        
+        do
+        {
+            rootFamily++;
+            interval++;
+            if (rootFamily > 6)
+            {
+                rootFamily = 0;
+            }
+        } while ( rootFamily != familyIndex );
+
+        return interval;
+    }
 
     private void SaveTuning( int drop )
     {        
@@ -191,6 +285,79 @@ public class GuitString : MonoBehaviour
         }
     }
 
+    //function that changes the current tuning to the given int value
+        //int value comes from the noteSelect dropdown
+    private void SetCurrentTuning ( int dropValue )
+    {
+       
+        //change the currentTuning's id
+        switch ( dropValue )
+        {
+            case 0:
+            case 1:
+            case 2:
+                currentTuning.SetId( "A" );
+                break;
+            case 3:                
+            case 4:
+                currentTuning.SetId( "B" );
+                break;
+            case 5:                
+            case 6:
+                currentTuning.SetId( "C" );                 
+                break;
+            case 7:                
+            case 8:                
+            case 9:                
+                currentTuning.SetId( "D" );
+                break;
+            case 10:                
+            case 11:                
+                currentTuning.SetId( "E" );
+                break;
+            case 12:                
+            case 13:                
+                currentTuning.SetId( "F" );
+                break;
+            case 14:                
+            case 15:                
+            case 16:
+                currentTuning.SetId( "G" );
+                break;
+            default:
+                break;
+        }
+
+        //update the currentTuning's sharp/flat state
+        switch ( dropValue )
+        {
+            //cases for flats
+            case 0:
+            case 3:
+            case 7:
+            case 10:
+            case 14:
+                currentTuning.usedSharp = false;
+                currentTuning.usedFlat = true;
+                break;
+
+            //cases for sharps
+            case 2:
+            case 6:
+            case 9:
+            case 13:
+            case 16:
+                currentTuning.usedFlat = false;
+                currentTuning.usedSharp = true;
+                break;
+
+            //case for natural
+            default:
+                currentTuning.usedSharp = false;
+                currentTuning.usedFlat = false;
+                break;
+        }
+    }
 
     // Use this for initialization
     void Start () 
@@ -200,7 +367,7 @@ public class GuitString : MonoBehaviour
 
     private void Awake()
     {
-        
+        currentTuning = new Note();
     }
 
     // Update is called once per frame

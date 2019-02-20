@@ -13,6 +13,16 @@ public class Note
     public bool usedSharp;
     public bool usedFlat;
 
+    //constructor for a blank note
+    public Note ()
+    {
+        id = "";
+        index = 0;
+        nextWholetone = 0;
+        prevWholetone = 0;
+        usedSharp = false;
+        usedFlat = false;
+    }
 
     public Note( string name, int ind, int next, int prev)
     {
@@ -40,6 +50,50 @@ public class Note
         }
     }
 
+    //function to change the note's id (ie. A, B, C) and then calls the ChangePrevNext function
+    public void SetId( string name )
+    {
+        id = name;
+        ChangePrevNext( id );
+    }
+
+    //function that updates the nextWholetone/prevWholetone according to he given id
+    private void ChangePrevNext( string id )
+    {
+        switch ( id )
+        {
+            case "A":
+                nextWholetone = 2;
+                prevWholetone = 2;
+                break;
+            case "B":
+                nextWholetone = 1;
+                prevWholetone = 2;
+                break;
+            case "C":
+                nextWholetone = 2;
+                prevWholetone = 1;
+                break;
+            case "D":
+                nextWholetone = 2;
+                prevWholetone = 2;
+                break;
+            case "E":
+                nextWholetone = 1;
+                prevWholetone = 2;
+                break;
+            case "F":
+                nextWholetone = 2;
+                prevWholetone = 1;
+                break;
+            case "G":
+                nextWholetone = 2;
+                prevWholetone = 2;
+                break;
+            default:
+                break;
+        }
+    }
 
     // Use this for initialization
     void Start () 

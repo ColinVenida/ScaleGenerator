@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 
 public class ScaleGenerator : MonoBehaviour
-{
+{    
     private int[] majorFormula = { 0, 2, 2, 1, 2, 2, 2, 1 };
     private int[] minorFormula = { 0, 2, 1, 2, 2, 1, 2, 2 };
     private int rootNote = 3;
@@ -70,10 +70,7 @@ public class ScaleGenerator : MonoBehaviour
                 break;
         }
 
-        //Debug.Log( "familyIndex = " + familyIndex );
-        //Debug.Log( "noteArray[] = " + noteArray.noteArray[familyIndex] );
-
-
+        //move to the next note to calculate
         familyIndex++;
         if (familyIndex > 6)
         {
@@ -162,11 +159,7 @@ public class ScaleGenerator : MonoBehaviour
             {
                 familyIndex = 0;
             }
-        }        
-
-        
-
-        //return strArray;
+        }                   
     }
     
     public int FindFamilyIndex ( int note )
@@ -209,6 +202,16 @@ public class ScaleGenerator : MonoBehaviour
         }
 
         return index;
+    }
+
+    public int[] GetMajorFormula()
+    {
+        return majorFormula;
+    }
+
+    public int[] GetMinorFormula()
+    {
+        return minorFormula;
     }
    
 }

@@ -382,7 +382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.000061035156, y: 62.99997}
+  m_AnchoredPosition: {x: -0.000061035156, y: 41.99997}
   m_SizeDelta: {x: 100, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &120910625 stripped
@@ -776,7 +776,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -712.5, y: 0}
-  m_SizeDelta: {x: 975, y: 750}
+  m_SizeDelta: {x: 790.2, y: 652.8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &225009148
 MonoBehaviour:
@@ -977,6 +977,11 @@ PrefabInstance:
       propertyPath: stringNumber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1016,6 +1021,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1008800857}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -1793,7 +1813,18 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 543725207}
+        m_MethodName: SetScale
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &366249070
@@ -2519,7 +2550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557252819850164, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224684104103935492, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
@@ -2636,6 +2667,11 @@ PrefabInstance:
       propertyPath: scaleGen
       value: 
       objectReference: {fileID: 1764589515}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -2681,6 +2717,31 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0002708435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 561208697}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224816759825267634, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2710,16 +2771,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0002708435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.480011
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -3144,7 +3195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 325, y: 62.99997}
+  m_AnchoredPosition: {x: 325, y: 41.99997}
   m_SizeDelta: {x: 100, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &876995364
@@ -3278,11 +3329,6 @@ PrefabInstance:
       propertyPath: presetDrop
       value: 
       objectReference: {fileID: 1022084628}
-    - target: {fileID: 224878916263216788, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 150
-      objectReference: {fileID: 0}
     - target: {fileID: 224767360918173326, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3302,6 +3348,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 938041529}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878916263216788, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -4322,7 +4388,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1702211891}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4729,7 +4795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -167, y: 63}
+  m_AnchoredPosition: {x: -167, y: 42}
   m_SizeDelta: {x: 100, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1264196489
@@ -4841,7 +4907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557252819850164, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224684104103935492, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
@@ -4958,6 +5024,11 @@ PrefabInstance:
       propertyPath: scaleGen
       value: 
       objectReference: {fileID: 1764589515}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_Value
@@ -4969,6 +5040,31 @@ PrefabInstance:
       value: CalculateFrets
       objectReference: {fileID: 0}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0002708435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906584524}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -5002,16 +5098,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0002708435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.480011
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -5149,7 +5235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557252819850164, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224684104103935492, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
@@ -5266,6 +5352,11 @@ PrefabInstance:
       propertyPath: scaleGen
       value: 
       objectReference: {fileID: 1764589515}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_Value
@@ -5277,6 +5368,31 @@ PrefabInstance:
       value: CalculateFrets
       objectReference: {fileID: 0}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0002708435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 613424035}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -5311,16 +5427,6 @@ PrefabInstance:
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0002708435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.480011
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
 --- !u!1001 &1340278892
@@ -5336,7 +5442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557252819850164, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224684104103935492, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
@@ -5468,6 +5574,11 @@ PrefabInstance:
       propertyPath: scaleGen
       value: 
       objectReference: {fileID: 1764589515}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_Value
@@ -5479,6 +5590,31 @@ PrefabInstance:
       value: CalculateFrets
       objectReference: {fileID: 0}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0002708435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1602017121}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -5512,16 +5648,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0002708435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.480011
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -5701,7 +5827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557252819850164, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224684104103935492, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
@@ -5833,6 +5959,11 @@ PrefabInstance:
       propertyPath: scaleGen
       value: 
       objectReference: {fileID: 1764589515}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_Value
@@ -5844,6 +5975,31 @@ PrefabInstance:
       value: CalculateFrets
       objectReference: {fileID: 0}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0002708435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 155970516}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -5877,16 +6033,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0002708435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.480011
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -6391,6 +6537,11 @@ PrefabInstance:
       propertyPath: scaleGen
       value: 
       objectReference: {fileID: 1764589515}
+    - target: {fileID: 114511010527920288, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: fBoard
+      value: 
+      objectReference: {fileID: 543725207}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_Value
@@ -6402,6 +6553,51 @@ PrefabInstance:
       value: CalculateFrets
       objectReference: {fileID: 0}
     - target: {fileID: 114807169862547932, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224767360918173326, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00006866455
+      objectReference: {fileID: 0}
+    - target: {fileID: 224830951538684362, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224830951538684362, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224830951538684362, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0002708435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.480011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1132039032}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CalculateFrets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526896970044483487, guid: f7c79e97a92a4e14ebdafe034253cb30,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -6454,36 +6650,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224767360918173326, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.00006866455
-      objectReference: {fileID: 0}
-    - target: {fileID: 224830951538684362, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224830951538684362, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224830951538684362, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0002708435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878094284244616, guid: f7c79e97a92a4e14ebdafe034253cb30,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.480011
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c79e97a92a4e14ebdafe034253cb30, type: 3}
@@ -7269,7 +7435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000038146973}
+  m_AnchoredPosition: {x: 0, y: 0.000022888184}
   m_SizeDelta: {x: 0, y: 136.8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1886721412
@@ -7435,7 +7601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -299, y: 62.99997}
+  m_AnchoredPosition: {x: -299, y: 41.99997}
   m_SizeDelta: {x: 100, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970449165
@@ -7809,8 +7975,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 543725207}
+        m_MethodName: SetScale
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

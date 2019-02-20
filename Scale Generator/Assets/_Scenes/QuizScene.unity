@@ -2698,8 +2698,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 258.4}
-  m_SizeDelta: {x: 803.3, y: 120.5}
+  m_AnchoredPosition: {x: 0, y: 235.8}
+  m_SizeDelta: {x: 750.6, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1028627192
 GameObject:
@@ -3215,8 +3215,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -381}
-  m_SizeDelta: {x: 440.4, y: 82.6}
+  m_AnchoredPosition: {x: 0, y: -347.7}
+  m_SizeDelta: {x: 411.5, y: 75.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1354885230
 MonoBehaviour:
@@ -3347,7 +3347,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1054.6, y: 961.7}
+  m_SizeDelta: {x: 975.2, y: 861}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1357910507
 MonoBehaviour:
@@ -4372,7 +4372,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1054.6, y: 961.7}
+  m_SizeDelta: {x: 985.4, y: 877.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625611357
 MonoBehaviour:
@@ -4594,8 +4594,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -64}
-  m_SizeDelta: {x: 738.2, y: 468.25}
+  m_AnchoredPosition: {x: 0, y: -58.4}
+  m_SizeDelta: {x: 689.8, y: 427.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1694516753
 GameObject:
@@ -5045,8 +5045,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 365}
-  m_SizeDelta: {x: 495, y: 92.7}
+  m_AnchoredPosition: {x: 0, y: 333.1}
+  m_SizeDelta: {x: 462.5, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1744586672
 MonoBehaviour:
@@ -5070,7 +5070,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 72
+    m_FontSize: 63
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
