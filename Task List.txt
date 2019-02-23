@@ -2,28 +2,41 @@
 
 ***FretboardScene***
 
-implement new note system to FretboardScene
-
-implement feature:  show different scales on the fret board
-	-make a drop down of the scales to use
+implement feature:  determine whether a scale is theoretical or not and alert the user
 
 implement feature:  highlight same notes on user's touch
 
 *******
+
+Make demo video to show other musicians and programmers
+	//take their feedback and adjust program from there
+
+properly document/refactor the classes (especially ScaleGenerator, and GuitString) to explain how the code works.
+	//make sure all the variable/data structure names are also "music theory" correct (ie. scale intervals)
 
 **Re-evalute what the scenes need after the new note system is implemented
 	//what bugs are there?
 	//is everything being saved?
 	//etc.
 
-refactor the Start() and Awake() functions to proper order
+refactor the Start() and Awake() functions to proper order.  This is affecting how the program saves the dropdown values
+between Scenes
 	[done]-list out all the functions that are currently in the Start(), Awake() and OnValueChanged functions		
 	-list out functions that are essential and need to be done first
 	-refactor logic to solve the OnValueChanged problem
 	-put other functions into the Start() function ?
 
+adjust the graphics settings so the app looks consistent on different screen sizes.
+
+create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+2/20/19
+implement new note system to FretboardScene
+
+implement feature:  show different scales on the fret board
+	-make a drop down of the scales to use
 
 1/12/19
 implemented the new note system to the QuizScene.  The Key toggles AND the sharp/flat option work in the scene!!!

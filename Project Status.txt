@@ -5,14 +5,11 @@ usuable with the new note system
 
 
 *Fretboard Scene*
-needs to implement the new note system
-error "'Note' is missing the class attribute 'ExtensionOfNativeclass'"	
-	//error will be fixed with the new note system.  Copy the ScaleGenerator object from the ScaleScene
-		//and delete the old Note object
-		//***just copy how the ScaleScene is set up
+usuable with new note system
+user can now adjust what scale is being displayed on the fretboard :)
 
-NullReferenceException during CalculateFrets() statup
-	//error occurs because the function is looking for the Notes object which is no longer being used
+*need to implement theoretical scale detection, and the highlight-note-on-touch features
+
 
 
 *Quiz Scene*

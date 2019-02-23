@@ -1,5 +1,16 @@
 ====Progress Log====
 
+2/20/19
+implement new note system to FretboardScene
+
+implement feature:  show different scales on the fret board
+	-make a drop down of the scales to use
+
+	//to acheieve this, I had to refactor the ScaleGenerator class so it returns a NoteArray object when it generates
+	//a scale instead of a string array.
+	//then I had to muscle out the logic of how to put the notes of the scale on the proper frets.
+	//Writing a proper/in-depth explanation of how the code/logic works has been added to the Task List
+
 1/12/19
 implemented the new note system to the QuizScene.  The Key toggles AND the sharp/flat option work in the scene!!!
 	//I had to copy the ScaleGenerator GameObject from the ScaleScene and paste it into the QuizScnee
