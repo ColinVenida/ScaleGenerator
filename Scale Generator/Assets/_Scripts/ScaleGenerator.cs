@@ -10,6 +10,9 @@ public class ScaleGenerator : MonoBehaviour
     private int[] majorFormula = { 0, 2, 2, 1, 2, 2, 2, 1 };
     private int[] minorFormula = { 0, 2, 1, 2, 2, 1, 2, 2 };
     private int rootNote = 3;
+    private bool isTheoretical;
+
+    public Text theoreticalWarning;
 
     // the root and scale values come from the "root" and "scale" dropdown objects in the Scale/Fretboard Scenes
     //function changes the given noteArray reference
@@ -18,6 +21,16 @@ public class ScaleGenerator : MonoBehaviour
         //rootNote is also set here incase this method is called before the
         //Awake() method finishes (yes it happens)
         //                              -OnValueChanged event fires when scaleDrop is set during Awake() method
+
+        //check if scale is theoretical
+        if ( CheckTheoretical( root, scale ) )
+        {
+            theoreticalWarning.gameObject.SetActive( true );
+        }
+        else
+        {
+            theoreticalWarning.gameObject.SetActive( false );
+        }
 
         //reset the sharp/flat booleans
         for (int i = 0; i < 7; i++)
@@ -202,6 +215,100 @@ public class ScaleGenerator : MonoBehaviour
         }
 
         return index;
+    }
+
+    private bool CheckTheoretical( int root, int scale )
+    {
+        bool theoretical = false;
+        int[] diatonicPattern = { 2, 1, 2, 2, 1, 2, 2 }; //an int[] that represents the intervals of all the notes
+                                                         //each index represents the amount of semitones between the notes, starting with A
+                                                         //ie. index 0 = A, and is 2 semitones away from B (index 1)
+        int startIndex = FindFamilyIndex( root );
+        int scaleTotal = 0;         //an int that represents the amount of semitones in the given scale
+        int diatonicTotal = 0;          //an int that represents the amount of semitones in the diatonicPattern;
+        //int sharpsTotal = 0;
+        //int flatsTotal = 0;
+
+        //adjusting the scaleTotal in case it starts on a sharp/flat note
+        switch ( root )
+        {
+            //cases for flats
+            case 0:
+            case 3:
+            case 7:
+            case 10:
+            case 14:
+                scaleTotal -= 1;
+                //flatsTotal++;
+                break;
+            //cases for sharps
+            case 2:
+            case 6:
+            case 9:
+            case 13:
+            case 16:
+                scaleTotal += 1;
+                //sharpsTotal++;
+                break;
+        }
+
+        int[] currentScale;
+        
+        switch( scale )
+        {
+            case 0:
+                currentScale = majorFormula;
+                break;
+            case 1:
+                currentScale = minorFormula;
+                break;
+            default:
+                currentScale = majorFormula;
+                break;
+        }
+
+        
+
+        //add the semitones of the diatonic pattern and the given scale, then compare them
+                    //any difference between the totals will represent a sharp or a flat note in the scale
+        for ( int i = 1; i < 7; i++ )
+        {
+            scaleTotal += currentScale[i];
+            diatonicTotal += diatonicPattern[startIndex];
+
+            //compare here
+            //Debug.Log( "iteration " + i + ": scaleTotal = " + scaleTotal + ", diatonicTotal = " + diatonicTotal );
+            if( scaleTotal > diatonicTotal )
+            {
+                //sharpsTotal++;
+                if ( (scaleTotal - diatonicTotal) > 1 )
+                {
+                    Debug.Log( "Theoretical Scale!!!! double sharp" );
+                    theoretical = true;
+                }
+            }
+            else if ( scaleTotal < diatonicTotal )
+            {
+                //flatsTotal++;
+                if ( (scaleTotal - diatonicTotal) < -1)
+                {
+                    Debug.Log( "Theoretical Scale!!!! double flat" );
+                    theoretical = true;
+                }
+            }
+
+            //increment and check array bounds
+            startIndex++;
+            if( startIndex > 6)
+            {
+                startIndex = 0;
+            }
+        }
+
+        //Debug.Log( "sharpsTotal = " + sharpsTotal );
+        //Debug.Log( "flatsTotal = " + flatsTotal );
+
+        return theoretical;
     }
 
     public int[] GetMajorFormula()
