@@ -16,8 +16,8 @@ public class ScaleScene : MonoBehaviour
 
     public void UpdateScale(  )
     {
-        //scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
-        scaleGen.CheckTheoretical( rootDrop.value, scaleDrop.value, noteArray );
+        scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
+        //scaleGen.CheckTheoretical( rootDrop.value, scaleDrop.value, noteArray );
 
         //**find the starting point of the scale here***
         int familyIndex = scaleGen.FindFamilyIndex( rootDrop.value );
