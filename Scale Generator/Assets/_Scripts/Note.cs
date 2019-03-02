@@ -12,6 +12,8 @@ public class Note
     public int prevWholetone;
     public bool usedSharp;
     public bool usedFlat;
+    public bool doubleSharp;
+    public bool doubleFlat;
 
     //constructor for a blank note
     public Note ()
@@ -22,6 +24,8 @@ public class Note
         prevWholetone = 0;
         usedSharp = false;
         usedFlat = false;
+        doubleSharp = false;
+        doubleFlat = false;
     }
 
     public Note( string name, int ind, int next, int prev)
@@ -32,17 +36,33 @@ public class Note
         prevWholetone = prev;
         usedSharp = false;
         usedFlat = false;
+        doubleSharp = false;
+        doubleFlat = false;
     }
 
     public string GetNote ()
     {
         if( usedSharp )
         {
-            return id + "#";
+            if( doubleSharp )
+            {
+                return id + "x";
+            }
+            else 
+            {
+                return id + "#";
+            }            
         }
         else if ( usedFlat )
         {
-            return id + "b";
+            if ( doubleFlat )
+            {
+                return id + "x";
+            }
+            else
+            {
+                return id + "b";
+            }
         }
         else
         {

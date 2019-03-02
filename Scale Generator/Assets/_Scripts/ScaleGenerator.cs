@@ -23,14 +23,14 @@ public class ScaleGenerator : MonoBehaviour
         //                              -OnValueChanged event fires when scaleDrop is set during Awake() method
 
         //check if scale is theoretical
-        if ( CheckTheoretical( root, scale ) )
-        {
-            theoreticalWarning.gameObject.SetActive( true );
-        }
-        else
-        {
-            theoreticalWarning.gameObject.SetActive( false );
-        }
+        //if (CheckTheoretical( root, scale ))
+        //{
+        //    theoreticalWarning.gameObject.SetActive( true );
+        //}
+        //else
+        //{
+        //    theoreticalWarning.gameObject.SetActive( false );
+        //}
 
         //reset the sharp/flat booleans
         for (int i = 0; i < 7; i++)
@@ -217,9 +217,11 @@ public class ScaleGenerator : MonoBehaviour
         return index;
     }
 
-    private bool CheckTheoretical( int root, int scale )
+    //private bool CheckTheoretical( int root, int scale )    
+    public void CheckTheoretical( int root, int scale, NoteArray noteArray )
     {
-        bool theoretical = false;
+  
+        //bool theoretical = false;
         int[] diatonicPattern = { 2, 1, 2, 2, 1, 2, 2 }; //an int[] that represents the intervals of all the notes
                                                          //each index represents the amount of semitones between the notes, starting with A
                                                          //ie. index 0 = A, and is 2 semitones away from B (index 1)
@@ -228,6 +230,16 @@ public class ScaleGenerator : MonoBehaviour
         int diatonicTotal = 0;          //an int that represents the amount of semitones in the diatonicPattern;
         //int sharpsTotal = 0;
         //int flatsTotal = 0;
+
+        //clear the existing sharps/flats/doubles
+        //reset the sharp/flat booleans
+        for (int i = 0; i < 7; i++)
+        {
+            noteArray.noteArray[i].usedFlat = false;
+            noteArray.noteArray[i].doubleFlat = false;
+            noteArray.noteArray[i].usedSharp = false;
+            noteArray.noteArray[i].doubleSharp = false;
+        }
 
         //adjusting the scaleTotal in case it starts on a sharp/flat note
         switch ( root )
@@ -273,27 +285,41 @@ public class ScaleGenerator : MonoBehaviour
                     //any difference between the totals will represent a sharp or a flat note in the scale
         for ( int i = 1; i < 7; i++ )
         {
+            int noteIndex = 0;
             scaleTotal += currentScale[i];
             diatonicTotal += diatonicPattern[startIndex];
 
+            if( startIndex == 6)
+            {
+                noteIndex = 0;
+            }
+            else
+            {
+                noteIndex = startIndex + 1;    
+            }
+
             //compare here
-            //Debug.Log( "iteration " + i + ": scaleTotal = " + scaleTotal + ", diatonicTotal = " + diatonicTotal );
+            Debug.Log( "iteration " + i + ": scaleTotal = " + scaleTotal + ", diatonicTotal = " + diatonicTotal );
             if( scaleTotal > diatonicTotal )
             {
-                //sharpsTotal++;
+                //sharpsTotal++;              
+                noteArray.noteArray[noteIndex].usedSharp = true;
                 if ( (scaleTotal - diatonicTotal) > 1 )
                 {
+                    noteArray.noteArray[noteIndex].doubleSharp = true;
                     Debug.Log( "Theoretical Scale!!!! double sharp" );
-                    theoretical = true;
+                    //theoretical = true;
                 }
             }
             else if ( scaleTotal < diatonicTotal )
             {
-                //flatsTotal++;
+                //flatsTotal++;      
+                noteArray.noteArray[noteIndex].usedFlat = true;
                 if ( (scaleTotal - diatonicTotal) < -1)
                 {
+                    noteArray.noteArray[noteIndex].doubleFlat = true;
                     Debug.Log( "Theoretical Scale!!!! double flat" );
-                    theoretical = true;
+                    //theoretical = true;
                 }
             }
 
@@ -306,9 +332,8 @@ public class ScaleGenerator : MonoBehaviour
         }
 
         //Debug.Log( "sharpsTotal = " + sharpsTotal );
-        //Debug.Log( "flatsTotal = " + flatsTotal );
-
-        return theoretical;
+        //Debug.Log( "flatsTotal = " + flatsTotal ); 
+        //return theoretical;
     }
 
     public int[] GetMajorFormula()
@@ -320,5 +345,5 @@ public class ScaleGenerator : MonoBehaviour
     {
         return minorFormula;
     }
-   
+
 }
