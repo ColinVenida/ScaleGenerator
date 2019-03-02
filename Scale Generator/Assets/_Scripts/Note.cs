@@ -46,7 +46,7 @@ public class Note
         {
             if( doubleSharp )
             {
-                return id + "x";
+                return id + "##";
             }
             else 
             {
@@ -57,7 +57,7 @@ public class Note
         {
             if ( doubleFlat )
             {
-                return id + "x";
+                return id + "bb";
             }
             else
             {
