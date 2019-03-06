@@ -11,6 +11,7 @@ public class ScaleGenerator : MonoBehaviour
     private int[] minorFormula = { 0, 2, 1, 2, 2, 1, 2, 2 };
     private int rootNote = 3;
     private bool isTheoretical;
+    private int rootIndex;  //variable that represents which index the root note is in
 
     public Text theoreticalWarning;
 
@@ -65,6 +66,7 @@ public class ScaleGenerator : MonoBehaviour
                                                          //each index represents the amount of semitones between the notes, starting with A
                                                          //ie. index 0 = A, and is 2 semitones away from B (index 1)
         int startIndex = FindFamilyIndex( root );
+        rootIndex = startIndex;
         int scaleTotal = 0;         //an int that represents the amount of semitones in the given scale
         int diatonicTotal = 0;          //an int that represents the amount of semitones in the diatonicPattern;
         
@@ -175,6 +177,11 @@ public class ScaleGenerator : MonoBehaviour
     public int[] GetMinorFormula()
     {
         return minorFormula;
+    }
+
+    public int GetRootIndex()
+    {
+        return rootIndex;
     }
 
 }

@@ -19,7 +19,7 @@ public class GuitString : MonoBehaviour
     public void CalculateFrets( int drop )
     {
         bool hasEnharmonic = false;
-        bool includeFamilyNote = false;
+        bool includeFamilyNote = false;        
 
         //set the preset dropdown to default value (0) if the tuning was changed by the preset button
         if (changePreset)
@@ -45,14 +45,15 @@ public class GuitString : MonoBehaviour
                 break;
         }
 
-        //blank out the fret board
+        //blank out the fret board and change font color to black
         for (int i = 0; i < fretArray.Length; i++)
         {
             fretArray[i].text = "";
+            fretArray[i].color = new Color32( 0, 0, 0, 255 );
         }
 
         //set the 12th fret's color to black in case it changed
-        fretArray[11].color = new Color32( 0, 0, 0, 255 );
+        //fretArray[11].color = new Color32( 0, 0, 0, 255 );
 
         SetCurrentTuning( drop );
    
@@ -98,8 +99,7 @@ public class GuitString : MonoBehaviour
         {
             familyIndex += 2;
             scaleInterval += 2;
-            currentFret++;
-            fretArray[11].color = new Color32( 0, 0, 255, 255 );
+            currentFret++;            
         }
         //if we have to include another version of the currentTuning's note (ie. a sharp or a flat)
         else
@@ -129,8 +129,13 @@ public class GuitString : MonoBehaviour
 
         //run through the fret board and set the labels to the scale 
         for (int i = 1; i < 8; i++)
-        {
-            
+        {            
+            //check if the next note is the same as the root note of the scale
+            if( familyIndex == fBoard.scaleGen.GetRootIndex() )
+            {
+                fretArray[currentFret].color = new Color( 0, 0, 255 );
+            }
+
             //set the currentFret's text to the note in the scale
             fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();            
             familyIndex++;
