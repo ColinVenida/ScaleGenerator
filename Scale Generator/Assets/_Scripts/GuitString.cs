@@ -67,7 +67,7 @@ public class GuitString : MonoBehaviour
         int familyIndex = fBoard.scaleGen.FindFamilyIndex( noteSelect.value );
 
         //find the interval of currentTuning in relation to the scale
-        int scaleInterval = FindScaleIntervale( fBoard.rootDrop.value, familyIndex );
+        int scaleInterval = FindScaleInterval( fBoard.rootDrop.value, familyIndex );
 
         //check if the note in the current scale is a different "version" than the currentTuning
         //ie. the tuning is C, and the note in the scale is C#
@@ -228,7 +228,7 @@ public class GuitString : MonoBehaviour
 
     //function that returns the root note's interval of the given family index
         //ie. what interval/position is "A" in the C scale (A is the 6th note in C scales)
-    private int FindScaleIntervale( int root, int familyIndex )
+    private int FindScaleInterval( int root, int familyIndex )
     {
         int interval = 0;        
         //find the FamilyIndex of the root note

@@ -7,10 +7,7 @@ public class ScaleQuiz : MonoBehaviour
 {
 
     private int[] quizIndexes = { 0, 0, 0, 0 };
-    private int[] wholeNotes = { 0, 2, 3, 5, 7, 8, 10 };  //array of just whole notes
-    private int[] majorDistances = { 0, 2, 4, 5, 7, 9, 11 }; //how many half-steps it takes to get from the root note to a given scale Position
-                                            //root note + 4 half steps = 3rd note of scale
-                                            
+                                                
     private int rootNote;
     private System.Random rnd = new System.Random();
     private string[] currentScale;
