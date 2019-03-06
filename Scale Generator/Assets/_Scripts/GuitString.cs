@@ -27,8 +27,7 @@ public class GuitString : MonoBehaviour
             presetDrop.value = 0;
         }
 
-        SaveTuning( drop );
-        int currentNote = drop;        
+        SaveTuning( drop );       
         int currentFret = 0;   //set currentFret to 0 to represent the first fret
 
         int[] currentScale;
