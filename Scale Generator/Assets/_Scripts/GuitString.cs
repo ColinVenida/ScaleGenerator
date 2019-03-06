@@ -18,12 +18,6 @@ public class GuitString : MonoBehaviour
         
     public void CalculateFrets( int drop )
     {
-
-        //  ***BUG***
-        //The ScaleGenerator displays G# major incorrectly
-            //G# major is a theoretical scale (ie. it needs a note with 2 sharps/flats in it)
-            //need code to determine if the scale is theoretical
-
         bool hasEnharmonic = false;
         bool includeFamilyNote = false;
 
