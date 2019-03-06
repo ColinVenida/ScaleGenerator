@@ -2,7 +2,6 @@
 
 ***FretboardScene***
 
-implement feature:  determine whether a scale is theoretical or not and alert the user
 
 implement feature:  highlight same notes on user's touch
 
@@ -32,6 +31,12 @@ create new art to make the app look nice
 
 ====COMPLETED TASKS====
 
+3/2/19
+implement feature:  determine whether a scale is theoretical or not and alert the user
+	-program correctly determines theoretical scales 
+		if there the scale is theoretical
+			-the user is informed the scale is theoretical
+			-the scale is correctly displayed on the ScaleGen and Fretboard scenes
 2/20/19
 implement new note system to FretboardScene
 
