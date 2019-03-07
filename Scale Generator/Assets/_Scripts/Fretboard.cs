@@ -226,7 +226,6 @@ public class Fretboard : MonoBehaviour
         visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
 
         SetScale();
-
 	}
 
     private void Awake()
@@ -257,6 +256,24 @@ public class Fretboard : MonoBehaviour
         }
     }
 
+    //change the color of all the fret texts that match the given note
+    public void HighlightFrets( string note )
+    {
+        for( int i = 0; i < guitStrings.Length; i++ )
+        {
+            for( int j = 0; j < guitStrings[i].fretArray.Length; j++ )
+            {
+                if( guitStrings[i].fretArray[j].text == note )
+                {
+                    guitStrings[i].fretArray[j].color = new Color( (float)0, (float)0.5, (float)0.5, 255 );                    
+                }
+                else if ( guitStrings[i].fretArray[j].color != Color.blue )
+                {                    
+                    guitStrings[i].fretArray[j].color = new Color( 0, 0, 0 );
+                }                
+            }//end j
+        }//end i
+    }
 
 
     // Update is called once per frame

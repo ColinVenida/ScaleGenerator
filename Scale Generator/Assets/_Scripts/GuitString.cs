@@ -133,7 +133,11 @@ public class GuitString : MonoBehaviour
             //check if the next note is the same as the root note of the scale
             if( familyIndex == fBoard.scaleGen.GetRootIndex() )
             {
-                fretArray[currentFret].color = new Color( 0, 0, 255 );
+               fretArray[currentFret].color = new Color( 0, 0, 1 );                
+            }
+            else
+            {
+                fretArray[currentFret].color = new Color( 0, 0, 0 );
             }
 
             //set the currentFret's text to the note in the scale
