@@ -1,10 +1,5 @@
 ====TASK LIST=====
 
-***FretboardScene***
-
-
-implement feature:  highlight same notes on user's touch
-
 *******
 
 Make demo video to show other musicians and programmers
@@ -16,6 +11,7 @@ properly document/refactor the classes (especially ScaleGenerator, and GuitStrin
 **Re-evalute what the scenes need after the new note system is implemented
 	//what bugs are there?
 	//is everything being saved?
+	//update the Task List docs
 	//etc.
 
 refactor the Start() and Awake() functions to proper order.  This is affecting how the program saves the dropdown values
@@ -30,6 +26,11 @@ adjust the graphics settings so the app looks consistent on different screen siz
 create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+3/7/19
+implement feature:  highlight same notes on user's touch
+	-if the user touches a fret that is displaying a note, then the program changes that note
+		and each note with the same string to a dark yellow color
 
 3/2/19
 implement feature:  determine whether a scale is theoretical or not and alert the user
