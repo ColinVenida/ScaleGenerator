@@ -265,11 +265,13 @@ public class Fretboard : MonoBehaviour
             {
                 if( guitStrings[i].fretArray[j].text == note )
                 {
-                    guitStrings[i].fretArray[j].color = new Color( (float)0, (float)0.5, (float)0.5, 255 );                    
+                    guitStrings[i].fretArray[j].color = new Color( (float)0.5, (float)0, (float)0.25, 255 );
+                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Bold;
                 }
                 else if ( guitStrings[i].fretArray[j].color != Color.blue )
                 {                    
                     guitStrings[i].fretArray[j].color = new Color( 0, 0, 0 );
+                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Normal;
                 }                
             }//end j
         }//end i

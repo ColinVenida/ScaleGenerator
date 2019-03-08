@@ -50,6 +50,7 @@ public class GuitString : MonoBehaviour
         {
             fretArray[i].text = "";
             fretArray[i].color = new Color32( 0, 0, 0, 255 );
+            fretArray[i].fontStyle = FontStyle.Normal;
         }
 
         //set the 12th fret's color to black in case it changed
