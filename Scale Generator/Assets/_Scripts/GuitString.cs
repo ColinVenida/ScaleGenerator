@@ -39,6 +39,21 @@ public class GuitString : MonoBehaviour
             case 1:
                 currentScale = fBoard.scaleGen.GetMinorFormula();
                 break;
+            case 2:
+                currentScale = fBoard.scaleGen.GetDorianFormula();
+                break;
+            case 3:
+                currentScale = fBoard.scaleGen.GetPhrygianFormula();
+                break;
+            case 4:
+                currentScale = fBoard.scaleGen.GetLydianFormula();
+                break;
+            case 5:
+                currentScale = fBoard.scaleGen.GetMixolydianFormula();
+                break;
+            case 6:
+                currentScale = fBoard.scaleGen.GetLocrianFormula();
+                break;
             default:
                 Debug.Log( "default in the GuitString scale assignment" );
                 currentScale = fBoard.scaleGen.GetMajorFormula();
@@ -128,13 +143,13 @@ public class GuitString : MonoBehaviour
             scaleInterval = 1;
         }
 
-        //run through the fret board and set the labels to the scale 
-        for (int i = 1; i < 8; i++)
-        {            
+        //run through the fret board and set the labels to the scale
+        while( currentFret < 14 )
+        {
             //check if the next note is the same as the root note of the scale
-            if( familyIndex == fBoard.scaleGen.GetRootIndex() )
+            if (familyIndex == fBoard.scaleGen.GetRootIndex())
             {
-               fretArray[currentFret].color = new Color( 0, 0, 1 );                
+                fretArray[currentFret].color = new Color( 0, 0, 1 );
             }
             else
             {
@@ -142,7 +157,7 @@ public class GuitString : MonoBehaviour
             }
 
             //set the currentFret's text to the note in the scale
-            fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();            
+            fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
             familyIndex++;
             scaleInterval++;
 
@@ -156,8 +171,9 @@ public class GuitString : MonoBehaviour
                 scaleInterval = 1;
             }
             //move to to the next fret according to the pattern
-            currentFret += currentScale[scaleInterval];            
-        }
+            currentFret += currentScale[scaleInterval];
+
+        }        
     }
 
     //function to check if the given note/tuning has enharmonic notes in the current scale

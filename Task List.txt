@@ -2,8 +2,22 @@
 
 *******
 
-Make demo video to show other musicians and programmers
-	//take their feedback and adjust program from there
+Scale Generator: Add modes to the scale generator drop down
+
+Sacle Generator: Add diminished character to scale generator
+
+Fretboard: Add text to show the octave on 12th fret
+
+***NEW FEATURE: Tooltip Menu***
+-Add a button to each scene that will bring up a new window that consicely explains a basic music theory
+-The content of the window will change based on what scene is being viewd, and what scales/root note has
+	been selected
+-examples of tooltips
+	"The major scale is made up of same pattern of whole steps and half steps.  Starting from the root:
+		[root] W W H W W W H [octave] "
+	"The Mixolydian scale is the major scale, but with a flat-7th note"
+	"something about enharmonics"
+
 
 properly document/refactor the classes (especially ScaleGenerator, and GuitString) to explain how the code works.
 	//make sure all the variable/data structure names are also "music theory" correct (ie. scale intervals)
@@ -26,6 +40,10 @@ adjust the graphics settings so the app looks consistent on different screen siz
 create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+3/25/19
+Make demo video to show other musicians and programmers
+	//take their feedback and adjust program from there
 
 3/7/19
 implement feature:  highlight same notes on user's touch

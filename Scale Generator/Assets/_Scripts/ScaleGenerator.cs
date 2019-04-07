@@ -6,17 +6,24 @@ using UnityEngine.UI;
 
 
 public class ScaleGenerator : MonoBehaviour
-{    
+{
+    //formulas: [nothing, root->2nd, 2nd->3rd, 3rd->4th, ... ]
     private int[] majorFormula = { 0, 2, 2, 1, 2, 2, 2, 1 };
     private int[] minorFormula = { 0, 2, 1, 2, 2, 1, 2, 2 };
+    private int[] dorianFormula = { 0, 2, 1, 2, 2, 2, 1, 2 };
+    private int[] phrygianFormula = { 0, 1, 2, 2, 2, 1, 2, 2 };
+    private int[] lydianFormula = { 0, 2, 2, 2, 1, 2, 2, 1 };
+    private int[] mixolydianFormula = { 0, 2, 2, 1, 2, 2, 1, 2 };
+    private int[] locrianFormula = { 0, 1, 2, 2, 1, 2, 2, 2 };
+
     private int rootNote = 3;
     private bool isTheoretical;
     private int rootIndex;  //variable that represents which index the root note is in
 
     public Text theoreticalWarning;
 
-    
-    public int FindFamilyIndex ( int note )
+
+    public int FindFamilyIndex( int note )
     {
         int index = 0;
 
@@ -59,7 +66,7 @@ public class ScaleGenerator : MonoBehaviour
     }
 
     // the root and scale values come from the "root" and "scale" dropdown objects in the Scale/Fretboard Scenes
-            //function changes the given noteArray reference
+    //function changes the given noteArray reference
     public void GenerateScale( int root, int scale, NoteArray noteArray )
     {
         int[] diatonicPattern = { 2, 1, 2, 2, 1, 2, 2 }; //an int[] that represents the intervals of all the notes
@@ -69,7 +76,7 @@ public class ScaleGenerator : MonoBehaviour
         rootIndex = startIndex;
         int scaleTotal = 0;         //an int that represents the amount of semitones in the given scale
         int diatonicTotal = 0;          //an int that represents the amount of semitones in the diatonicPattern;
-        
+
 
         //clear the existing sharps/flats/doubles
         //reset the sharp/flat booleans
@@ -84,7 +91,7 @@ public class ScaleGenerator : MonoBehaviour
         theoreticalWarning.gameObject.SetActive( false );
 
         //adjusting the scaleTotal and usedSharp/Flat in case it starts on a sharp/flat note
-        switch ( root )
+        switch (root)
         {
             //cases for flats
             case 0:
@@ -109,8 +116,8 @@ public class ScaleGenerator : MonoBehaviour
         }
 
         int[] currentScale;
-        
-        switch( scale )
+
+        switch (scale)
         {
             case 0:
                 currentScale = majorFormula;
@@ -118,55 +125,70 @@ public class ScaleGenerator : MonoBehaviour
             case 1:
                 currentScale = minorFormula;
                 break;
+            case 2:
+                currentScale = dorianFormula;
+                break;
+            case 3:
+                currentScale = phrygianFormula;
+                break;
+            case 4:
+                currentScale = lydianFormula;
+                break;
+            case 5:
+                currentScale = mixolydianFormula;
+                break;
+            case 6:
+                currentScale = locrianFormula;
+                break;
             default:
                 currentScale = majorFormula;
                 break;
         }
 
         //add the semitones of the diatonic pattern and the given scale, then compare them
-                    //any difference between the totals will represent a sharp or a flat note in the scale
-        for ( int i = 1; i < 7; i++ )
+        //any difference between the totals will represent a sharp or a flat note in the scale
+        for (int i = 1; i < 7; i++)
         {
             int noteIndex = 0;
             scaleTotal += currentScale[i];
             diatonicTotal += diatonicPattern[startIndex];
 
-            if( startIndex == 6)
+            if (startIndex == 6)
             {
                 noteIndex = 0;
             }
             else
             {
-                noteIndex = startIndex + 1;    
+                noteIndex = startIndex + 1;
             }
 
             //compare here            
-            if( scaleTotal > diatonicTotal )
-            {                
+            if (scaleTotal > diatonicTotal)
+            {
                 noteArray.noteArray[noteIndex].usedSharp = true;
-                if ( (scaleTotal - diatonicTotal) > 1 )
+                if ((scaleTotal - diatonicTotal) > 1)
                 {
                     noteArray.noteArray[noteIndex].doubleSharp = true;
-                    theoreticalWarning.gameObject.SetActive( true );                    
+                    theoreticalWarning.gameObject.SetActive( true );
                 }
             }
-            else if ( scaleTotal < diatonicTotal )
-            {                
+            else if (scaleTotal < diatonicTotal)
+            {
                 noteArray.noteArray[noteIndex].usedFlat = true;
-                if ( (scaleTotal - diatonicTotal) < -1)
+                if ((scaleTotal - diatonicTotal) < -1)
                 {
                     noteArray.noteArray[noteIndex].doubleFlat = true;
-                    theoreticalWarning.gameObject.SetActive( true );                    
+                    theoreticalWarning.gameObject.SetActive( true );
                 }
             }
-                        
+
             //increment and check array bounds
             startIndex++;
-            if( startIndex > 6)
+            if (startIndex > 6)
             {
                 startIndex = 0;
             }
-        }       
+        }
     }
 
     public int[] GetMajorFormula()
@@ -177,6 +199,31 @@ public class ScaleGenerator : MonoBehaviour
     public int[] GetMinorFormula()
     {
         return minorFormula;
+    }
+
+    public int[] GetDorianFormula()
+    {
+        return dorianFormula;
+    }
+
+    public int[] GetPhrygianFormula()
+    {
+        return phrygianFormula;
+    }
+
+    public int[] GetLydianFormula()
+    {
+        return lydianFormula;
+    }
+
+    public int[] GetMixolydianFormula()
+    {
+        return mixolydianFormula;
+    }
+
+    public int[] GetLocrianFormula()
+    {
+        return locrianFormula;
     }
 
     public int GetRootIndex()

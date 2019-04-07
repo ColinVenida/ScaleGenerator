@@ -37,25 +37,32 @@ public class ScaleScene : MonoBehaviour
     {
         switch (scale.value)
         {
-            case 0:
+            //'\u2205' is for half-diminished symbol
+            //unicode symbols found here https://www.fileformat.info/info/unicode/font/arial_unicode_ms/list.htm
+            case 0: //ionian
+            case 4: //lydian
+            case 5: //mixolydian
                 notePositions[0].text = "I";
                 notePositions[1].text = "ii";
                 notePositions[2].text = "iii";
                 notePositions[3].text = "IV";
                 notePositions[4].text = "V";
                 notePositions[5].text = "vi";
-                notePositions[6].text = "vii";
-                notePositions[7].text = "VIII";
+                notePositions[6].text = "vii" + '\u2205';
+                notePositions[7].text = "I";
                 break;
-            case 1:
+            case 1: //aeolian
+            case 2: //dorian
+            case 3: //phrygian
+            case 6: //locrian
                 notePositions[0].text = "i";
-                notePositions[1].text = "ii";
+                notePositions[1].text = "ii" + '\u2205';
                 notePositions[2].text = "III";
                 notePositions[3].text = "iv";
                 notePositions[4].text = "v";
                 notePositions[5].text = "VI";
                 notePositions[6].text = "VII";
-                notePositions[7].text = "viii";
+                notePositions[7].text = "i";
                 break;
         }
     }
@@ -68,13 +75,18 @@ public class ScaleScene : MonoBehaviour
         //add minor/diminished
         switch (scaleDrop.value)
         {
-            case 0:
+            case 0: //ionian
+            case 4: //lydian
+            case 5: //mixolydian
                 displayText[1].text += "m";
                 displayText[2].text += "m";
                 displayText[5].text += "m";
                 displayText[6].text += "dim";
                 break;
-            case 1:
+            case 1: //aeolian
+            case 2: //dorian
+            case 3: //phrygian
+            case 6: //locrian
                 displayText[0].text += "m";
                 displayText[1].text += "dim";
                 displayText[3].text += "m";
