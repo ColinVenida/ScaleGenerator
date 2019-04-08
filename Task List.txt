@@ -2,9 +2,6 @@
 
 *******
 
-Scale Generator: Add modes to the scale generator drop down
-
-Sacle Generator: Add diminished character to scale generator
 
 Fretboard: Add text to show the octave on 12th fret
 
@@ -40,6 +37,11 @@ adjust the graphics settings so the app looks consistent on different screen siz
 create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+4/6/19
+Scale Generator: Add modes to the scale generator drop down
+
+Sacle Generator: Add diminished character to scale generator
 
 3/25/19
 Make demo video to show other musicians and programmers
