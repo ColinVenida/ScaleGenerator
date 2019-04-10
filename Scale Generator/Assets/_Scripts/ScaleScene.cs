@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ScaleScene : MonoBehaviour 
 {
-
     public Text[] notePositions;
     public Text[] displayText;
     public ScaleGenerator scaleGen;
@@ -14,8 +13,16 @@ public class ScaleScene : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
-    public void UpdateScale(  )
+    private bool isInitialized;
+
+    public void UpdateScale()
     {
+        //the scale will not update until the dropdowns have properly updated, see the Start() function
+        if( !isInitialized )
+        {
+            return;
+        }
+
         scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );        
 
         //**find the starting point of the scale here***
@@ -31,6 +38,34 @@ public class ScaleScene : MonoBehaviour
             }
         }
         UpdateDisplay();
+        SavePlayerPrefs();
+    }
+
+    public void UpdateDisplay()
+    {
+        //add minor/diminished
+        switch (scaleDrop.value)
+        {
+            case 0: //ionian
+            case 4: //lydian
+            case 5: //mixolydian
+                displayText[1].text += "m";
+                displayText[2].text += "m";
+                displayText[5].text += "m";
+                displayText[6].text += "dim";
+                break;
+            case 1: //aeolian
+            case 2: //dorian
+            case 3: //phrygian
+            case 6: //locrian
+                displayText[0].text += "m";
+                displayText[1].text += "dim";
+                displayText[3].text += "m";
+                displayText[4].text += "m";
+                displayText[7].text += "m";
+                break;
+        }
+        UpdatePositions( scaleDrop );
     }
 
     public void UpdatePositions( Dropdown scale )
@@ -66,59 +101,23 @@ public class ScaleScene : MonoBehaviour
                 break;
         }
     }
-
-
-    public void UpdateDisplay()
-    {
-        UpdatePositions( scaleDrop );
-
-        //add minor/diminished
-        switch (scaleDrop.value)
-        {
-            case 0: //ionian
-            case 4: //lydian
-            case 5: //mixolydian
-                displayText[1].text += "m";
-                displayText[2].text += "m";
-                displayText[5].text += "m";
-                displayText[6].text += "dim";
-                break;
-            case 1: //aeolian
-            case 2: //dorian
-            case 3: //phrygian
-            case 6: //locrian
-                displayText[0].text += "m";
-                displayText[1].text += "dim";
-                displayText[3].text += "m";
-                displayText[4].text += "m";
-                displayText[7].text += "m";
-                break;
-        }
-    }
-
+    
     private void SavePlayerPrefs()
-    {
+    {        
         PlayerPrefs.SetInt( "scaleType", scaleDrop.value );
         PlayerPrefs.SetInt( "rootNote", rootDrop.value );
         PlayerPrefs.Save();
-
-        Debug.Log( "Saving!" );
-        //Debug.Log( "scaleType = " + PlayerPrefs.GetInt( "scaleType" ) );
-        Debug.Log( "SAVE playerpref rootNote = " + PlayerPrefs.GetInt( "rootNote" ) );
     }
-
-    void SetDropdownValues()
-    {        
-        scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
-        rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
-    }
-
-
 
     // Use this for initialization
     void Start()
     {
-        SetDropdownValues();
+        scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );  //OnValueChanged Event, which updates the scale, gets triggered                                                                 
+        rootDrop.value = PlayerPrefs.GetInt( "rootNote" );      //every time you change the either drop value
+
+        //now that the dropdowns have been properly updated, we can update the scale
+        isInitialized = true;
+        UpdateScale();
     }
 
     private void Awake()
@@ -135,11 +134,9 @@ public class ScaleScene : MonoBehaviour
             PlayerPrefs.SetInt( "rootNote", 5 );
         }
 
-        //set the variables based on the PlayerPrefs
-        //scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
-        //rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
-        //rootNote = rootDrop.value;
-
+        //we don't want to update the scale pre-maturely, so we set a bool to false
+        //the bool is set to true after BOTH the scaleDrop and rootDrop values have been changed
+        isInitialized = false;        
     }
 
     // Update is called once per frame
