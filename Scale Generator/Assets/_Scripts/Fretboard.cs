@@ -15,7 +15,8 @@ public class Fretboard : MonoBehaviour
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
 
-
+    private bool isInitialized;
+    private bool guitStringInitialized;
     private string[] currentScale;
     private int visibleStrings;
 
@@ -138,60 +139,85 @@ public class Fretboard : MonoBehaviour
     //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
     public void SetScale() 
     {
+        if( !isInitialized )
+        {
+            //Debug.Log( "Not initialized, returning" );
+            return;
+        }
         scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
-
-        //guitStrings[0].CalculateFrets( guitStrings[0].noteSelect.value );
+        SaveScalePrefs();        
 
         //update all the string's scales
         for (int i = 0; i < 8; i++)
-        {
-            guitStrings[i].CalculateFrets( guitStrings[i].noteSelect.value );
-        }
-
-    }
-
-    private void WakeupTuning ()
-    {
-        for( int i = 0; i < guitStrings.Length; i++ )
-        {
-            switch( i )
+        {          
+            switch (i)
             {
-                case 0:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringOne" );
+                case 0:                    
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringOne" ) );
                     break;
                 case 1:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringTwo" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringTwo" ) );
                     break;
                 case 2:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringThree" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringThree" ) );
                     break;
                 case 3:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringFour" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFour" ) );
                     break;
                 case 4:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringFive" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFive" ) );
                     break;
                 case 5:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSix" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSix" ) );
                     break;
                 case 6:
-                    Debug.Log( " *wakeup* GuitStringSeven = " + PlayerPrefs.GetInt( "GuitStringSeven" ) );
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSeven" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSeven" ) );
                     break;
                 case 7:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringEight" );
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringEight" ) );
                     break;
             }//end switch
-        }//end for
+        }
     }
 
+    //change the color of all the fret texts that match the given note
+    public void HighlightFrets( string note )
+    {
+        for (int i = 0; i < guitStrings.Length; i++)
+        {
+            for (int j = 0; j < guitStrings[i].fretArray.Length; j++)
+            {
+                if (guitStrings[i].fretArray[j].text == note)
+                {
+                    guitStrings[i].fretArray[j].color = new Color( (float)0.8, (float)0.8, (float)0, 255 );
+                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Bold;
+                }
+                else if (guitStrings[i].fretArray[j].color != Color.blue)
+                {
+                    guitStrings[i].fretArray[j].color = new Color( 0, 0, 0 );
+                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Normal;
+                }
+            }//end j
+        }//end i
+    }
+
+    public bool GetGuitStringInitialized()
+    {
+        return guitStringInitialized;
+    }
     
     // Use this for initialization
     void Start () 
     {
-        //set the currentScale to C Major
-        scaleGen.GenerateScale( 5, 0, noteArray );
         
+        //set the scale and root to the PlayerPrefs
+        scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
+        rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
+        
+
+
+        
+        //set each string's tuning       
         for (int i = 0; i < guitStrings.Length; i++)
         {
             switch (i)
@@ -214,7 +240,7 @@ public class Fretboard : MonoBehaviour
                 case 5:
                     guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSix" );
                     break;
-                case 6:                    
+                case 6:
                     guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSeven" );
                     break;
                 case 7:
@@ -222,15 +248,16 @@ public class Fretboard : MonoBehaviour
                     break;
             }//end switch
         }//end for
+
+        isInitialized = true;
+        guitStringInitialized = true;
+        SetScale();
         ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
         visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
-
-        SetScale();
 	}
 
     private void Awake()
-    {
-        //Debug.Log( "Fretboard Awake()" );
+    {        
         //check and set the PlayerPrefs
         if (!PlayerPrefs.HasKey( "GuitStringsVisible" ))
         {
@@ -254,27 +281,17 @@ public class Fretboard : MonoBehaviour
         {
             PlayerPrefs.SetInt( "presetValue", 0 );
         }
+
+        isInitialized = false;
+        guitStringInitialized = false;
+
     }
 
-    //change the color of all the fret texts that match the given note
-    public void HighlightFrets( string note )
-    {
-        for( int i = 0; i < guitStrings.Length; i++ )
-        {
-            for( int j = 0; j < guitStrings[i].fretArray.Length; j++ )
-            {
-                if( guitStrings[i].fretArray[j].text == note )
-                {
-                    guitStrings[i].fretArray[j].color = new Color( (float)0.8, (float)0.8, (float)0, 255 );
-                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Bold;
-                }
-                else if ( guitStrings[i].fretArray[j].color != Color.blue )
-                {                    
-                    guitStrings[i].fretArray[j].color = new Color( 0, 0, 0 );
-                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Normal;
-                }                
-            }//end j
-        }//end i
+    private void SaveScalePrefs()
+    {       
+        PlayerPrefs.SetInt( "scaleType", scaleDrop.value );
+        PlayerPrefs.SetInt( "rootNote", rootDrop.value );
+        PlayerPrefs.Save();
     }
 
 

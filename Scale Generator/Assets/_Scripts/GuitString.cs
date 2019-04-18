@@ -21,12 +21,17 @@ public class GuitString : MonoBehaviour
         bool hasEnharmonic = false;
         bool includeFamilyNote = false;        
 
+        if( !fBoard.GetGuitStringInitialized() )
+        {
+            return;
+        }
+
         //set the preset dropdown to default value (0) if the tuning was changed by the preset button
         if (changePreset)
         {
             presetDrop.value = 0;
         }
-
+       
         SaveTuning( drop );       
         int currentFret = 0;   //set currentFret to 0 to represent the first fret
 
@@ -174,7 +179,7 @@ public class GuitString : MonoBehaviour
             currentFret += currentScale[scaleInterval];
 
         }        
-    }
+    }//end CacculateFrets()
 
     //function to check if the given note/tuning has enharmonic notes in the current scale
     private bool CheckEnharmonic( int tuning )
@@ -273,12 +278,11 @@ public class GuitString : MonoBehaviour
     }
 
     private void SaveTuning( int drop )
-    {        
+    {
         switch( this.stringNumber )
         {
             case 0:
-                PlayerPrefs.SetInt( "GuitStringOne", drop );
-                //Dbug.Log( "value = " + PlayerPrefs.GetInt( "GuitStringOne" ) );
+                PlayerPrefs.SetInt( "GuitStringOne", drop );                
                 break;
             case 1:
                 PlayerPrefs.SetInt( "GuitStringTwo", drop );
@@ -302,6 +306,8 @@ public class GuitString : MonoBehaviour
                 PlayerPrefs.SetInt( "GuitStringEight", drop );               
                 break;
         }
+        PlayerPrefs.Save();
+        
     }
 
     //function that changes the current tuning to the given int value
