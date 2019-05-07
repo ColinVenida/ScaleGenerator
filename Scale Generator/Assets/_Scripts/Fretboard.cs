@@ -214,7 +214,7 @@ public class Fretboard : MonoBehaviour
         scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
         rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
         
-
+        
 
         
         //set each string's tuning       
