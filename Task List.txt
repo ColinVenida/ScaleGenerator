@@ -15,6 +15,16 @@ Fretboard: Add text to show the octave on 12th fret
 	"The Mixolydian scale is the major scale, but with a flat-7th note"
 	"something about enharmonics"
 
+***NEW FEATURE:  Chord Arpeggios***
+-add a Fretboard filter that shows the arpeggios of the selected chord
+	-need to add a button/menu for the user to select what scale/arpeggio they want to display
+	-need to research how arpeggios are formed/made
+		-do they come from a specific scale?
+
+Add Modes to the QuizScene
+
+Implement saving feature to the QuizScene
+	-Use a PlayerPref array or lots of booleans to save the checkbox status
 
 properly document/refactor the classes (especially ScaleGenerator, and GuitString) to explain how the code works.
 	//make sure all the variable/data structure names are also "music theory" correct (ie. scale intervals)
@@ -25,18 +35,21 @@ properly document/refactor the classes (especially ScaleGenerator, and GuitStrin
 	//update the Task List docs
 	//etc.
 
-refactor the Start() and Awake() functions to proper order.  This is affecting how the program saves the dropdown values
-between Scenes
-	[done]-list out all the functions that are currently in the Start(), Awake() and OnValueChanged functions		
-	-list out functions that are essential and need to be done first
-	-refactor logic to solve the OnValueChanged problem
-	-put other functions into the Start() function ?
 
 adjust the graphics settings so the app looks consistent on different screen sizes.
 
 create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+4/19/17
+***The program saves dropdown values for the ScaleScene and Fretboard scene, NOT the QuizScene
+refactor the Start() and Awake() functions to proper order.  This is affecting how the program saves the dropdown values
+between Scenes
+	[done]-list out all the functions that are currently in the Start(), Awake() and OnValueChanged functions		
+	-list out functions that are essential and need to be done first
+	-refactor logic to solve the OnValueChanged problem
+	-put other functions into the Start() function ?
 
 4/6/19
 Scale Generator: Add modes to the scale generator drop down
