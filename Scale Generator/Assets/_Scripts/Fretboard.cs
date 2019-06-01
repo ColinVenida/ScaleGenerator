@@ -14,6 +14,7 @@ public class Fretboard : MonoBehaviour
     public Dropdown rootDrop;
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
+    public TextFormatter textForm;
 
     private bool isInitialized;
     private bool guitStringInitialized;
@@ -178,6 +179,8 @@ public class Fretboard : MonoBehaviour
                     break;
             }//end switch
         }
+
+        textForm.UpdateScale();
     }
 
     //change the color of all the fret texts that match the given note
@@ -204,6 +207,11 @@ public class Fretboard : MonoBehaviour
     public bool GetGuitStringInitialized()
     {
         return guitStringInitialized;
+    }
+    
+    public bool GetIsInitialized()
+    {
+        return isInitialized;
     }
     
     // Use this for initialization
