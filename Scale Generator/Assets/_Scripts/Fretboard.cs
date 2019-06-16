@@ -190,6 +190,11 @@ public class Fretboard : MonoBehaviour
         {
             for (int j = 0; j < guitStrings[i].fretArray.Length; j++)
             {
+                
+                if (guitStrings[i].fretArray[j].color == Color.blue)    //always keep the blue root notes
+                {
+                    continue;
+                }
                 if (guitStrings[i].fretArray[j].text == note)
                 {
                     guitStrings[i].fretArray[j].color = new Color( (float)0.8, (float)0.8, (float)0, 255 );
@@ -221,10 +226,7 @@ public class Fretboard : MonoBehaviour
         //set the scale and root to the PlayerPrefs
         scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
         rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
-        
-        
-
-        
+             
         //set each string's tuning       
         for (int i = 0; i < guitStrings.Length; i++)
         {

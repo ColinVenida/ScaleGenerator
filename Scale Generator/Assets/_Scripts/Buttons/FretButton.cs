@@ -20,7 +20,8 @@ public class FretButton : MonoBehaviour
         if ( childText.text != "" )
         {
             if (onDisplay)
-            {
+            {         
+                //remove the "m" or "dim" from the string
                 if (childText.text.Contains( "dim" ))
                 {
                     remove = 3;
@@ -33,10 +34,6 @@ public class FretButton : MonoBehaviour
                 }                
             }
 
-            
-            //Debug.Log( "str = " + str );
-
-            //fBoard.HighlightFrets( childText.text );
             fBoard.HighlightFrets( str );
         }
     }
