@@ -28,6 +28,7 @@ public class ScaleScene : MonoBehaviour
         //**find the starting point of the scale here***
         int familyIndex = scaleGen.FindFamilyIndex( rootDrop.value );
 
+       
         for ( int i = 0; i < 8; i++ )
         {            
             displayText[i].text = noteArray.noteArray[familyIndex].GetNote();
@@ -38,6 +39,7 @@ public class ScaleScene : MonoBehaviour
             }
         }
         UpdateDisplay();
+
         SavePlayerPrefs();
     }
 

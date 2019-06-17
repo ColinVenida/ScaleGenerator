@@ -20,7 +20,7 @@ public class FretButton : MonoBehaviour
         if ( childText.text != "" )
         {
             if (onDisplay)
-            {         
+            {
                 //remove the "m" or "dim" from the string
                 if (childText.text.Contains( "dim" ))
                 {

@@ -7,37 +7,34 @@ using UnityEngine.UI;
 //methods copied from ScaleScene.cs
 public class TextFormatter : MonoBehaviour
 {
-    public Fretboard fBoard;
-    //public ScaleGenerator scaleGen;
-    //public NoteArray noteArray;
-    public Text[] notePositions;
-    public Text[] displayText;
+    public Fretboard fBoard;   
+    public DisplayScale[] displayScale;
     
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
-
-
     public void UpdateScale ()
     {    
 
-        //**find the starting point of the scale here***
-        int familyIndex = fBoard.scaleGen.FindFamilyIndex( rootDrop.value );
-
-        for (int i = 0; i < 8; i++)
+        for (int j = 0; j < displayScale.Length; j++ )
         {
-            displayText[i].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
-            familyIndex++;
-            if (familyIndex > 6)
+            //**find the starting point of the scale here***
+            int familyIndex = fBoard.scaleGen.FindFamilyIndex( rootDrop.value );
+            for (int i = 0; i < 8; i++)
             {
-                familyIndex = 0;
+                displayScale[j].displayText[i].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
+                familyIndex++;
+                if (familyIndex > 6)
+                {
+                    familyIndex = 0;
+                }
             }
-        }
-        UpdateDisplay();
+            UpdateDisplay( j );
+        }            
         //SavePlayerPrefs();
     }
 
-    public void UpdateDisplay()
+    public void UpdateDisplay( int display )
     {
         if ( !fBoard.GetIsInitialized() )
         {
@@ -50,26 +47,26 @@ public class TextFormatter : MonoBehaviour
             case 0: //ionian
             case 4: //lydian
             case 5: //mixolydian
-                displayText[1].text += "m";
-                displayText[2].text += "m";
-                displayText[5].text += "m";
-                displayText[6].text += "dim";
+                displayScale[display].displayText[1].text += "m";
+                displayScale[display].displayText[2].text += "m";
+                displayScale[display].displayText[5].text += "m";
+                displayScale[display].displayText[6].text += "dim";
                 break;
             case 1: //aeolian
             case 2: //dorian
             case 3: //phrygian
             case 6: //locrian
-                displayText[0].text += "m";
-                displayText[1].text += "dim";
-                displayText[3].text += "m";
-                displayText[4].text += "m";
-                displayText[7].text += "m";
+                displayScale[display].displayText[0].text += "m";
+                displayScale[display].displayText[1].text += "dim";
+                displayScale[display].displayText[3].text += "m";
+                displayScale[display].displayText[4].text += "m";
+                displayScale[display].displayText[7].text += "m";
                 break;
         }
-        UpdatePositions( scaleDrop );
+        UpdatePositions( display, scaleDrop );
     }
 
-    public void UpdatePositions( Dropdown scale )
+    public void UpdatePositions( int display, Dropdown scale )
     {
         switch ( scale.value )
         {
@@ -78,27 +75,27 @@ public class TextFormatter : MonoBehaviour
             case 0: //ionian
             case 4: //lydian
             case 5: //mixolydian
-                notePositions[0].text = "I";
-                notePositions[1].text = "ii";
-                notePositions[2].text = "iii";
-                notePositions[3].text = "IV";
-                notePositions[4].text = "V";
-                notePositions[5].text = "vi";
-                notePositions[6].text = "vii" + '\u2205';
-                notePositions[7].text = "I";
+                displayScale[display].notePositions[0].text = "I";
+                displayScale[display].notePositions[1].text = "ii";
+                displayScale[display].notePositions[2].text = "iii";
+                displayScale[display].notePositions[3].text = "IV";
+                displayScale[display].notePositions[4].text = "V";
+                displayScale[display].notePositions[5].text = "vi";
+                displayScale[display].notePositions[6].text = "vii" + '\u2205';
+                displayScale[display].notePositions[7].text = "I";
                 break;
             case 1: //aeolian
             case 2: //dorian
             case 3: //phrygian
             case 6: //locrian
-                notePositions[0].text = "i";
-                notePositions[1].text = "ii" + '\u2205';
-                notePositions[2].text = "III";
-                notePositions[3].text = "iv";
-                notePositions[4].text = "v";
-                notePositions[5].text = "VI";
-                notePositions[6].text = "VII";
-                notePositions[7].text = "i";
+                displayScale[display].notePositions[0].text = "i";
+                displayScale[display].notePositions[1].text = "ii" + '\u2205';
+                displayScale[display].notePositions[2].text = "III";
+                displayScale[display].notePositions[3].text = "iv";
+                displayScale[display].notePositions[4].text = "v";
+                displayScale[display].notePositions[5].text = "VI";
+                displayScale[display].notePositions[6].text = "VII";
+                displayScale[display].notePositions[7].text = "i";
                 break;
         }
     }
