@@ -1,14 +1,17 @@
 ====TASK LIST=====
 
 *******
+===========================================================================================
+		COMPLETE THESE TASKS THEN POST THE APP TO THE GOOGLE BETA SERVER
+					FOR TESTING
+===========================================================================================
 
 
 Fretboard: Add text to show the octave on 12th fret
 
 ***NEW FEATURE: Tooltip Menu***
 -Add a button to each scene that will bring up a new window that consicely explains a basic music theory
--The content of the window will change based on what scene is being viewd, and what scales/root note has
-	been selected
+-The content of the window will change based on what scale is being viewd
 -examples of tooltips
 	"The major scale is made up of same pattern of whole steps and half steps.  Starting from the root:
 		[root] W W H W W W H [octave] "
@@ -21,10 +24,20 @@ Fretboard: Add text to show the octave on 12th fret
 	-need to research how arpeggios are formed/made
 		-do they come from a specific scale?
 
+
 Add Modes to the QuizScene
 
 Implement saving feature to the QuizScene
 	-Use a PlayerPref array or lots of booleans to save the checkbox status
+
+Post App to Google beta servers
+
+===================================================================================
+
+
+***NEW FEATURE:  Lefty-Swap***
+-add a checkbox that will reformat the fretboard/tuning buttons to show the note positions for
+left-handed players
 
 properly document/refactor the classes (especially ScaleGenerator, and GuitString) to explain how the code works.
 	//make sure all the variable/data structure names are also "music theory" correct (ie. scale intervals)
@@ -42,7 +55,12 @@ create new art to make the app look nice
 
 ====COMPLETED TASKS====
 
-4/19/17
+6/15/19
+combined the scale generator into the FretboardScene for better usability
+		//it was redundant/frustrating to have the scale generator and fretboard
+		//on different scenes.  Why have the 
+
+4/19/19
 ***The program saves dropdown values for the ScaleScene and Fretboard scene, NOT the QuizScene
 refactor the Start() and Awake() functions to proper order.  This is affecting how the program saves the dropdown values
 between Scenes

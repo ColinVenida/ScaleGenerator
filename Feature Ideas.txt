@@ -18,14 +18,18 @@ chord quizes
 	-user can select checkboxes what scale(s) they wished to be quized on
 
 Guitar Fretboard
-	-displays all the whole notes of each string on the guitar up to 14 frets
-		-app procedurally generates and displays notes on each string
+	-user can choose what scale and root note to display on the fretboard
+		-user can also choose different chords/arpeggios to display
+			-ex. maj7, min7, dominant7
 	-user can change the tuning of the each string to change what notes are displayed
 	-user can pick from a pre-set list of common guitar tunings
 		-"Drop D"
 		-"full step down"
-	-user can add/remove strings to accomodate different guitars
+	-user can add/remove strings to accomodate different guitars/instruments
+	-user can tap each note on the fret board to highlight all the same notes
+	-user can swap the fretboard display for left-handed players
 
 	***extra feature***
-		-user can press each note on fret board to have hte app play the tone (midi?)
-		-user can tap each note on the fret board to highlight all the same notes
+		-user can press each note on fret board to have the app play the tone (midi?)
+		-user can display two different scales simultaneously to compare them
+		
