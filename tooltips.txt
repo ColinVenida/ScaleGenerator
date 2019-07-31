@@ -1,38 +1,47 @@
 [Major Ionian]
-The formula for Major Scale (starting from the root):  [Root]-W-W-H-W-W-W-H-[Octave]
+-The formula for Major Scale (starting from the root):  [Root]-W-W-H-W-W-W-H-[Octave]
 
-W is a \"Whole Step\" (2 Frets), H is a \"Half-Step\" (1 Fret) on the Fretboard.
+-W is a \"Whole Step\" (2 Frets), H is a \"Half-Step\" (1 Fret) on the Fretboard.
 
-Example Songs:  
+-Ionian sounds \"Bright,\" \"Happy,\" \"Melodic,\" \"Joyous\"
+
+-Example Songs:  Axis of Awesome - \"4 Chords\"
 
 [Minor Aeolian]
 
-The formula for Minor Scale (starting from the root): [Root]-W-H-W-W-H-W-W-[Octave]
+-The formula for Minor Scale (starting from the root): [Root]-W-H-W-W-H-W-W-[Octave]
 
-The difference between major and minor scales is minor has a flat 3rd, 6th, and 7th note.
+-The difference between major and minor scales is minor has a flat 3rd, 6th, and 7th note.
 
-Example Songs:
+-Example Songs:
 
 [dorian]
-Dorian is a minor scale with natural 6th (instead of a flat 6) note.
+-Dorian is a minor scale with natural 6th (instead of a flat 6) note.
 
-Example Songs: Pink Floyd - \"The Wall: Pt 2,\" \"Breath,\" 
-Carlos Santana - \"Oye Como Va\"
+-Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\" \"Not-As-Sad-As-Minor\"
+
+-Example Songs: Pink Floyd - \"The Wall: Pt 2,\" Pink Floyd - \"Breath,\" Carlos Santana - \"Oye Como Va\"
 
 [phrygian]
-Phrygian is a minor scale with a flat 2nd note note.
+-Phrygian is a minor scale with a flat 2nd note note.
 
-Example Songs: Coheed and Cambria - \"Welcome Home,\" 
+-Phrygian sounds \"Exotic,\" \"Otherwordly,\" \Tense,\" \"Creepy\"
+
+-Example Songs: Coheed and Cambria - \"Welcome Home,\" Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"
 
 [lydian]
-Lydian is a major scale with a sharp 4th note.
+-Lydian is a major scale with a sharp 4th note.
 
-Example Songs: The Jetsons Theme Song, 
+-Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\" \"Sci-Fi\"
+
+-Example Songs: The Jetsons Theme Song, 
 
 [mixolydian]
-Mixolydian is a major scale with a flat 7th note.
+-Mixolydian is a major scale with a flat 7th note.
 
-Example Songs:  AC/DC - \"Highway to Hell,\" Lady Gaga - \"Born This Way,\" 
+-Mixolydian sounds \"Bright,\" \"Upbeat,\" \"Rockin!\" 
+
+-Example Songs:  AC/DC - \"Highway to Hell,\" Lady Gaga - \"Born This Way,\" 
 
 [locrain]
-Locrean is a minor scale with flat 2nd, and flat 5th notes.
+-Locrean is a minor scale with flat 2nd, and flat 5th notes.

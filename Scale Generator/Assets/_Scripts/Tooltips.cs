@@ -50,21 +50,21 @@ public class Tooltips : MonoBehaviour
         {
             "-W is a \"Whole Step\" (2 Frets), H is a \"Half-Step\" (1 Fret) on the Fretboard.",
             "-The difference between major and minor scale is minor has a flat 3rd, 6th, and 7th note.",
-            "-[Dorian Description]",
-            "-[Phrygian Description]",
-            "-[Lydian Description]",
-            "-[Mixolydian Description]",
+            "-Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\" \"Not-As-Sad-As-Minor\"",
+            "-Phrygian sounds \"Exotic,\" \"Otherwordly,\" \"Tense,\" \"Creepy\"",
+            "-Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\" \"Sci-Fi\"",
+            "-Mixolydian sounds \"Bright,\" \"Upbeat,\" \"Rockin!\" ",
             "-[Locrean Description]"
         };
 
         thirdTips = new string[7]
         {
-            "-[Ionian Example Songs]",
+            "-Example Songs:  Axis of Awesome - \"4 Chords\"",
             "-[Aeolian Example Songs]",
-            "-[Dorian Example Songs]",
-            "-[Phrygian Example Songs]",
+            "-Example Songs: Pink Floyd - \"The Wall: Pt 2,\" Pink Floyd - \"Breath,\" Carlos Santana - \"Oye Como Va\"",
+            "-Example Songs: Coheed and Cambria - \"Welcome Home,\" Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"",
             "-[Lydian Example Songs]",
-            "-[Mixolydian Example Songs]",
+            "-Example Songs:  AC/DC - \"Highway to Hell,\" Lady Gaga - \"Born This Way,\"",
             "-[Locrean Example Songs]"
         };
 
