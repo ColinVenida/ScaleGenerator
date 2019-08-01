@@ -3,9 +3,9 @@
 
 -W is a \"Whole Step\" (2 Frets), H is a \"Half-Step\" (1 Fret) on the Fretboard.
 
--Ionian sounds \"Bright,\" \"Happy,\" \"Melodic,\" \"Joyous\"
+-Ionian sounds \"Bright,\" \"Happy,\" \"Joyous\"
 
--Example Songs:  Axis of Awesome - \"4 Chords\"
+-Example Songs:  Tom Petty - \"Free Fallin,\" Eric Johnson - \"Cliffs Of Dover,\" Axis of Awesome - \"4 Chords\"
 
 [Minor Aeolian]
 
@@ -13,35 +13,41 @@
 
 -The difference between major and minor scales is minor has a flat 3rd, 6th, and 7th note.
 
--Example Songs:
+-Aeolian sounds \"Dark,\" \"Sad,\" \"Somber"\
+
+-Example Songs: REM - \"Losing My Religion,\" Bob Dylan - \"All Along the Watchtower,\" Rolling Stones - \"Gimmie Shelter\"
 
 [dorian]
 -Dorian is a minor scale with natural 6th (instead of a flat 6) note.
 
--Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\" \"Not-As-Sad-As-Minor\"
+-Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\"
 
 -Example Songs: Pink Floyd - \"The Wall: Pt 2,\" Pink Floyd - \"Breath,\" Carlos Santana - \"Oye Como Va\"
 
 [phrygian]
 -Phrygian is a minor scale with a flat 2nd note note.
 
--Phrygian sounds \"Exotic,\" \"Otherwordly,\" \Tense,\" \"Creepy\"
+-Phrygian sounds \"Exotic,\" \"Otherwordly,\" \Tense\" 
 
 -Example Songs: Coheed and Cambria - \"Welcome Home,\" Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"
 
 [lydian]
 -Lydian is a major scale with a sharp 4th note.
 
--Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\" \"Sci-Fi\"
+-Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\"
 
--Example Songs: The Jetsons Theme Song, 
+-Example Songs: Joe Satriani - \"Flying in a Blue Dream,\" Frank Zappa - \"Zoot Alures,\" The Simpson's Theme Song
 
 [mixolydian]
 -Mixolydian is a major scale with a flat 7th note.
 
 -Mixolydian sounds \"Bright,\" \"Upbeat,\" \"Rockin!\" 
 
--Example Songs:  AC/DC - \"Highway to Hell,\" Lady Gaga - \"Born This Way,\" 
+-Example Songs:  AC/DC - \"Highway to Hell,\" Aerosmith - \"Walk This Way,\" Lady Gaga - \"Born This Way\" 
 
-[locrain]
--Locrean is a minor scale with flat 2nd, and flat 5th notes.
+[locrian]
+-Locrian is a minor scale with flat 2nd, and flat 5th notes.
+
+-Locrian sounds \"Unsettling,\" \"Unresolved,"\ \"Evil\"
+
+-Example Songs: John Kirkpatrick - \"Dust to Dust,\" Bj\u00F6rk - \"Army of Me\" (just the verse), The Strokes - \"Juice Box\" (just the bass)

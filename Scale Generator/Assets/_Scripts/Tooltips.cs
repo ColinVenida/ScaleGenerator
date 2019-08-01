@@ -43,29 +43,29 @@ public class Tooltips : MonoBehaviour
             "-Phrygian is a minor scale with a flat 2nd note note.",
             "-Lydian is a major scale with a sharp 4th note.",
             "-Mixolydian is a major scale with a flat 7th note.",
-            "-Locrean is a minor scale with flat 2nd, and flat 5th notes."
+            "-Locrian is a minor scale with flat 2nd, and flat 5th notes."
         };
 
         secondTips = new string[7]
         {
             "-W is a \"Whole Step\" (2 Frets), H is a \"Half-Step\" (1 Fret) on the Fretboard.",
             "-The difference between major and minor scale is minor has a flat 3rd, 6th, and 7th note.",
-            "-Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\" \"Not-As-Sad-As-Minor\"",
-            "-Phrygian sounds \"Exotic,\" \"Otherwordly,\" \"Tense,\" \"Creepy\"",
-            "-Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\" \"Sci-Fi\"",
-            "-Mixolydian sounds \"Bright,\" \"Upbeat,\" \"Rockin!\" ",
-            "-[Locrean Description]"
+            "-Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\"",
+            "-Phrygian sounds \"Exotic,\" \"Otherwordly,\" \"Tense,\"",
+            "-Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\"",
+            "-Mixolydian sounds \"Bright,\" \"Upbeat,\" \"Rockin!\"",
+            "-Locrian sounds \"Unsettling,\" \"Unresolved,\" \"Evil\""
         };
 
         thirdTips = new string[7]
         {
-            "-Example Songs:  Axis of Awesome - \"4 Chords\"",
-            "-[Aeolian Example Songs]",
+            "-Ionian sounds \"Bright,\" \"Happy,\" \"Joyous\"\n-Example Songs: Tom Petty - \"Free Fallin,\" Eric Johnson - \"Cliffs Of Dover,\" Axis of Awesome - \"4 Chords\"",
+            "-Aeolian sounds \"Dark,\" \"Sad,\" \"Somber\"\n-Example Songs: REM - \"Losing My Religion,\" Bob Dylan - \"All Along the Watchtower,\" Rolling Stones - \"Gimmie Shelter\"",
             "-Example Songs: Pink Floyd - \"The Wall: Pt 2,\" Pink Floyd - \"Breath,\" Carlos Santana - \"Oye Como Va\"",
             "-Example Songs: Coheed and Cambria - \"Welcome Home,\" Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"",
-            "-[Lydian Example Songs]",
-            "-Example Songs:  AC/DC - \"Highway to Hell,\" Lady Gaga - \"Born This Way,\"",
-            "-[Locrean Example Songs]"
+            "-Example Songs: Joe Satriani - \"Flying in a Blue Dream,\" Frank Zappa - \"Zoot Alures,\" The Simpson's Theme Song",
+            "-Example Songs:  AC/DC - \"Highway to Hell,\" Aerosmith - \"Walk This Way,\" Lady Gaga - \"Born This Way\" ",
+            "-Example Songs: John Kirkpatrick - \"Dust to Dust,\" Bj\u00F6rk - \"Army of Me\" (just the verse), The Strokes - \"Juice Box\" (just the bass)"
         };
 
         //call the ChangeTips function after everything has been initialized
