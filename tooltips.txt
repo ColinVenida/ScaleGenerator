@@ -29,7 +29,7 @@
 
 -Phrygian sounds \"Exotic,\" \"Otherwordly,\" \Tense\" 
 
--Example Songs: Coheed and Cambria - \"Welcome Home,\" Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"
+-Example Songs: Coheed and Cambria - \"Welcome Home\" (intro and verse), Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"
 
 [lydian]
 -Lydian is a major scale with a sharp 4th note.

@@ -62,7 +62,7 @@ public class Tooltips : MonoBehaviour
             "-Ionian sounds \"Bright,\" \"Happy,\" \"Joyous\"\n-Example Songs: Tom Petty - \"Free Fallin,\" Eric Johnson - \"Cliffs Of Dover,\" Axis of Awesome - \"4 Chords\"",
             "-Aeolian sounds \"Dark,\" \"Sad,\" \"Somber\"\n-Example Songs: REM - \"Losing My Religion,\" Bob Dylan - \"All Along the Watchtower,\" Rolling Stones - \"Gimmie Shelter\"",
             "-Example Songs: Pink Floyd - \"The Wall: Pt 2,\" Pink Floyd - \"Breath,\" Carlos Santana - \"Oye Como Va\"",
-            "-Example Songs: Coheed and Cambria - \"Welcome Home,\" Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"",
+            "-Example Songs: Coheed and Cambria - \"Welcome Home\" (intro and verse), Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"",
             "-Example Songs: Joe Satriani - \"Flying in a Blue Dream,\" Frank Zappa - \"Zoot Alures,\" The Simpson's Theme Song",
             "-Example Songs:  AC/DC - \"Highway to Hell,\" Aerosmith - \"Walk This Way,\" Lady Gaga - \"Born This Way\" ",
             "-Example Songs: John Kirkpatrick - \"Dust to Dust,\" Bj\u00F6rk - \"Army of Me\" (just the verse), The Strokes - \"Juice Box\" (just the bass)"
