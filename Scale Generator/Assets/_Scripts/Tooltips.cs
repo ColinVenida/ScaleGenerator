@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Tooltips : MonoBehaviour
 {
+    public Text currentScale;
     public Text tip1;
     public Text tip2;
     public Text tip3;
@@ -24,7 +25,31 @@ public class Tooltips : MonoBehaviour
             return;
         }
 
-        //switch statement if we need it???
+        //switch statement
+        switch ( scale )
+        {
+            case 0:
+                currentScale.text = "Current Scale: Major (Ionian)";
+                break;
+            case 1:
+                currentScale.text = "Current Scale: Minor (Aeolian)";
+                break;
+            case 2:
+                currentScale.text = "Current Scale: Dorian";
+                break;
+            case 3:
+                currentScale.text = "Current Scale:  Phrygian";
+                break;
+            case 4:
+                currentScale.text = "Current Scale: Lydian";
+                break;
+            case 5:
+                currentScale.text = "Current Scale: Mixolydian";
+                break;
+            case 6:
+                currentScale.text = "Current Scale: Locrian";
+                break;
+        }
 
         tip1.text = firstTips[scale];
         tip2.text = secondTips[scale];
