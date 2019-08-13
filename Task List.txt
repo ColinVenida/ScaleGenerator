@@ -9,14 +9,7 @@
 
 Fretboard: Add text to show the octave on 12th fret
 
-***NEW FEATURE: Tooltip Menu***
--Add a button to each scene that will bring up a new window that consicely explains a basic music theory
--The content of the window will change based on what scale is being viewd
--examples of tooltips
-	"The major scale is made up of same pattern of whole steps and half steps.  Starting from the root:
-		[root] W W H W W W H [octave] "
-	"The Mixolydian scale is the major scale, but with a flat-7th note"
-	"something about enharmonics"
+
 
 ***NEW FEATURE:  Chord Arpeggios***
 -add a Fretboard filter that shows the arpeggios of the selected chord
@@ -30,14 +23,15 @@ Add Modes to the QuizScene
 Implement saving feature to the QuizScene
 	-Use a PlayerPref array or lots of booleans to save the checkbox status
 
-Post App to Google beta servers
+
 
 ===================================================================================
 
 
-***NEW FEATURE:  Lefty-Swap***
+***NEW FEATURE:  Lefty-Swap***   [NOT SURE IF I NEED THIS]
 -add a checkbox that will reformat the fretboard/tuning buttons to show the note positions for
 left-handed players
+
 
 properly document/refactor the classes (especially ScaleGenerator, and GuitString) to explain how the code works.
 	//make sure all the variable/data structure names are also "music theory" correct (ie. scale intervals)
@@ -54,6 +48,21 @@ adjust the graphics settings so the app looks consistent on different screen siz
 create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+8/11/2019
+Post App to Google beta servers
+
+
+[DATE]
+***NEW FEATURE: Tooltip Menu***
+-Add a button to each scene that will bring up a new window that consicely explains a basic music theory
+-The content of the window will change based on what scale is being viewd
+-examples of tooltips
+	"The major scale is made up of same pattern of whole steps and half steps.  Starting from the root:
+		[root] W W H W W W H [octave] "
+	"The Mixolydian scale is the major scale, but with a flat-7th note"
+	"something about enharmonics"
+
 
 6/15/19
 combined the scale generator into the FretboardScene for better usability
