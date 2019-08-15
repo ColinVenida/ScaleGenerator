@@ -75,17 +75,17 @@ public class Tooltips : MonoBehaviour
         {
             "-W is a \"Whole Step\" (2 Frets), H is a \"Half-Step\" (1 Fret) on the Fretboard.",
             "-The difference between major and minor scale is minor has a flat 3rd, 6th, and 7th note.",
-            "-Dorian sounds \"Smooth,\" \"Mellow,\" \"Groovy,\"",
-            "-Phrygian sounds \"Exotic,\" \"Otherwordly,\" \"Tense,\"",
-            "-Lydian sounds \"Dreamy,\" \"Floaty,\" \"Adventurous,\"",
-            "-Mixolydian sounds \"Bright,\" \"Upbeat,\" \"Rockin!\"",
-            "-Locrian sounds \"Unsettling,\" \"Unresolved,\" \"Evil\""
+            "-Dorian sounds \"smooth,\" \"mellow,\" \"groovy\"",
+            "-Phrygian sounds \"exotic,\" \"otherwordly,\" \"tense\"",
+            "-Lydian sounds \"dreamy,\" \"floaty,\" \"adventurous\"",
+            "-Mixolydian sounds \"bright,\" \"upbeat,\" \"rockin!\"",
+            "-Locrian sounds \"unsettling,\" \"unresolved,\" \"evil\""
         };
 
         thirdTips = new string[7]
         {
-            "-Ionian sounds \"Bright,\" \"Happy,\" \"Joyous\"\n-Example Songs: Tom Petty - \"Free Fallin,\" Eric Johnson - \"Cliffs Of Dover,\" Axis of Awesome - \"4 Chords\"",
-            "-Aeolian sounds \"Dark,\" \"Sad,\" \"Somber\"\n-Example Songs: REM - \"Losing My Religion,\" Bob Dylan - \"All Along the Watchtower,\" Rolling Stones - \"Gimmie Shelter\"",
+            "-Ionian sounds \"bright,\" \"happy,\" \"joyous\"\n-Example Songs: Tom Petty - \"Free Fallin,\" Eric Johnson - \"Cliffs Of Dover,\" Axis of Awesome - \"4 Chords\"",
+            "-Aeolian sounds \"dark,\" \"sad,\" \"somber\"\n-Example Songs: REM - \"Losing My Religion,\" Bob Dylan - \"All Along the Watchtower,\" Rolling Stones - \"Gimmie Shelter\"",
             "-Example Songs: Pink Floyd - \"The Wall: Pt 2,\" Pink Floyd - \"Breath,\" Carlos Santana - \"Oye Como Va\"",
             "-Example Songs: Coheed and Cambria - \"Welcome Home\" (intro and verse), Megadeth - \"Symphony of Destruction,\" Missy Elliot - \"Get Ur Freak On\"",
             "-Example Songs: Joe Satriani - \"Flying in a Blue Dream,\" Frank Zappa - \"Zoot Alures,\" The Simpson's Theme Song",
