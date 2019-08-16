@@ -179,8 +179,40 @@ public class Fretboard : MonoBehaviour
                     break;
             }//end switch
         }
-
         textForm.UpdateScale();
+    }
+
+    //function that grays out the 2, 4, 6 notes of the scale
+    public void SetArpeggio()
+    {
+        //find the key of the scale; use the familyIndex to better fit with the rest of the program
+        int famIndex = scaleGen.FindFamilyIndex( rootDrop.value );      
+        
+        //find the 2nd, 4th, and 5th notes of the scale
+        int[] intervals =
+        {
+            famIndex + 1,
+            famIndex + 3,
+            famIndex + 5
+        };
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (intervals[i] > 6)
+            {
+                intervals[i] -= 7;
+            }
+        }
+
+        List<string> noteList = new List<string>();
+        noteList.Add( noteArray.noteArray[intervals[0]].GetNote() );
+        noteList.Add( noteArray.noteArray[intervals[1]].GetNote() );
+        noteList.Add( noteArray.noteArray[intervals[2]].GetNote() );
+        
+        for (int i = 0; i < 8; i++)
+        {
+            guitStrings[i].SetArpeggio( noteList );
+        }
     }
 
     //change the color of all the fret texts that match the given note

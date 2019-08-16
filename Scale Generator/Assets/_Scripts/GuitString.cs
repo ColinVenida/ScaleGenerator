@@ -10,7 +10,7 @@ public class GuitString : MonoBehaviour
     public Dropdown noteSelect;
     public Text[] fretArray;
     public Dropdown presetDrop;
-    public int stringNumber;
+    public int stringNumber; 
 
     public static bool changePreset = true;  //variable for determining if the Preset Dropdown should be reset or not
 
@@ -35,6 +35,7 @@ public class GuitString : MonoBehaviour
         SaveTuning( drop );       
         int currentFret = 0;   //set currentFret to 0 to represent the first fret
 
+        //check which scale is selected
         int[] currentScale;
         switch( fBoard.scaleDrop.value )
         {
@@ -72,10 +73,7 @@ public class GuitString : MonoBehaviour
             fretArray[i].color = new Color32( 0, 0, 0, 255 );
             fretArray[i].fontStyle = FontStyle.Normal;
         }
-
-        //set the 12th fret's color to black in case it changed
-        //fretArray[11].color = new Color32( 0, 0, 0, 255 );
-
+                
         SetCurrentTuning( drop );
    
         //check whether the GuitString's tuning is enharmonic with any note in the noteArray
@@ -87,7 +85,7 @@ public class GuitString : MonoBehaviour
         //  the familyIndex will represent the open GuitString, then we can find the next fret        
         int familyIndex = fBoard.scaleGen.FindFamilyIndex( noteSelect.value );
 
-        //find the interval of currentTuning in relation to the scale
+        //find the interval of currentTuning in relation to the scale            
         int scaleInterval = FindScaleInterval( fBoard.rootDrop.value, familyIndex );
 
         //check if the note in the current scale is a different "version" than the currentTuning
@@ -99,8 +97,7 @@ public class GuitString : MonoBehaviour
         }
 
        
-        //find out which fret to start on and which notes to display
-
+        //***find out which fret to start on and which notes to display***
         //if we have to start on the note AFTER the tuning (ie. tuining is A, and we start on B)
         if ( !includeFamilyNote )
         {           
@@ -162,6 +159,9 @@ public class GuitString : MonoBehaviour
             }
 
             //set the currentFret's text to the note in the scale
+
+            //****check here for editing arpeggios****
+
             fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
             familyIndex++;
             scaleInterval++;
@@ -275,6 +275,19 @@ public class GuitString : MonoBehaviour
         } while ( rootFamily != familyIndex );
 
         return interval;
+    }
+
+    //gray out the 2nd, 4th, and 6th notes of the scale
+    //public void SetArpeggio( int famIndex )
+    public void SetArpeggio( List<string> noteList )
+    {       
+        for ( int i = 0; i < fretArray.Length; i++ )
+        {
+            if ( noteList.Contains(fretArray[i].text) )
+            {                
+                fretArray[i].text = "";
+            }
+        }
     }
 
     private void SaveTuning( int drop )
