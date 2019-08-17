@@ -179,6 +179,7 @@ public class Fretboard : MonoBehaviour
                     break;
             }//end switch
         }
+        textForm.ShowArpeggio( false ); 
         textForm.UpdateScale();
     }
 

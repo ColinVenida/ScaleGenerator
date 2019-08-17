@@ -13,5 +13,7 @@ public class ArpeggioButton : MonoBehaviour
     {
         scaleDrop.value = scale;
         fBoard.SetArpeggio();
+        fBoard.textForm.ShowArpeggio( true );
+
     }
 }

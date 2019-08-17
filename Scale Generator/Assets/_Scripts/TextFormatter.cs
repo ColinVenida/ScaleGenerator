@@ -11,7 +11,7 @@ public class TextFormatter : MonoBehaviour
     public DisplayScale[] displayScale;
     
     public Dropdown scaleDrop;
-    public Dropdown rootDrop;
+    public Dropdown rootDrop;    
 
     public void UpdateScale ()
     {    
@@ -97,6 +97,37 @@ public class TextFormatter : MonoBehaviour
                 displayScale[display].notePositions[6].text = "VII";
                 displayScale[display].notePositions[7].text = "i";
                 break;
+        }
+    }
+    
+    //gray out the 2, 4, and 6 positions
+    public void ShowArpeggio( bool show )
+    {
+        if ( show )
+        {
+            for ( int i = 0; i < displayScale.Length; i++ )
+            {
+                displayScale[i].displayText[1].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+                displayScale[i].displayText[3].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+                displayScale[i].displayText[5].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+
+                displayScale[i].notePositions[1].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+                displayScale[i].notePositions[3].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+                displayScale[i].notePositions[5].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+            }
+        }
+        else
+        {
+            for (int i = 0; i < displayScale.Length; i++)
+            {
+                displayScale[i].displayText[1].color = new Color( 0.196f, 0.196f, 0.196f );                
+                displayScale[i].displayText[3].color = new Color( 0.196f, 0.196f, 0.196f );
+                displayScale[i].displayText[5].color = new Color( 0.196f, 0.196f, 0.196f );
+
+                displayScale[i].notePositions[1].color = new Color( 0.196f, 0.196f, 0.196f );
+                displayScale[i].notePositions[3].color = new Color( 0.196f, 0.196f, 0.196f );
+                displayScale[i].notePositions[5].color = new Color( 0.196f, 0.196f, 0.196f );
+            }
         }
     }
 
