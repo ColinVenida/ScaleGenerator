@@ -9,9 +9,11 @@ public class TextFormatter : MonoBehaviour
 {
     public Fretboard fBoard;   
     public DisplayScale[] displayScale;
-    
+    public Toggle useArpeggio;    
     public Dropdown scaleDrop;
-    public Dropdown rootDrop;    
+    public Dropdown rootDrop;
+
+
 
     public void UpdateScale ()
     {    

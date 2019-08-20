@@ -11,7 +11,7 @@ public class Fretboard : MonoBehaviour
     public Button RemoveBtn;
     public Dropdown presetDrop;
     public Dropdown scaleDrop;
-    public Dropdown rootDrop;
+    public Dropdown rootDrop;    
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
     public TextFormatter textForm;
@@ -183,9 +183,10 @@ public class Fretboard : MonoBehaviour
         textForm.UpdateScale();
     }
 
-    //function that grays out the 2, 4, 6 notes of the scale
+    //function that sets the 2nd, 4th, and 6th notes inactive
+    //public void SetArpeggio( bool arp )
     public void SetArpeggio()
-    {
+    {        
         //find the key of the scale; use the familyIndex to better fit with the rest of the program
         int famIndex = scaleGen.FindFamilyIndex( rootDrop.value );      
         
@@ -209,11 +210,19 @@ public class Fretboard : MonoBehaviour
         noteList.Add( noteArray.noteArray[intervals[0]].GetNote() );
         noteList.Add( noteArray.noteArray[intervals[1]].GetNote() );
         noteList.Add( noteArray.noteArray[intervals[2]].GetNote() );
-        
+
         for (int i = 0; i < 8; i++)
         {
-            guitStrings[i].SetArpeggio( noteList );
+            guitStrings[i].FilterArpeggio( noteList );
         }
+    }
+
+    public void ResetArpeggio()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            guitStrings[i].CancelArpeggio();
+        }        
     }
 
     //change the color of all the fret texts that match the given note

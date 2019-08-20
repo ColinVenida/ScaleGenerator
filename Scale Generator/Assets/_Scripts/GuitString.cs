@@ -15,6 +15,10 @@ public class GuitString : MonoBehaviour
     public static bool changePreset = true;  //variable for determining if the Preset Dropdown should be reset or not
 
     private Note currentTuning;
+    private int[] arpeggioFrets = { 0, 0, 0, 0 };
+    private string[] arpeggioNotes = { "", "", "", "" };
+
+
         
     public void CalculateFrets( int drop )
     {
@@ -25,6 +29,9 @@ public class GuitString : MonoBehaviour
         {
             return;
         }
+
+        //cancel arpeggio for a fresh start
+        CancelArpeggio();
 
         //set the preset dropdown to default value (0) if the tuning was changed by the preset button
         if (changePreset)
@@ -159,9 +166,6 @@ public class GuitString : MonoBehaviour
             }
 
             //set the currentFret's text to the note in the scale
-
-            //****check here for editing arpeggios****
-
             fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
             familyIndex++;
             scaleInterval++;
@@ -277,16 +281,25 @@ public class GuitString : MonoBehaviour
         return interval;
     }
 
-    //gray out the 2nd, 4th, and 6th notes of the scale
-    //public void SetArpeggio( int famIndex )
-    public void SetArpeggio( List<string> noteList )
+    //blank out the 2nd, 4th, and 6th notes of the scale       
+    public void FilterArpeggio( List<string> noteList )
     {       
+        for (int i = 0; i < fretArray.Length; i++)
+        {
+            if (noteList.Contains( fretArray[i].text ))
+            {
+                fretArray[i].gameObject.SetActive( false );
+                
+            }
+        }       
+    }
+
+    //function to set all the fretArray to active
+    public void CancelArpeggio()
+    {
         for ( int i = 0; i < fretArray.Length; i++ )
         {
-            if ( noteList.Contains(fretArray[i].text) )
-            {                
-                fretArray[i].text = "";
-            }
+            fretArray[i].gameObject.SetActive( true );
         }
     }
 

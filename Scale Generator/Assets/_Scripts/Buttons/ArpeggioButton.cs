@@ -6,14 +6,10 @@ using UnityEngine.UI;
 public class ArpeggioButton : MonoBehaviour
 {
     public int scale;
-    public Fretboard fBoard;
-    public Dropdown scaleDrop;
+    public ArpeggioManager arpManager;    
 
-    public void FilterScale()
+    public void Arpeggio()   
     {
-        scaleDrop.value = scale;
-        fBoard.SetArpeggio();
-        fBoard.textForm.ShowArpeggio( true );
-
+        arpManager.FilterScale( scale );               
     }
 }
