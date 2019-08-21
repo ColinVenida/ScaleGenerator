@@ -15,11 +15,13 @@ public class Fretboard : MonoBehaviour
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
     public TextFormatter textForm;
-
+    
     private bool isInitialized;
+    private bool useArpeggio = false;
     private bool guitStringInitialized;
     private string[] currentScale;
     private int visibleStrings;
+    private List<string> arpList;
 
     //*REMEMBER*  #1 String goes in index 0!!!!!
     private int[] GUITAR_STANDARD = { 11, 4, 15, 8, 1, 11 };
@@ -139,12 +141,14 @@ public class Fretboard : MonoBehaviour
 
     //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
     public void SetScale() 
-    {
+    {        
         if( !isInitialized )
         {
             //Debug.Log( "Not initialized, returning" );
             return;
         }
+        ResetArpeggio();
+
         scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
         SaveScalePrefs();        
 
@@ -183,10 +187,12 @@ public class Fretboard : MonoBehaviour
         textForm.UpdateScale();
     }
 
-    //function that sets the 2nd, 4th, and 6th notes inactive
-    //public void SetArpeggio( bool arp )
+    //function that sets the 2nd, 4th, and 6th notes inactive   
     public void SetArpeggio()
-    {        
+    {
+        useArpeggio = true;
+        arpList.Clear();
+
         //find the key of the scale; use the familyIndex to better fit with the rest of the program
         int famIndex = scaleGen.FindFamilyIndex( rootDrop.value );      
         
@@ -206,23 +212,42 @@ public class Fretboard : MonoBehaviour
             }
         }
 
-        List<string> noteList = new List<string>();
-        noteList.Add( noteArray.noteArray[intervals[0]].GetNote() );
-        noteList.Add( noteArray.noteArray[intervals[1]].GetNote() );
-        noteList.Add( noteArray.noteArray[intervals[2]].GetNote() );
+        //List<string> noteList = new List<string>();        
+        //noteList.Add( noteArray.noteArray[intervals[0]].GetNote() );
+        //noteList.Add( noteArray.noteArray[intervals[1]].GetNote() );
+        //noteList.Add( noteArray.noteArray[intervals[2]].GetNote() );
+
+        //List<string> arpList = new List<string>();
+        arpList.Add( noteArray.noteArray[intervals[0]].GetNote() );
+        arpList.Add( noteArray.noteArray[intervals[1]].GetNote() );
+        arpList.Add( noteArray.noteArray[intervals[2]].GetNote() );
+
 
         for (int i = 0; i < 8; i++)
         {
-            guitStrings[i].FilterArpeggio( noteList );
+            //guitStrings[i].FilterArpeggio( noteList );
+            guitStrings[i].FilterArpeggio( arpList );
         }
     }
 
     public void ResetArpeggio()
     {
+        useArpeggio = false;
         for (int i = 0; i < 8; i++)
         {
             guitStrings[i].CancelArpeggio();
         }        
+    }
+
+    public List<string> GetArplist()
+    {
+        //Debug.Log( "Getting arpList " + arpList[0] );
+        return arpList;
+    }
+
+    public bool UseArpeggio()
+    {
+        return useArpeggio;
     }
 
     //change the color of all the fret texts that match the given note
@@ -231,8 +256,7 @@ public class Fretboard : MonoBehaviour
         for (int i = 0; i < guitStrings.Length; i++)
         {
             for (int j = 0; j < guitStrings[i].fretArray.Length; j++)
-            {
-                
+            {                
                 if (guitStrings[i].fretArray[j].color == Color.blue)    //always keep the blue root notes
                 {
                     continue;
@@ -303,6 +327,7 @@ public class Fretboard : MonoBehaviour
 
         isInitialized = true;
         guitStringInitialized = true;
+        arpList = new List<string>();
         SetScale();
         ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
         visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );

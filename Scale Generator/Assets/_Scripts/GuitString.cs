@@ -85,8 +85,7 @@ public class GuitString : MonoBehaviour
    
         //check whether the GuitString's tuning is enharmonic with any note in the noteArray
         //ie. if the GuitString is set A#, and the scale has Bb in it
-        hasEnharmonic = CheckEnharmonic( noteSelect.value );
-        
+        hasEnharmonic = CheckEnharmonic( noteSelect.value );        
         
         //find the family index of the GuitString's tuning
         //  the familyIndex will represent the open GuitString, then we can find the next fret        
@@ -102,8 +101,7 @@ public class GuitString : MonoBehaviour
         {            
             includeFamilyNote = true;
         }
-
-       
+               
         //***find out which fret to start on and which notes to display***
         //if we have to start on the note AFTER the tuning (ie. tuining is A, and we start on B)
         if ( !includeFamilyNote )
@@ -117,8 +115,7 @@ public class GuitString : MonoBehaviour
             if( currentScale[scaleInterval] == 2 )
             {
                 currentFret++;
-            }
-            
+            }            
         }
         else if ( hasEnharmonic )
         {
@@ -181,8 +178,14 @@ public class GuitString : MonoBehaviour
             }
             //move to to the next fret according to the pattern
             currentFret += currentScale[scaleInterval];
-
         }        
+
+        //check to set it back to arpeggio
+        if ( fBoard.UseArpeggio() )
+        {
+            FilterArpeggio( fBoard.GetArplist() );
+        }
+
     }//end CacculateFrets()
 
     //function to check if the given note/tuning has enharmonic notes in the current scale
@@ -332,15 +335,13 @@ public class GuitString : MonoBehaviour
                 PlayerPrefs.SetInt( "GuitStringEight", drop );               
                 break;
         }
-        PlayerPrefs.Save();
-        
+        PlayerPrefs.Save();        
     }
 
     //function that changes the current tuning to the given int value
         //int value comes from the noteSelect dropdown
     private void SetCurrentTuning ( int dropValue )
-    {
-       
+    {       
         //change the currentTuning's id
         switch ( dropValue )
         {

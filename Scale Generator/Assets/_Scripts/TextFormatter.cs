@@ -13,8 +13,6 @@ public class TextFormatter : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
-
-
     public void UpdateScale ()
     {    
 

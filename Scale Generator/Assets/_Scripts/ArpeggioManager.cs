@@ -32,6 +32,18 @@ public class ArpeggioManager : MonoBehaviour
         }        
     }
 
+    public void ResetFilter()
+    {
+        useArp = false;
+        lastBtn = -1;
+
+        //change the button color back to white
+        for (int i = 0; i < btnArray.Length; i++)
+        {
+            btnArray[i].image.color = new Color( 1.0f, 1.0f, 1.0f );
+        }
+    }
+
 
     private void ChangeBtnColor( int scale )
     {
