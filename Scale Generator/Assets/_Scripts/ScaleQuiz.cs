@@ -172,11 +172,27 @@ public class ScaleQuiz : MonoBehaviour
         switch( scaleDrop.value )
         {
             case 0:
-                scale = " major scale";
+                scale = " Major (Ionian) scale";
                 break;
             case 1:
-                scale = " minor scale";
+                scale = " Minor (Aeolian) scale";
                 break;
+            case 2:
+                scale = " Dorian scale";
+                break;
+            case 3:
+                scale = " Phrygian scale";
+                break;
+            case 4:
+                scale = " Lydian scale";
+                break;
+            case 5:
+                scale = " Mixolydian scale";
+                break;
+            case 6:
+                scale = " Locrian scale";
+                break;
+
             default:
                 Debug.Log( "default statement in SetQuestionText()" );
                 scale = " major scale";
