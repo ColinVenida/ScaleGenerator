@@ -34,6 +34,7 @@ public class ArpeggioManager : MonoBehaviour
 
     public void ResetFilter()
     {
+        Debug.Log( "ResetFilter()" );
         useArp = false;
         lastBtn = -1;
 

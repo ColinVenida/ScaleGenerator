@@ -284,7 +284,7 @@ public class GuitString : MonoBehaviour
         return interval;
     }
 
-    //blank out the 2nd, 4th, and 6th notes of the scale       
+    //set the frets of the given notes inactive    
     public void FilterArpeggio( List<string> noteList )
     {       
         for (int i = 0; i < fretArray.Length; i++)

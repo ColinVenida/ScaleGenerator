@@ -10,22 +10,14 @@
 Fretboard: Add text to show the octave on 12th fret
 
 
-
-***NEW FEATURE:  Chord Arpeggios***
--add a Fretboard filter that shows the arpeggios of the selected chord
-	-need to add a button/menu for the user to select what scale/arpeggio they want to display
-	-need to research how arpeggios are formed/made
-		-do they come from a specific scale?
-
-
 Add Modes to the QuizScene
 
 Implement saving feature to the QuizScene
 	-Use a PlayerPref array or lots of booleans to save the checkbox status
 
 
-
 ===================================================================================
+
 
 
 ***NEW FEATURE:  Lefty-Swap***   [NOT SURE IF I NEED THIS]
@@ -48,6 +40,18 @@ adjust the graphics settings so the app looks consistent on different screen siz
 create new art to make the app look nice
 
 ====COMPLETED TASKS====
+
+8/20/19
+-Added ArpeggioManager class to help with consistent user experience.  The app turns off the arpeggio filter when the scale
+is changed, or when the root note is changed.
+
+
+8/20/19
+***NEW FEATURE:  Chord Arpeggios***
+-add a Fretboard filter that shows the arpeggios of the selected chord
+	-need to add a button/menu for the user to select what scale/arpeggio they want to display
+	-need to research how arpeggios are formed/made
+		-do they come from a specific scale?
 
 8/11/2019
 Post App to Google beta servers
