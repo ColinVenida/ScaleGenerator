@@ -6,16 +6,18 @@ using UnityEngine.UI;
 public class Tooltips : MonoBehaviour
 {
     public Text currentScale;
+    public Text scaleTitle;
     public Text tip1;
     public Text tip2;
     public Text tip3;
+    public Text currentText;
     public Dropdown scaleDrop;
 
+
+    private int currentTip;
     private string[] firstTips;
     private string[] secondTips;
     private string[] thirdTips;
-
-
 
     public void ChangeTips( int scale )
     {
@@ -29,6 +31,39 @@ public class Tooltips : MonoBehaviour
         switch ( scale )
         {
             case 0:
+                scaleTitle.text = "The Major (Ionian) Scale";
+                break;
+            case 1:
+                scaleTitle.text = "The Minor (Aeolian) Scale";
+                break;
+            case 2:
+                scaleTitle.text = "The Dorian Mode";
+                break;
+            case 3:
+                scaleTitle.text = "The Phrygian Mode";
+                break;
+            case 4:
+                scaleTitle.text = "The Lydian Mode";
+                break;
+            case 5:
+                scaleTitle.text = "The Mixolydian Mode";
+                break;
+            case 6:
+                scaleTitle.text = "The Locrian Mode";
+                break;
+        }
+
+        tip1.text = firstTips[scale];
+        tip2.text = secondTips[scale];
+        tip3.text = thirdTips[scale];
+    }
+
+    public void UpdateCurrentText( int scale )
+    {
+        Debug.Log( "UpdateCurrentText: " + scale );
+        switch (scale)
+        {
+            case 0:
                 currentScale.text = "Current Scale: Major (Ionian)";
                 break;
             case 1:
@@ -38,7 +73,7 @@ public class Tooltips : MonoBehaviour
                 currentScale.text = "Current Scale: Dorian";
                 break;
             case 3:
-                currentScale.text = "Current Scale:  Phrygian";
+                currentScale.text = "Current Scale: Phrygian";
                 break;
             case 4:
                 currentScale.text = "Current Scale: Lydian";
@@ -50,10 +85,35 @@ public class Tooltips : MonoBehaviour
                 currentScale.text = "Current Scale: Locrian";
                 break;
         }
+    }
 
-        tip1.text = firstTips[scale];
-        tip2.text = secondTips[scale];
-        tip3.text = thirdTips[scale];
+    //function to cycle the tips forwards
+    public void NextTip()
+    {
+        currentTip++;
+        if ( currentTip > 6 )
+        {
+            currentTip = 0;
+        }
+        currentText.text = ( currentTip + 1 ).ToString() + "/7";
+        ChangeTips( currentTip );
+    }
+
+    //function to cycle the tips backwards
+    public void PrevTip()
+    {
+        currentTip--;
+        if (currentTip < 0)
+        {
+            currentTip = 6;
+        }
+        currentText.text = ( currentTip + 1 ).ToString() + "/7";
+        ChangeTips( currentTip );
+    }
+        
+    public int GetCurrentTip()
+    {
+        return currentTip;
     }
 
 
@@ -93,8 +153,11 @@ public class Tooltips : MonoBehaviour
             "-Example Songs: John Kirkpatrick - \"Dust to Dust,\" Bj\u00F6rk - \"Army of Me\" (just the verse), The Strokes - \"Juice Box\" (just the bass)"
         };
 
+        currentTip = scaleDrop.value;
+        currentText.text = ( currentTip + 1 ).ToString() + "/7";
+
         //call the ChangeTips function after everything has been initialized
-        ChangeTips( scaleDrop.value );
+        ChangeTips( scaleDrop.value );       
     }
 
 }
