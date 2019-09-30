@@ -1,29 +1,21 @@
 ====TASK LIST=====
 
-*******
-===========================================================================================
-		COMPLETE THESE TASKS THEN POST THE APP TO THE GOOGLE BETA SERVER
-					FOR TESTING
-===========================================================================================
+***Art Tasks***
+Create a fretboard graphic that adjusts in width
 
+create semi-transparent strings graphic
+
+redesign color scheme and buttons(?)
+
+
+***Design/Programming Tasks***
+Add scrollbar to the fretboard
+	-extend fretboard to 24 frets
 
 Fretboard: Add text to show the octave on 12th fret
 
-
-Add Modes to the QuizScene
-
 Implement saving feature to the QuizScene
 	-Use a PlayerPref array or lots of booleans to save the checkbox status
-
-
-===================================================================================
-
-
-
-***NEW FEATURE:  Lefty-Swap***   [NOT SURE IF I NEED THIS]
--add a checkbox that will reformat the fretboard/tuning buttons to show the note positions for
-left-handed players
-
 
 properly document/refactor the classes (especially ScaleGenerator, and GuitString) to explain how the code works.
 	//make sure all the variable/data structure names are also "music theory" correct (ie. scale intervals)
@@ -35,13 +27,27 @@ properly document/refactor the classes (especially ScaleGenerator, and GuitStrin
 	//etc.
 
 
-adjust the graphics settings so the app looks consistent on different screen sizes.
+adjust the graphics settings so the app looks consistent on different screen sizes. (I think this is done already [expanded background
+beyond the camera])
 
-create new art to make the app look nice
+
+***NEW FEATURE:  Lefty-Swap***   [NOT SURE IF I NEED THIS]
+-add a checkbox that will reformat the fretboard/tuning buttons to show the note positions for
+left-handed players
+
 
 ====COMPLETED TASKS====
 
-8/20/19
+************************************9/25/19*********************************
+-removed Unity Data Analytics to avoid including a privacy policy in the app
+	-will add again when privacy policy is ready
+-published new version to Play Console for internal testing :]
+
+9/22/19
+-Add Modes to the QuizScene
+-Added buttons to cycle through the tooltips window
+
+8/20/19		[class has been removed]
 -Added ArpeggioManager class to help with consistent user experience.  The app turns off the arpeggio filter when the scale
 is changed, or when the root note is changed.
 
