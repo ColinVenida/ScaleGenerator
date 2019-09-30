@@ -1,0 +1,15 @@
+Android build checklist:
+
+-input keystore aliases and passwords
+	-In Unity:  Edit > Project Settings > Player Settings > Publish Settings
+-update the android version number, and android build code
+	-In Unity:  Edit > Project Settings > Player Settings > Other Settings > Bundle Version Code
+-set the native code to 32 bit and 64 bit
+	-In Unity:  Edit > Project Settings > Player Settings > Other Settings	
+	-https://stackoverflow.com/questions/55974331/unity-export-android-64-bit
+	-DO NOT check x86 (?)
+
+*for submitting to Play Console
+
+-Check the Build App Bundle checkbox
+	-In Unity: File > Build Settings > Build App Bundle (checkbox)

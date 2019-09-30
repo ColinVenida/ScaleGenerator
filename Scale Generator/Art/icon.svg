@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="icon.svg"
-   inkscape:export-filename="C:\Users\Business Bears\Desktop\icon-512.png"
+   inkscape:export-filename="D:\Programming_Projects\Unity Projects\Scale Generator\ScaleGenerator\Scale Generator\Art\icon-192.png"
    inkscape:export-xdpi="96.000061"
    inkscape:export-ydpi="96.000061">
   <defs
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="486.67277"
-     inkscape:cy="892.86502"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="294.60249"
+     inkscape:cy="795.81397"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -238,20 +238,21 @@
   <g
      inkscape:label="Circle"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     style="display:inline">
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.38057593;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.14261329;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4939"
-       width="135.46666"
-       height="135.46666"
-       x="28.164511"
-       y="4.8565798"
+       width="50.799999"
+       height="50.726917"
+       x="64.459709"
+       y="53.79739"
        inkscape:export-filename="C:\Users\Business Bears\Desktop\icon-512.png"
        inkscape:export-xdpi="137.39188"
        inkscape:export-ydpi="137.39188" />
     <g
        id="g4580"
-       transform="matrix(1.4367197,0,0,1.4311645,-126.32166,-43.423361)"
+       transform="matrix(0.53876993,0,0,0.53591459,6.5273942,35.718458)"
        inkscape:export-xdpi="137.39188"
        inkscape:export-ydpi="137.39188"
        inkscape:export-filename="C:\Users\Business Bears\Desktop\icon-512.png">

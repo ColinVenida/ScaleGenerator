@@ -211,21 +211,14 @@ public class Fretboard : MonoBehaviour
                 intervals[i] -= 7;
             }
         }
-
-        //List<string> noteList = new List<string>();        
-        //noteList.Add( noteArray.noteArray[intervals[0]].GetNote() );
-        //noteList.Add( noteArray.noteArray[intervals[1]].GetNote() );
-        //noteList.Add( noteArray.noteArray[intervals[2]].GetNote() );
-
-        //List<string> arpList = new List<string>();
+        
         arpList.Add( noteArray.noteArray[intervals[0]].GetNote() );
         arpList.Add( noteArray.noteArray[intervals[1]].GetNote() );
         arpList.Add( noteArray.noteArray[intervals[2]].GetNote() );
 
 
         for (int i = 0; i < 8; i++)
-        {
-            //guitStrings[i].FilterArpeggio( noteList );
+        {           
             guitStrings[i].FilterArpeggio( arpList );
         }
     }
@@ -238,18 +231,7 @@ public class Fretboard : MonoBehaviour
             guitStrings[i].CancelArpeggio();
         }        
     }
-
-    public List<string> GetArplist()
-    {
-        //Debug.Log( "Getting arpList " + arpList[0] );
-        return arpList;
-    }
-
-    public bool UseArpeggio()
-    {
-        return useArpeggio;
-    }
-
+    
     //change the color of all the fret texts that match the given note
     public void HighlightFrets( string note )
     {
@@ -273,6 +255,16 @@ public class Fretboard : MonoBehaviour
                 }
             }//end j
         }//end i
+    }
+
+    public List<string> GetArplist()
+    {
+        return arpList;
+    }
+
+    public bool UseArpeggio()
+    {
+        return useArpeggio;
     }
 
     public bool GetGuitStringInitialized()
