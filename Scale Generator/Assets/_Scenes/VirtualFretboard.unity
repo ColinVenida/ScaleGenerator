@@ -1231,7 +1231,7 @@ RectTransform:
   m_Father: {fileID: 782516332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.00000011920929}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.9999998}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -3126,7 +3126,7 @@ GameObject:
   - component: {fileID: 451564087}
   - component: {fileID: 451564086}
   m_Layer: 5
-  m_Name: CurrentTip
+  m_Name: TipNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4435,7 +4435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000076293945}
+  m_AnchoredPosition: {x: 0, y: -0.000045776367}
   m_SizeDelta: {x: 0, y: 155.2}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &653770224 stripped
@@ -5081,7 +5081,7 @@ MonoBehaviour:
   tip1: {fileID: 1263853451}
   tip2: {fileID: 4727591}
   tip3: {fileID: 1366104175}
-  currentText: {fileID: 451564086}
+  tipNumber: {fileID: 451564086}
   scaleDrop: {fileID: 1941558776}
 --- !u!114 &793304846 stripped
 MonoBehaviour:
@@ -7049,7 +7049,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 160681586}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14431,7 +14431,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 789510026}
-        m_MethodName: UpdateCurrentText
+        m_MethodName: UpdateCurrentScale
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

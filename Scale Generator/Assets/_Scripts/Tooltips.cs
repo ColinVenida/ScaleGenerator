@@ -10,11 +10,11 @@ public class Tooltips : MonoBehaviour
     public Text tip1;
     public Text tip2;
     public Text tip3;
-    public Text currentText;
+    public Text tipNumber;
     public Dropdown scaleDrop;
 
 
-    private int currentTip;
+    private int tipIndex;
     private string[] firstTips;
     private string[] secondTips;
     private string[] thirdTips;
@@ -58,7 +58,7 @@ public class Tooltips : MonoBehaviour
         tip3.text = thirdTips[scale];
     }
 
-    public void UpdateCurrentText( int scale )
+    public void UpdateCurrentScale( int scale )
     {
         Debug.Log( "UpdateCurrentText: " + scale );
         switch (scale)
@@ -85,35 +85,39 @@ public class Tooltips : MonoBehaviour
                 currentScale.text = "Current Scale: Locrian";
                 break;
         }
+
+        //update the tipIndex and tipNumber
+        tipIndex = scale;
+        tipNumber.text = ( tipIndex + 1 ).ToString() + "/7";
     }
 
     //function to cycle the tips forwards
     public void NextTip()
     {
-        currentTip++;
-        if ( currentTip > 6 )
+        tipIndex++;
+        if ( tipIndex > 6 )
         {
-            currentTip = 0;
+            tipIndex = 0;
         }
-        currentText.text = ( currentTip + 1 ).ToString() + "/7";
-        ChangeTips( currentTip );
+        tipNumber.text = ( tipIndex + 1 ).ToString() + "/7";
+        ChangeTips( tipIndex );
     }
 
     //function to cycle the tips backwards
     public void PrevTip()
     {
-        currentTip--;
-        if (currentTip < 0)
+        tipIndex--;
+        if (tipIndex < 0)
         {
-            currentTip = 6;
+            tipIndex = 6;
         }
-        currentText.text = ( currentTip + 1 ).ToString() + "/7";
-        ChangeTips( currentTip );
+        tipNumber.text = ( tipIndex + 1 ).ToString() + "/7";
+        ChangeTips( tipIndex );
     }
         
-    public int GetCurrentTip()
+    public int GetTipIndex()
     {
-        return currentTip;
+        return tipIndex;
     }
 
 
@@ -153,8 +157,8 @@ public class Tooltips : MonoBehaviour
             "-Example Songs: John Kirkpatrick - \"Dust to Dust,\" Bj\u00F6rk - \"Army of Me\" (just the verse), The Strokes - \"Juice Box\" (just the bass)"
         };
 
-        currentTip = scaleDrop.value;
-        currentText.text = ( currentTip + 1 ).ToString() + "/7";
+        tipIndex = scaleDrop.value;
+        tipNumber.text = ( tipIndex + 1 ).ToString() + "/7";
 
         //call the ChangeTips function after everything has been initialized
         ChangeTips( scaleDrop.value );       
