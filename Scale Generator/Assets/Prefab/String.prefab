@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1059712919918412
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1134600612908218
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1214166389259118
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1250635231415446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1413323746549928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1436230923699544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,8 +1730,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    m_PressedColor: {r: 0.6037736, g: 0.6009256, b: 0.6009256, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1902,6 +1908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1506276326290512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1628511664933528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,6 +2593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1647279715761060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,6 +3094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1822291188499736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3268,6 +3278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1858521729777374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,6 +3457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1894289629784322
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,6 +3562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1918731129072156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3733,6 +3746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 0}
+  onDisplay: 0
 --- !u!1 &1927381390807486
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,13 +6,18 @@ Create a fretboard graphic that adjusts in width
 create semi-transparent strings graphic
 
 redesign color scheme and buttons(?)
+	-new colors/fonts/images for the background, titles and buttons
 
 
 ***Design/Programming Tasks***
+
+[BUG]
+	switching the arpeggio filters does not update the tooltip number at the bottom of the tooltip window
+
 Add scrollbar to the fretboard
 	-extend fretboard to 24 frets
 
-Fretboard: Add text to show the octave on 12th fret
+Fretboard: Add text to show the octave on 12th adn 24th fret
 
 Implement saving feature to the QuizScene
 	-Use a PlayerPref array or lots of booleans to save the checkbox status
@@ -26,10 +31,23 @@ properly document/refactor the classes (especially ScaleGenerator, and GuitStrin
 	//update the Task List docs
 	//etc.
 
-
 adjust the graphics settings so the app looks consistent on different screen sizes. (I think this is done already [expanded background
 beyond the camera])
 
+***User Interface/Experience Tasks***
+Have dropdowns automatically change position to show the selected item
+
+Have dropdowns change color when the viewport template is open
+
+
+***Publishing Tasks***
+Rollout a new internal test
+	-I'm having trouble getting the app published to the internal testers.  Maybe a new internal test will fix it
+		-email friends or Google for help?
+
+
+Re-enable Google Analytics
+	-put privacy policy into the App description and have a button inside the App that links to the privacy policy
 
 ***NEW FEATURE:  Lefty-Swap***   [NOT SURE IF I NEED THIS]
 -add a checkbox that will reformat the fretboard/tuning buttons to show the note positions for
