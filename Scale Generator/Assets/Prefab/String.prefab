@@ -2333,6 +2333,7 @@ GameObject:
   - component: {fileID: 114017497672453692}
   - component: {fileID: 222081004578087084}
   - component: {fileID: 114692182664051568}
+  - component: {fileID: 374810209946526308}
   m_Layer: 0
   m_Name: Viewport
   m_TagString: Untagged
@@ -2410,6 +2411,20 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &374810209946526308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628511664933528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaedd5994721e2643bf2608819a0693e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentDrop: {fileID: 2526896970044483487}
+  contentTrans: {fileID: 224767360918173326}
 --- !u!1 &1633445087600898
 GameObject:
   m_ObjectHideFlags: 0
