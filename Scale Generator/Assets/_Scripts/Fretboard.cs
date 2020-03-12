@@ -45,10 +45,12 @@ public class Fretboard : MonoBehaviour
             if (i - activeStrings < 0)
             {                
                 guitStrings[i].gameObject.SetActive( true );
+                guitStrings[i].noteSelect.gameObject.SetActive( true );
             }
             else
             {                
                 guitStrings[i].gameObject.SetActive( false );
+                guitStrings[i].noteSelect.gameObject.SetActive( false );
             }
         }
         visibleStrings = activeStrings;
@@ -70,7 +72,8 @@ public class Fretboard : MonoBehaviour
     {
         //check visible strings
         if( visibleStrings < 8 )
-        {            
+        {
+            guitStrings[visibleStrings].noteSelect.gameObject.SetActive( true );
             guitStrings[visibleStrings].gameObject.SetActive( true );
             visibleStrings++;
             PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) + 1 );
@@ -82,7 +85,8 @@ public class Fretboard : MonoBehaviour
     {
         //check visible strings
         if (visibleStrings > 4)
-        {            
+        {
+            guitStrings[visibleStrings - 1].noteSelect.gameObject.SetActive( false );
             guitStrings[visibleStrings - 1].gameObject.SetActive( false );
             visibleStrings--;
             PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) - 1 );
