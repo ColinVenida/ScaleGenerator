@@ -7,21 +7,23 @@ public class GuitString : MonoBehaviour
 {
     public Fretboard fBoard;    
     public NoteArray noteArray;
-    public Dropdown noteSelect;
-    public Text[] fretArray;
+    public Dropdown noteSelect;    
+    public Button[] buttonArray;
+    public Text[] textArray; 
     public Dropdown presetDrop;
-    public int stringNumber; 
+    public int stringNumber;
 
     public static bool changePreset = true;  //variable for determining if the Preset Dropdown should be reset or not
 
     private Note currentTuning;
+
     private int[] arpeggioFrets = { 0, 0, 0, 0 };
     private string[] arpeggioNotes = { "", "", "", "" };
-
-
         
     public void CalculateFrets( int drop )
     {
+        
+
         bool hasEnharmonic = false;
         bool includeFamilyNote = false;        
 
@@ -74,11 +76,13 @@ public class GuitString : MonoBehaviour
         }
 
         //blank out the fret board and change font color to black
-        for (int i = 0; i < fretArray.Length; i++)
-        {
-            fretArray[i].text = "";
-            fretArray[i].color = new Color32( 0, 0, 0, 255 );
-            fretArray[i].fontStyle = FontStyle.Normal;
+        for (int i = 0; i < textArray.Length; i++)
+        {            
+            buttonArray[i].gameObject.SetActive( false );
+            buttonArray[i].image.color = new Color( 1.0f, 1.0f, 1.0f );
+            textArray[i].text = "";
+            textArray[i].color = new Color32( 0, 0, 0, 255 );
+            textArray[i].fontStyle = FontStyle.Normal;
         }
                 
         SetCurrentTuning( drop );
@@ -150,20 +154,21 @@ public class GuitString : MonoBehaviour
         }
 
         //run through the fret board and set the labels to the scale
-        while( currentFret < 14 )
+        while( currentFret < 24 )
         {
             //check if the next note is the same as the root note of the scale
             if (familyIndex == fBoard.scaleGen.GetRootIndex())
-            {
-                fretArray[currentFret].color = new Color( 0, 0, 1 );
+            {                
+                buttonArray[currentFret].image.color = new Color( 0.0f, 0.6f, 0.8f );
             }
             else
             {
-                fretArray[currentFret].color = new Color( 0, 0, 0 );
+                textArray[currentFret].color = new Color( 0, 0, 0 );
             }
 
             //set the currentFret's text to the note in the scale
-            fretArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
+            buttonArray[currentFret].gameObject.SetActive( true );
+            textArray[currentFret].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
             familyIndex++;
             scaleInterval++;
 
@@ -187,6 +192,32 @@ public class GuitString : MonoBehaviour
         }
 
     }//end CacculateFrets()
+
+
+    public void FilterArpeggio( List<string> noteList )
+    {
+       
+        for (int i = 0; i < buttonArray.Length; i++)
+        {
+            if (noteList.Contains( textArray[i].text ))
+            {
+                buttonArray[i].gameObject.SetActive( false );
+
+            }
+        }
+    }
+
+    //function to set all the fretArray to active
+    public void CancelArpeggio()
+    {        
+        for (int i = 0; i < buttonArray.Length; i++)
+        {
+            if ( textArray[i].text != "" )
+            {
+                buttonArray[i].gameObject.SetActive( true );
+            }            
+        }
+    }
 
     //function to check if the given note/tuning has enharmonic notes in the current scale
     private bool CheckEnharmonic( int tuning )
@@ -285,26 +316,7 @@ public class GuitString : MonoBehaviour
     }
 
     //set the frets of the given notes inactive    
-    public void FilterArpeggio( List<string> noteList )
-    {       
-        for (int i = 0; i < fretArray.Length; i++)
-        {
-            if (noteList.Contains( fretArray[i].text ))
-            {
-                fretArray[i].gameObject.SetActive( false );
-                
-            }
-        }       
-    }
-
-    //function to set all the fretArray to active
-    public void CancelArpeggio()
-    {
-        for ( int i = 0; i < fretArray.Length; i++ )
-        {
-            fretArray[i].gameObject.SetActive( true );
-        }
-    }
+    
 
     private void SaveTuning( int drop )
     {

@@ -240,24 +240,25 @@ public class Fretboard : MonoBehaviour
     public void HighlightFrets( string note )
     {
         for (int i = 0; i < guitStrings.Length; i++)
-        {
-            for (int j = 0; j < guitStrings[i].fretArray.Length; j++)
+        {        
+            for (int j = 0; j < guitStrings[i].textArray.Length; j++)
             {                
-                if (guitStrings[i].fretArray[j].color == Color.blue)    //always keep the blue root notes
+                if (guitStrings[i].buttonArray[j].image.color.Equals( new Color( 0.0f, 0.6f, 0.8f ) )) //always keep the blue root notes
                 {
                     continue;
                 }
-                if (guitStrings[i].fretArray[j].text == note)
-                {
-                    guitStrings[i].fretArray[j].color = new Color( (float)0.8, (float)0.8, (float)0, 255 );
-                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Bold;
+                if (guitStrings[i].textArray[j].text == note)
+                {                    
+                    guitStrings[i].buttonArray[j].image.color = new Color( 0.0f, 0.8f, 0.6f );
+                    guitStrings[i].textArray[j].fontStyle = FontStyle.Bold;
                 }
-                else if (guitStrings[i].fretArray[j].color != Color.blue)
-                {
-                    guitStrings[i].fretArray[j].color = new Color( 0, 0, 0 );
-                    guitStrings[i].fretArray[j].fontStyle = FontStyle.Normal;
+                else if (guitStrings[i].textArray[j].color != Color.blue)
+                {                    
+                    guitStrings[i].buttonArray[j].image.color = new Color( 1.0f, 1.0f, 1.0f );
+                    guitStrings[i].textArray[j].fontStyle = FontStyle.Normal;
                 }
             }//end j
+
         }//end i
     }
 
