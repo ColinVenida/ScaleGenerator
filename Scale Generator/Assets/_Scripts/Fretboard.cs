@@ -55,7 +55,7 @@ public class Fretboard : MonoBehaviour
             }
         }
         visibleStrings = activeStrings;
-        fretboardImage.rectTransform.sizeDelta = new Vector2( fretboardImage.rectTransform.sizeDelta.x, 80 * (activeStrings +1));
+        fretboardImage.rectTransform.sizeDelta = new Vector2( fretboardImage.rectTransform.sizeDelta.x, 85 * (activeStrings +1));
         PlayerPrefs.SetInt( "GuitStringsVisible", activeStrings );
     }
 
