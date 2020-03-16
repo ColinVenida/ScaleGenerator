@@ -15,6 +15,7 @@ public class Fretboard : MonoBehaviour
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
     public TextFormatter textForm;
+    public Image fretboardImage;
     
     private bool isInitialized;
     private bool useArpeggio = false;
@@ -54,6 +55,7 @@ public class Fretboard : MonoBehaviour
             }
         }
         visibleStrings = activeStrings;
+        fretboardImage.rectTransform.sizeDelta = new Vector2( fretboardImage.rectTransform.sizeDelta.x, 80 * (activeStrings +1));
         PlayerPrefs.SetInt( "GuitStringsVisible", activeStrings );
     }
 
@@ -73,10 +75,17 @@ public class Fretboard : MonoBehaviour
         //check visible strings
         if( visibleStrings < 8 )
         {
+            
+
             guitStrings[visibleStrings].noteSelect.gameObject.SetActive( true );
             guitStrings[visibleStrings].gameObject.SetActive( true );
+
+            fretboardImage.rectTransform.sizeDelta = new Vector2( fretboardImage.rectTransform.sizeDelta.x, 
+                fretboardImage.rectTransform.sizeDelta.y + 80 );
+
             visibleStrings++;
             PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) + 1 );
+
         }
         presetDrop.value = 0;
     }
@@ -86,8 +95,13 @@ public class Fretboard : MonoBehaviour
         //check visible strings
         if (visibleStrings > 4)
         {
+
             guitStrings[visibleStrings - 1].noteSelect.gameObject.SetActive( false );
             guitStrings[visibleStrings - 1].gameObject.SetActive( false );
+
+            fretboardImage.rectTransform.sizeDelta = new Vector2( fretboardImage.rectTransform.sizeDelta.x,
+               fretboardImage.rectTransform.sizeDelta.y - 80 );
+            
             visibleStrings--;
             PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) - 1 );
         }
