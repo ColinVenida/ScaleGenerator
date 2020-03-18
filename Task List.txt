@@ -1,9 +1,7 @@
 ====TASK LIST=====
 
 ***Art Tasks***
-Create a fretboard graphic that adjusts in width
 
-create semi-transparent strings graphic
 
 redesign color scheme and buttons(?)
 	-new colors/fonts/images for the background, titles and buttons
@@ -14,8 +12,7 @@ redesign color scheme and buttons(?)
 [BUG]
 	switching the arpeggio filters does not update the tooltip number at the bottom of the tooltip window
 
-Add scrollbar to the fretboard
-	-extend fretboard to 24 frets
+
 
 Fretboard: Add text to show the octave on 12th adn 24th fret
 
@@ -35,7 +32,6 @@ adjust the graphics settings so the app looks consistent on different screen siz
 beyond the camera])
 
 ***User Interface/Experience Tasks***
-Have dropdowns automatically change position to show the selected item
 
 Have dropdowns change color when the viewport template is open
 
@@ -44,7 +40,6 @@ Have dropdowns change color when the viewport template is open
 Rollout a new internal test
 	-I'm having trouble getting the app published to the internal testers.  Maybe a new internal test will fix it
 		-email friends or Google for help?
-
 
 Re-enable Google Analytics
 	-put privacy policy into the App description and have a button inside the App that links to the privacy policy
@@ -55,6 +50,28 @@ left-handed players
 
 
 ====COMPLETED TASKS====
+
+************************************3/13-16/2020*******************************
+
+BACK FROM THE DEAD!!!!
+
+---
+-Add scrollbar to the fretboard
+	-extend fretboard to 24 frets
+
+Create a fretboard graphic that adjusts in height
+		Adjusted the fretboard's canvas anchor point to the top-left so it expands downward when scaled
+
+create semi-transparent strings graphic
+		Added a ScrollRect UI object and a Mask (UI?) to the fretboard GameObject.  This allowed me to increase the scale
+		of the fretboard and GuitStrings sprites and also allowed the user to horizontally scroll the fretboard
+----
+
+-Have dropdowns automatically change position to show the selected item
+	Created a new behavior that can be drag-dropped onto the UI Dropdowns.  Behavior sets the content's Y position based on
+	what item is selected in the dropdown menu during it's OnEnable() function.  The behavior is not the most elegant, 
+	but it works good enough :p.
+
 
 ************************************9/25/19*********************************
 -removed Unity Data Analytics to avoid including a privacy policy in the app

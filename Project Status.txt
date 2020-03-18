@@ -8,7 +8,7 @@ usuable with the new note system
 usuable with new note system
 user can now adjust what scale is being displayed on the fretboard :)
 
-*need to implement theoretical scale detection, and the highlight-note-on-touch features
+*need to implement theoretical scale detection, and the highlight-note-on-touch features [done]
 
 
 
