@@ -60,7 +60,7 @@ public class Tooltips : MonoBehaviour
 
     public void UpdateCurrentScale( int scale )
     {
-        Debug.Log( "UpdateCurrentText: " + scale );
+        //Debug.Log( "UpdateCurrentText: " + scale );
         switch (scale)
         {
             case 0:
