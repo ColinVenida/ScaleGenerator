@@ -10,6 +10,11 @@ public class FretButton : MonoBehaviour
 
     private Text childText;
 
+    void Start()
+    {
+        childText = GetComponentInChildren<Text>();
+    }
+
     public void HighlightColor()
     {
         //Debug.Log( "Fret has been pressed.  HighlightColor() invoked" );
@@ -37,15 +42,6 @@ public class FretButton : MonoBehaviour
             fBoard.HighlightFrets( str );
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        childText = GetComponentInChildren<Text>();        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
+    
 }
