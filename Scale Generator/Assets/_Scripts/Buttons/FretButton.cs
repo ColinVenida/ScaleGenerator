@@ -16,9 +16,7 @@ public class FretButton : MonoBehaviour
     }
 
     public void HighlightColor()
-    {
-        //Debug.Log( "Fret has been pressed.  HighlightColor() invoked" );
-        //Debug.Log( "childText = " + childText.text );
+    {        
         int remove = 0;
         string str = childText.text;
 
@@ -38,10 +36,7 @@ public class FretButton : MonoBehaviour
                     str = str.Remove( childText.text.Length - remove );
                 }                
             }
-
             fBoard.HighlightFrets( str );
         }
-    }
-   
-    
+    }       
 }

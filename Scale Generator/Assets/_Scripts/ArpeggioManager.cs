@@ -45,14 +45,9 @@ public class ArpeggioManager : MonoBehaviour
         }
     }
 
-
     private void ChangeBtnColor( int scale )
     {
-        //reset all the button's colors        
-        for (int i = 0; i < btnArray.Length; i++)
-        {
-            btnArray[i].image.color = new Color( 1.0f, 1.0f, 1.0f );
-        }
+        ResetBtnColor();
 
         //if scale is different than lastBtn, then change the color of the scale's button
         if ( scale != lastBtn )
@@ -69,6 +64,14 @@ public class ArpeggioManager : MonoBehaviour
                     btnArray[2].image.color = new Color( 0.784f, 0.784f, 0.784f );
                     break;
             }
+        }
+    }
+
+    private void ResetBtnColor()
+    {
+        for ( int i = 0; i < btnArray.Length; i++ )
+        {
+            btnArray[i].image.color = new Color( 1.0f, 1.0f, 1.0f );
         }
     }
 

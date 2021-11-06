@@ -20,16 +20,4 @@ public class NoteArray : MonoBehaviour
         noteArray[6] = new Note( "G", 0, 2, 2 );
 
     }
-
-    // Use this for initialization
-    void Start () 
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-		
-	}
 }

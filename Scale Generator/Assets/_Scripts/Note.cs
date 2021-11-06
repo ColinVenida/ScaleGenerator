@@ -74,11 +74,11 @@ public class Note
     public void SetId( string name )
     {
         id = name;
-        ChangePrevNext( id );
+        ChangePrevAndNextWholetone( id );
     }
 
     //function that updates the nextWholetone/prevWholetone according to he given id
-    private void ChangePrevNext( string id )
+    private void ChangePrevAndNextWholetone( string id )
     {
         switch ( id )
         {
@@ -113,17 +113,5 @@ public class Note
             default:
                 break;
         }
-    }
-
-    // Use this for initialization
-    void Start () 
-	{
-        
-    }
-
-    // Update is called once per frame
-    void Update () 
-	{
-		
-	}
+    }  
 }

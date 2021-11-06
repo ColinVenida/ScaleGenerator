@@ -35,12 +35,7 @@ public class TextFormatter : MonoBehaviour
     }
 
     public void UpdateDisplay( int display )
-    {
-        if ( !fBoard.GetIsInitialized() )
-        {
-            return;
-        }
-
+    {        
         //add minor/diminished
         switch ( scaleDrop.value )
         {

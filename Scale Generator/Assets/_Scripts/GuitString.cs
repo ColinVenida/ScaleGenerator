@@ -21,17 +21,10 @@ public class GuitString : MonoBehaviour
     private string[] arpeggioNotes = { "", "", "", "" };
         
     public void CalculateFrets( int drop )
-    {
-        
-
+    {        
         bool hasEnharmonic = false;
-        bool includeFamilyNote = false;        
-
-        if( !fBoard.GetGuitStringInitialized() )
-        {
-            return;
-        }
-
+        bool includeFamilyNote = false;      
+        
         //cancel arpeggio for a fresh start
         CancelArpeggio();
 
@@ -112,11 +105,10 @@ public class GuitString : MonoBehaviour
         {           
             familyIndex++;  //move the familyIndex to the next note
             scaleInterval++;    //move the scaleInterval to the next note
-            if (scaleInterval > 7)
-            {
-                scaleInterval = 1;
-            }            
-            if( currentScale[scaleInterval] == 2 )
+
+            scaleInterval = CheckScaleIntervalBounds( scaleInterval );
+
+            if ( currentScale[scaleInterval] == 2 )
             {
                 currentFret++;
             }            
@@ -141,17 +133,12 @@ public class GuitString : MonoBehaviour
                 scaleInterval++;                
             }
             //if the tuning used a flat, but scale had a natural, then we don't have to adjust the familyIndex, or the scaleInterval
-        }        
+        }
 
         //check for array bounds
-        if (familyIndex > 6)
-        {
-            familyIndex = 0;
-        }
-        if (scaleInterval > 7)
-        {
-            scaleInterval = 1;
-        }
+        familyIndex = CheckFamilyIndexBounds( familyIndex );
+        scaleInterval = CheckScaleIntervalBounds( scaleInterval );
+        
 
         //run through the fret board and set the labels to the scale
         while( currentFret < 24 )
@@ -173,14 +160,9 @@ public class GuitString : MonoBehaviour
             scaleInterval++;
 
             //check for array bounds
-            if (familyIndex > 6)
-            {
-                familyIndex = 0;
-            }
-            if (scaleInterval > 7)
-            {
-                scaleInterval = 1;
-            }
+            familyIndex = CheckFamilyIndexBounds( familyIndex );
+            scaleInterval = CheckScaleIntervalBounds( scaleInterval );
+
             //move to to the next fret according to the pattern
             currentFret += currentScale[scaleInterval];
         }        
@@ -193,6 +175,24 @@ public class GuitString : MonoBehaviour
 
     }//end CacculateFrets()
 
+
+    private int CheckFamilyIndexBounds( int index )
+    {
+         if ( index > 6)
+         {
+            index = 0;
+         }            
+        return index;
+    }
+
+    private int CheckScaleIntervalBounds( int interval )
+    {
+        if ( interval > 7 )
+        {
+            interval = 1;
+        }
+        return interval;
+    }
 
     public void FilterArpeggio( List<string> noteList )
     {
@@ -421,22 +421,10 @@ public class GuitString : MonoBehaviour
                 currentTuning.usedFlat = false;
                 break;
         }
-    }
-
-    // Use this for initialization
-    void Start () 
-	{
-        
-    }
+    } 
 
     private void Awake()
     {
         currentTuning = new Note();
     }
-
-    // Update is called once per frame
-    void Update () 
-	{
-		
-	}
 }

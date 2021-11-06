@@ -17,9 +17,9 @@ public class Fretboard : MonoBehaviour
     public TextFormatter textForm;
     public Image fretImage;
     public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.    
-    private bool isInitialized;
+    
     private bool useArpeggio = false;
-    private bool guitStringInitialized;
+    
     private string[] currentScale;
     private int visibleStrings;
     private int fretImageIndex;
@@ -38,6 +38,85 @@ public class Fretboard : MonoBehaviour
     private int[] BASS_STANDARD = { 15, 8, 1, 11 };
     private int[] UKULELE_STANDARD = { 1, 11, 5, 15 };
 
+
+
+    private void Awake()
+    {
+        //check and set the PlayerPrefs
+        if ( !PlayerPrefs.HasKey( "GuitStringsVisible" ) )
+        {
+            PlayerPrefs.SetInt( "GuitStringsVisible", 6 );
+        }
+
+        if ( !PlayerPrefs.HasKey( "GuitStringOne" ) )
+        {
+            //if it doesn't have the first one, then set them all
+            PlayerPrefs.SetInt( "GuitStringOne", 7 );
+            PlayerPrefs.SetInt( "GuitStringTwo", 2 );
+            PlayerPrefs.SetInt( "GuitStringThree", 10 );
+            PlayerPrefs.SetInt( "GuitStringFour", 5 );
+            PlayerPrefs.SetInt( "GuitStringFive", 0 );
+            PlayerPrefs.SetInt( "GuitStringSix", 7 );
+            PlayerPrefs.SetInt( "GuitStringSeven", 2 );
+            PlayerPrefs.SetInt( "GuitStringEight", 10 );
+        }
+
+        if ( !PlayerPrefs.HasKey( "presetValue" ) )
+        {
+            PlayerPrefs.SetInt( "presetValue", 0 );
+        }
+    }
+
+    void Start()
+    {
+        //set the scale and root to the PlayerPrefs
+        scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
+        rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
+
+        //set each string's tuning       
+        for ( int i = 0; i < guitStrings.Length; i++ )
+        {
+            switch ( i )
+            {
+                case 0:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringOne" );
+                    break;
+                case 1:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringTwo" );
+                    break;
+                case 2:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringThree" );
+                    break;
+                case 3:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringFour" );
+                    break;
+                case 4:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringFive" );
+                    break;
+                case 5:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSix" );
+                    break;
+                case 6:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSeven" );
+                    break;
+                case 7:
+                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringEight" );
+                    break;
+            }//end switch
+        }//end for
+        
+        arpList = new List<string>();
+        SetScale();
+        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
+        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
+    }
+
+    private void SaveScalePrefs()
+    {
+        PlayerPrefs.SetInt( "scaleType", scaleDrop.value );
+        PlayerPrefs.SetInt( "rootNote", rootDrop.value );
+        PlayerPrefs.Save();
+    }
 
     private void ToggleStrings ( int activeStrings )
     {
@@ -102,9 +181,7 @@ public class Fretboard : MonoBehaviour
     {
         //check visible strings
         if( visibleStrings < 8 )
-        {
-            
-
+        {         
             guitStrings[visibleStrings].noteSelect.gameObject.SetActive( true );
             guitStrings[visibleStrings].gameObject.SetActive( true );
 
@@ -116,7 +193,6 @@ public class Fretboard : MonoBehaviour
 
             visibleStrings++;
             PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) + 1 );
-
         }
         presetDrop.value = 0;
     }
@@ -194,11 +270,7 @@ public class Fretboard : MonoBehaviour
     //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
     public void SetScale() 
     {        
-        if( !isInitialized )
-        {
-            //Debug.Log( "Not initialized, returning" );
-            return;
-        }
+        
         ResetArpeggio();
 
         scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
@@ -268,7 +340,6 @@ public class Fretboard : MonoBehaviour
         arpList.Add( noteArray.noteArray[intervals[1]].GetNote() );
         arpList.Add( noteArray.noteArray[intervals[2]].GetNote() );
 
-
         for (int i = 0; i < 8; i++)
         {           
             guitStrings[i].FilterArpeggio( arpList );
@@ -318,108 +389,5 @@ public class Fretboard : MonoBehaviour
     public bool UseArpeggio()
     {
         return useArpeggio;
-    }
-
-    public bool GetGuitStringInitialized()
-    {
-        return guitStringInitialized;
-    }
-    
-    public bool GetIsInitialized()
-    {
-        return isInitialized;
-    }
-    
-    // Use this for initialization
-    void Start () 
-    {
-        
-        //set the scale and root to the PlayerPrefs
-        scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
-        rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
-             
-        //set each string's tuning       
-        for (int i = 0; i < guitStrings.Length; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringOne" );
-                    break;
-                case 1:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringTwo" );
-                    break;
-                case 2:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringThree" );
-                    break;
-                case 3:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringFour" );
-                    break;
-                case 4:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringFive" );
-                    break;
-                case 5:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSix" );
-                    break;
-                case 6:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringSeven" );
-                    break;
-                case 7:
-                    guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringEight" );
-                    break;
-            }//end switch
-        }//end for
-
-        isInitialized = true;
-        guitStringInitialized = true;
-        arpList = new List<string>();
-        SetScale();
-        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
-        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
-	}
-
-    private void Awake()
-    {        
-        //check and set the PlayerPrefs
-        if (!PlayerPrefs.HasKey( "GuitStringsVisible" ))
-        {
-            PlayerPrefs.SetInt( "GuitStringsVisible", 6 );
-        }
-
-        if (!PlayerPrefs.HasKey( "GuitStringOne" ))
-        {
-            //if it doesn't have the first one, then set them all
-            PlayerPrefs.SetInt( "GuitStringOne", 7 );
-            PlayerPrefs.SetInt( "GuitStringTwo", 2 );
-            PlayerPrefs.SetInt( "GuitStringThree", 10 );
-            PlayerPrefs.SetInt( "GuitStringFour", 5 );
-            PlayerPrefs.SetInt( "GuitStringFive", 0 );
-            PlayerPrefs.SetInt( "GuitStringSix", 7 );
-            PlayerPrefs.SetInt( "GuitStringSeven", 2 );
-            PlayerPrefs.SetInt( "GuitStringEight", 10 );
-        }
-
-        if (!PlayerPrefs.HasKey( "presetValue" ))
-        {
-            PlayerPrefs.SetInt( "presetValue", 0 );
-        }
-
-        isInitialized = false;
-        guitStringInitialized = false;
-
-    }
-
-    private void SaveScalePrefs()
-    {       
-        PlayerPrefs.SetInt( "scaleType", scaleDrop.value );
-        PlayerPrefs.SetInt( "rootNote", rootDrop.value );
-        PlayerPrefs.Save();
-    }
-
-
-    // Update is called once per frame
-    void Update () 
-    {
-		
-	}
+    }       
 }
