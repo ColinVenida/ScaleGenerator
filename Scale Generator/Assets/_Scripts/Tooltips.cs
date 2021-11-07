@@ -70,8 +70,7 @@ public class Tooltips : MonoBehaviour
         {
             return;
         }
-
-        //switch statement
+       
         switch ( scale )
         {
             case 0:
@@ -102,8 +101,7 @@ public class Tooltips : MonoBehaviour
     }
 
     public void UpdateCurrentScale( int scale )
-    {
-        //Debug.Log( "UpdateCurrentText: " + scale );
+    {        
         switch (scale)
         {
             case 0:
@@ -134,7 +132,7 @@ public class Tooltips : MonoBehaviour
         tipNumber.text = ( tipIndex + 1 ).ToString() + "/7";
     }
 
-    //function to cycle the tips forwards
+    
     public void NextTip()
     {
         tipIndex++;
@@ -146,7 +144,7 @@ public class Tooltips : MonoBehaviour
         ChangeTips( tipIndex );
     }
 
-    //function to cycle the tips backwards
+    
     public void PrevTip()
     {
         tipIndex--;

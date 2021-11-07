@@ -30,8 +30,7 @@ public class TextFormatter : MonoBehaviour
                 }
             }
             UpdateDisplay( j );
-        }            
-        //SavePlayerPrefs();
+        }                  
     }
 
     public void UpdateDisplay( int display )
@@ -124,17 +123,5 @@ public class TextFormatter : MonoBehaviour
                 displayScale[i].notePositions[5].color = new Color( 0.196f, 0.196f, 0.196f );
             }
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    }  
 }
