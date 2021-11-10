@@ -68,12 +68,20 @@ public class Fretboard : MonoBehaviour
     }
 
     void Start()
-    {
-        //set the scale and root to the PlayerPrefs
+    {        
         scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
         rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
 
-        //set each string's tuning       
+        LoadGuitStringTuning();      
+        
+        arpList = new List<string>();
+        SetScale();        
+        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
+        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );        
+    }
+
+    private void LoadGuitStringTuning()
+    {        
         for ( int i = 0; i < guitStrings.Length; i++ )
         {
             switch ( i )
@@ -102,13 +110,8 @@ public class Fretboard : MonoBehaviour
                 case 7:
                     guitStrings[i].noteSelect.value = PlayerPrefs.GetInt( "GuitStringEight" );
                     break;
-            }//end switch
-        }//end for
-        
-        arpList = new List<string>();
-        SetScale();
-        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
-        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
+            }
+        }
     }
 
     private void SaveScalePrefs()
@@ -134,39 +137,22 @@ public class Fretboard : MonoBehaviour
                 guitStrings[i].gameObject.SetActive( false );
                 guitStrings[i].noteSelect.gameObject.SetActive( false );
             }
-        }
-        visibleStrings = activeStrings;
-        fretImage.rectTransform.sizeDelta = new Vector2( fretImage.rectTransform.sizeDelta.x, 85 * (activeStrings));
+        }        
+        UpdateFretboardImage();
+    }
+    
+    private void UpdateFretboardImage()
+    {        
+        const float GSTRING_HEIGHT = 85;
+        float adjustedY = GSTRING_HEIGHT * ( visibleStrings );
 
-        switch (visibleStrings)
-        {
-            case 4:
-                fretImageIndex = 4;
-                break;
-            case 5:
-                fretImageIndex = 3;
-                break;
-            case 6:
-                fretImageIndex = 2;
-                break;
-            case 7:
-                fretImageIndex = 1;
-                break;
-            case 8:
-                fretImageIndex = 0;
-                break;
-            default:
-                fretImageIndex = 0;
-                break;
-        }
+        fretImage.rectTransform.sizeDelta = new Vector2( fretImage.rectTransform.sizeDelta.x, adjustedY );        
 
-        fretImage.sprite = fretboardImages[fretImageIndex];
-        fretImage.sprite = fretboardImages[0];
-
-        PlayerPrefs.SetInt( "GuitStringsVisible", activeStrings );
+        PlayerPrefs.SetInt( "GuitStringsVisible", visibleStrings );
+        PlayerPrefs.Save();
     }
 
-    private void SetTuning ( int[] tuning )
+    private void SetTuning( int[] tuning )
     {
         GuitString.changePreset = false;
         for( int i = 0; i < visibleStrings; i++ )
@@ -177,7 +163,7 @@ public class Fretboard : MonoBehaviour
     }
 
     
-    public void AddGuitString ()
+    public void AddGuitString()
     {
         //check visible strings
         if( visibleStrings < 8 )
@@ -185,40 +171,27 @@ public class Fretboard : MonoBehaviour
             guitStrings[visibleStrings].noteSelect.gameObject.SetActive( true );
             guitStrings[visibleStrings].gameObject.SetActive( true );
 
-            fretImage.rectTransform.sizeDelta = new Vector2( fretImage.rectTransform.sizeDelta.x, 
-                fretImage.rectTransform.sizeDelta.y + 85 );
-
-            fretImageIndex--;
-            fretImage.sprite = fretboardImages[fretImageIndex];
-
-            visibleStrings++;
-            PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) + 1 );
+            visibleStrings++;            
+            UpdateFretboardImage();
         }
         presetDrop.value = 0;
     }
         
-    public void RemoveGuitString ()
+    public void RemoveGuitString()
     {
         //check visible strings
         if (visibleStrings > 4)
         {
-
             guitStrings[visibleStrings - 1].noteSelect.gameObject.SetActive( false );
             guitStrings[visibleStrings - 1].gameObject.SetActive( false );
 
-            fretImage.rectTransform.sizeDelta = new Vector2( fretImage.rectTransform.sizeDelta.x,
-               fretImage.rectTransform.sizeDelta.y - 85 );
-
-            fretImageIndex++;
-            fretImage.sprite = fretboardImages[fretImageIndex];
-
-            visibleStrings--;
-            PlayerPrefs.SetInt( "GuitStringsVisible", PlayerPrefs.GetInt( "GuitStringsVisible" ) - 1 );
+            visibleStrings--;            
+            UpdateFretboardImage();
         }
         presetDrop.value = 0;
     }
 
-    public void SetPreset ()
+    public void SetPreset()
     {
         switch (presetDrop.value)
         {
