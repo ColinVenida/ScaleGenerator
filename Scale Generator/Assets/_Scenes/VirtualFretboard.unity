@@ -6232,7 +6232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fBoard: {fileID: 543725207}
-  displayScale:
+  displayScales:
   - {fileID: 1331413248990342854}
   - {fileID: 994219078}
   useArpeggio: {fileID: 0}
