@@ -13767,8 +13767,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1131189509}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Arpeggio
+        m_TargetAssemblyTypeName: ArpeggioButton, Assembly-CSharp
+        m_MethodName: ToggleArpeggio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14741,8 +14741,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1233375888}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Arpeggio
+        m_TargetAssemblyTypeName: ArpeggioButton, Assembly-CSharp
+        m_MethodName: ToggleArpeggio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20287,8 +20287,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1456496334}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Arpeggio
+        m_TargetAssemblyTypeName: ArpeggioButton, Assembly-CSharp
+        m_MethodName: ToggleArpeggio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26657,10 +26657,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fBoard: {fileID: 543725207}
   scaleDrop: {fileID: 1941558776}
-  btnArray:
-  - {fileID: 1131189506}
-  - {fileID: 1456496331}
-  - {fileID: 1233375885}
 --- !u!224 &2039060312
 RectTransform:
   m_ObjectHideFlags: 0

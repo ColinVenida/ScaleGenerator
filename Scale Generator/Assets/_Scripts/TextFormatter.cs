@@ -13,9 +13,11 @@ public class TextFormatter : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
+    private Color darkGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+    private Color lightGray = new Color( 0.196f, 0.196f, 0.196f );
+
     public void UpdateScale ()
     {    
-
         for (int j = 0; j < displayScales.Length; j++ )
         {
             //**find the starting point of the scale here***
@@ -29,35 +31,45 @@ public class TextFormatter : MonoBehaviour
                     familyIndex = 0;
                 }
             }
-            AddChordQuality( j );
+            AddChordQuality( j );            
         }                  
     }
 
-    private void AddChordQuality( int displayIndex )
+    private void AddChordQuality( int displayIndex )    
     {        
         //add minor/diminished
         switch ( scaleDrop.value )
         {
             case 0: //ionian
             case 4: //lydian
-            case 5: //mixolydian
-                displayScales[displayIndex].noteTexts[1].text += "m";
-                displayScales[displayIndex].noteTexts[2].text += "m";
-                displayScales[displayIndex].noteTexts[5].text += "m";
-                displayScales[displayIndex].noteTexts[6].text += "dim";
+            case 5: //mixolydian                
+                AddMajorScaleQualities( displayScales[displayIndex] );
                 break;
             case 1: //aeolian
             case 2: //dorian
             case 3: //phrygian
             case 6: //locrian
-                displayScales[displayIndex].noteTexts[0].text += "m";
-                displayScales[displayIndex].noteTexts[1].text += "dim";
-                displayScales[displayIndex].noteTexts[3].text += "m";
-                displayScales[displayIndex].noteTexts[4].text += "m";
-                displayScales[displayIndex].noteTexts[7].text += "m";
+                AddMinorScaleQualities( displayScales[displayIndex] );
                 break;
         }
         UpdatePositions( displayIndex, scaleDrop );
+    }
+
+    private void AddMajorScaleQualities( DisplayScale dScale )
+    {
+        dScale.noteTexts[1].text += "m";
+        dScale.noteTexts[2].text += "m";
+        dScale.noteTexts[5].text += "m";
+        dScale.noteTexts[6].text += "dim";
+    }
+
+    private void AddMinorScaleQualities( DisplayScale dScale )
+    {
+        dScale.noteTexts[0].text += "m";
+        dScale.noteTexts[1].text += "dim";
+        dScale.noteTexts[3].text += "m";
+        dScale.noteTexts[4].text += "m";
+        dScale.noteTexts[7].text += "m";
     }
 
     private void UpdatePositions( int display, Dropdown scale )
@@ -68,30 +80,40 @@ public class TextFormatter : MonoBehaviour
             //unicode symbols found here https://www.fileformat.info/info/unicode/font/arial_unicode_ms/list.htm
             case 0: //ionian
             case 4: //lydian
-            case 5: //mixolydian
-                displayScales[display].intervalTexts[0].text = "I";
-                displayScales[display].intervalTexts[1].text = "ii";
-                displayScales[display].intervalTexts[2].text = "iii";
-                displayScales[display].intervalTexts[3].text = "IV";
-                displayScales[display].intervalTexts[4].text = "V";
-                displayScales[display].intervalTexts[5].text = "vi";
-                displayScales[display].intervalTexts[6].text = "vii" + '\u2205';
-                displayScales[display].intervalTexts[7].text = "I";
+            case 5: //mixolydian                
+                ChangeDisplayScaleToMajorIntervals( displayScales[display] );
                 break;
             case 1: //aeolian
             case 2: //dorian
             case 3: //phrygian
-            case 6: //locrian
-                displayScales[display].intervalTexts[0].text = "i";
-                displayScales[display].intervalTexts[1].text = "ii" + '\u2205';
-                displayScales[display].intervalTexts[2].text = "III";
-                displayScales[display].intervalTexts[3].text = "iv";
-                displayScales[display].intervalTexts[4].text = "v";
-                displayScales[display].intervalTexts[5].text = "VI";
-                displayScales[display].intervalTexts[6].text = "VII";
-                displayScales[display].intervalTexts[7].text = "i";
+            case 6: //locrian                
+                ChangeDisplayScaleToMinorIntervals( displayScales[display] );
                 break;
         }
+    }
+
+    private void ChangeDisplayScaleToMajorIntervals( DisplayScale dScale )
+    {
+        dScale.intervalTexts[0].text = "I";
+        dScale.intervalTexts[1].text = "ii";
+        dScale.intervalTexts[2].text = "iii";
+        dScale.intervalTexts[3].text = "IV";
+        dScale.intervalTexts[4].text = "V";
+        dScale.intervalTexts[5].text = "vi";
+        dScale.intervalTexts[6].text = "vii" + '\u2205';
+        dScale.intervalTexts[7].text = "I";
+    }
+
+    private void ChangeDisplayScaleToMinorIntervals( DisplayScale dScale )
+    {
+        dScale.intervalTexts[0].text = "i";
+        dScale.intervalTexts[1].text = "ii" + '\u2205';
+        dScale.intervalTexts[2].text = "III";
+        dScale.intervalTexts[3].text = "iv";
+        dScale.intervalTexts[4].text = "v";
+        dScale.intervalTexts[5].text = "VI";
+        dScale.intervalTexts[6].text = "VII";
+        dScale.intervalTexts[7].text = "i";
     }
     
     //gray out the 2, 4, and 6 positions
@@ -99,29 +121,25 @@ public class TextFormatter : MonoBehaviour
     {        
         if ( show )
         {
-            for ( int i = 0; i < displayScales.Length; i++ )
-            {
-                displayScales[i].noteTexts[1].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
-                displayScales[i].noteTexts[3].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
-                displayScales[i].noteTexts[5].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );                
-
-                displayScales[i].intervalTexts[1].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
-                displayScales[i].intervalTexts[3].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
-                displayScales[i].intervalTexts[5].color = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
-            }
+            UpdateDisplayArpeggioColor( darkGray );            
         }
         else
         {
-            for (int i = 0; i < displayScales.Length; i++)
-            {
-                displayScales[i].noteTexts[1].color = new Color( 0.196f, 0.196f, 0.196f );                
-                displayScales[i].noteTexts[3].color = new Color( 0.196f, 0.196f, 0.196f );
-                displayScales[i].noteTexts[5].color = new Color( 0.196f, 0.196f, 0.196f );
-
-                displayScales[i].intervalTexts[1].color = new Color( 0.196f, 0.196f, 0.196f );
-                displayScales[i].intervalTexts[3].color = new Color( 0.196f, 0.196f, 0.196f );
-                displayScales[i].intervalTexts[5].color = new Color( 0.196f, 0.196f, 0.196f );
-            }
+            UpdateDisplayArpeggioColor( lightGray );            
         }
     }  
+
+    private void UpdateDisplayArpeggioColor( Color c )
+    {
+        for ( int i = 0; i < displayScales.Length; i++ )
+        {
+            displayScales[i].noteTexts[1].color = c;
+            displayScales[i].noteTexts[3].color = c;
+            displayScales[i].noteTexts[5].color = c;
+
+            displayScales[i].intervalTexts[1].color = c;
+            displayScales[i].intervalTexts[3].color = c;
+            displayScales[i].intervalTexts[5].color = c;
+        }
+    }
 }

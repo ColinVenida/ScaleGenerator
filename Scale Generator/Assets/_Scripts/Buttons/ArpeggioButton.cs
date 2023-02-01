@@ -9,7 +9,7 @@ public class ArpeggioButton : MonoBehaviour
     public int arpID;
     public ArpeggioManager arpManager;  
 
-    public void PromptArpeggio()   
+    public void ToggleArpeggio()   
     {
         arpManager.ProcessArpeggio( arpID, selfBtn );
     }
