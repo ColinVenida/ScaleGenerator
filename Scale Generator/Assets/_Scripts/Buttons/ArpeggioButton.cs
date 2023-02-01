@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class ArpeggioButton : MonoBehaviour
 {
-    public int scale;
-    public ArpeggioManager arpManager;    
+    public Button selfBtn;
+    public int arpID;
+    public ArpeggioManager arpManager;  
 
-    public void Arpeggio()   
+    public void PromptArpeggio()   
     {
-        arpManager.FilterScale( scale );               
+        arpManager.ProcessArpeggio( arpID, selfBtn );
     }
 }

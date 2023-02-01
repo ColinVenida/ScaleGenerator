@@ -13828,7 +13828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8529668fa66bc4ea17d7460cd6a41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 0
+  selfBtn: {fileID: 1131189506}
+  arpID: 0
   arpManager: {fileID: 2039060311}
 --- !u!114 &1132039032 stripped
 MonoBehaviour:
@@ -14801,7 +14802,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8529668fa66bc4ea17d7460cd6a41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 5
+  selfBtn: {fileID: 1233375885}
+  arpID: 5
   arpManager: {fileID: 2039060311}
 --- !u!1 &1245479599
 GameObject:
@@ -20158,7 +20160,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20346,7 +20348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8529668fa66bc4ea17d7460cd6a41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1
+  selfBtn: {fileID: 1456496331}
+  arpID: 1
   arpManager: {fileID: 2039060311}
 --- !u!1 &1466067401
 GameObject:

@@ -7,72 +7,46 @@ using UnityEngine.UI;
 public class ArpeggioManager : MonoBehaviour
 {
     public Fretboard fBoard;   
-    public Dropdown scaleDrop;
-    public Button[] btnArray;
-
-    private bool useArp = false;
+    public Dropdown scaleDrop;    
+   
     private int lastBtn = -1; //int to identify the previous button pushed
 
-    public void FilterScale( int scale )
-    {
-        ChangeBtnColor( scale );
-        //if the same button has been pushed twice, then turn off the filter
-        if (lastBtn == scale)
-        {            
-            lastBtn = -1;       //reset the lastBtn so we can activate the button again
-            fBoard.textForm.ShowArpeggio( false );
-            fBoard.ResetArpeggio();
+    public void ProcessArpeggio( int arpID, Button selfBtn )
+    {        
+        if ( lastBtn != arpID )
+        {              
+            ApplyArpeggio( arpID );
+            DarkenBtnColor( selfBtn );
         }
         else
         {            
-            scaleDrop.value = scale;            
-            lastBtn = scale;
-            fBoard.textForm.ShowArpeggio( true );
-            fBoard.SetArpeggio();
+            CancelArpeggio();
+            ResetBtnColor( selfBtn );
         }        
     }
 
-    public void ResetFilter()
+    private void ApplyArpeggio( int id )
     {
-        Debug.Log( "ResetFilter()" );
-        useArp = false;
-        lastBtn = -1;
-
-        //change the button color back to white
-        for (int i = 0; i < btnArray.Length; i++)
-        {
-            btnArray[i].image.color = new Color( 1.0f, 1.0f, 1.0f );
-        }
+        scaleDrop.value = id;
+        lastBtn = id;
+        fBoard.textForm.ShowArpeggio( true );
+        fBoard.SetArpeggio();
     }
 
-    private void ChangeBtnColor( int scale )
+    private void DarkenBtnColor( Button btn )
     {
-        ResetBtnColor();
-
-        //if scale is different than lastBtn, then change the color of the scale's button
-        if ( scale != lastBtn )
-        {
-            switch ( scale ) 
-            {
-                case 0:     //major7
-                    btnArray[0].image.color = new Color( 0.784f, 0.784f, 0.784f );
-                    break;
-                case 1:     //minor7
-                    btnArray[1].image.color = new Color( 0.784f, 0.784f, 0.784f );
-                    break;
-                case 5:     //dom7
-                    btnArray[2].image.color = new Color( 0.784f, 0.784f, 0.784f );
-                    break;
-            }
-        }
+        btn.image.color = new Color( 0.784f, 0.784f, 0.784f );
     }
 
-    private void ResetBtnColor()
+    private void CancelArpeggio()
     {
-        for ( int i = 0; i < btnArray.Length; i++ )
-        {
-            btnArray[i].image.color = new Color( 1.0f, 1.0f, 1.0f );
-        }
+        lastBtn = -1;       //reset the lastBtn so we can activate the button again
+        fBoard.textForm.ShowArpeggio( false );
+        fBoard.ResetArpeggio();
     }
 
+    private void ResetBtnColor( Button btn )
+    {
+        btn.image.color = new Color( 1.0f, 1.0f, 1.0f );
+    }
 }
