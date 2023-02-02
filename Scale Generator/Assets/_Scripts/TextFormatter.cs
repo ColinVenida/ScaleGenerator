@@ -13,8 +13,8 @@ public class TextFormatter : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
-    private Color darkGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
-    private Color lightGray = new Color( 0.196f, 0.196f, 0.196f );
+    private Color lightGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
+    private Color darkGray = new Color( 0.196f, 0.196f, 0.196f );
 
     public void UpdateScale ()
     {    
@@ -114,21 +114,19 @@ public class TextFormatter : MonoBehaviour
         dScale.intervalTexts[5].text = "VI";
         dScale.intervalTexts[6].text = "VII";
         dScale.intervalTexts[7].text = "i";
-    }
+    }    
     
-    //gray out the 2, 4, and 6 positions
-    public void ShowArpeggio( bool show )
-    {        
-        if ( show )
-        {
-            UpdateDisplayArpeggioColor( darkGray );            
-        }
-        else
-        {
-            UpdateDisplayArpeggioColor( lightGray );            
-        }
-    }  
+    public void EnableArpeggioColor()
+    {
+        UpdateDisplayArpeggioColor( lightGray );
+    }
 
+    public void DisableArpeggioColor()
+    {
+        UpdateDisplayArpeggioColor( darkGray );
+    }
+
+    //apply color to the 2, 4, and 6 intervals   
     private void UpdateDisplayArpeggioColor( Color c )
     {
         for ( int i = 0; i < displayScales.Length; i++ )

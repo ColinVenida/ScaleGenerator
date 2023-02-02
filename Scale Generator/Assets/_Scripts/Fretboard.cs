@@ -280,7 +280,8 @@ public class Fretboard : MonoBehaviour
                     break;
             }//end switch
         }
-        textForm.ShowArpeggio( false ); 
+        //textForm.ShowArpeggio( false ); 
+        textForm.DisableArpeggioColor();
         textForm.UpdateScale();
     }
 
