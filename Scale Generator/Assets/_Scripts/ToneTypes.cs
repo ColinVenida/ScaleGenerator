@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum ToneType
+public static class ToneTypes
 {
-    WHOLE_TONE = 2,
-    SEMI_TONE = 1,
+    public const int WHOLE_TONE = 2;
+    public const int SEMI_TONE = 1;
 }

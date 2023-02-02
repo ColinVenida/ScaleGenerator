@@ -10,8 +10,8 @@ public class NoteArray : MonoBehaviour
 
     private void Awake ()
     {
-        int whole = (int) ToneType.WHOLE_TONE;
-        int semi = ( int )ToneType.SEMI_TONE;
+        int whole = ToneTypes.WHOLE_TONE;
+        int semi = ToneTypes.SEMI_TONE;
 
         //populate the noteArray 
         noteArray[0] = new Note( "A", 0, whole, whole );

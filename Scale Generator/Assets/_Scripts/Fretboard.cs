@@ -279,8 +279,7 @@ public class Fretboard : MonoBehaviour
                     guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringEight" ) );
                     break;
             }//end switch
-        }
-        //textForm.ShowArpeggio( false ); 
+        }        
         textForm.DisableArpeggioColor();
         textForm.UpdateScale();
     }
