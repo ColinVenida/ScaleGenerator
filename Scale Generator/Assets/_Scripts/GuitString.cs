@@ -360,33 +360,33 @@ public class GuitString : MonoBehaviour
             case 0:
             case 1:
             case 2:
-                currentTuning.SetId( "A" );
+                currentTuning.SetName( "A" );
                 break;
             case 3:                
             case 4:
-                currentTuning.SetId( "B" );
+                currentTuning.SetName( "B" );
                 break;
             case 5:                
             case 6:
-                currentTuning.SetId( "C" );                 
+                currentTuning.SetName( "C" );                 
                 break;
             case 7:                
             case 8:                
             case 9:                
-                currentTuning.SetId( "D" );
+                currentTuning.SetName( "D" );
                 break;
             case 10:                
             case 11:                
-                currentTuning.SetId( "E" );
+                currentTuning.SetName( "E" );
                 break;
             case 12:                
             case 13:                
-                currentTuning.SetId( "F" );
+                currentTuning.SetName( "F" );
                 break;
             case 14:                
             case 15:                
             case 16:
-                currentTuning.SetId( "G" );
+                currentTuning.SetName( "G" );
                 break;
             default:
                 break;

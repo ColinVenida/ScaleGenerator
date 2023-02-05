@@ -5,19 +5,23 @@ using UnityEngine;
 
 public class Note 
 {
-    //public char id;
-    private string id;    
+    //public char name;
+    private string name;    
     public int nextWholetone;
     public int prevWholetone;
+    public PitchModifier pitch;
+    public bool hasDoubledPitchModifier = false;
+
     public bool usedSharp;
     public bool usedFlat;
     public bool doubleSharp;
     public bool doubleFlat;
+        
 
     //constructor for a blank note
     public Note ()
     {
-        id = "";       
+        name = "";       
         nextWholetone = 0;
         prevWholetone = 0;
         usedSharp = false;
@@ -26,20 +30,28 @@ public class Note
         doubleFlat = false;
     }
 
-    public Note( string name )
+    public Note( string n )
     {
-        id = name;
+        name = n;
         nextWholetone = 0;
         prevWholetone = 0;
+        pitch = PitchModifier.Natural;
+        
         usedSharp = false;
         usedFlat = false;
         doubleSharp = false;
         doubleFlat = false;
     }
 
-    public Note( string name, int next, int prev)
+    public Note( string n, PitchModifier p )
     {
-        id = name;        
+        name = n;
+        pitch = p;
+    }
+
+    public Note( string n, int next, int prev)
+    {
+        name = n;        
         nextWholetone = next;
         prevWholetone = prev;
         usedSharp = false;
@@ -54,41 +66,41 @@ public class Note
         {
             if( doubleSharp )
             {
-                return id + "##";
+                return name + "##";
             }
             else 
             {
-                return id + "#";
+                return name + "#";
             }            
         }
         else if ( usedFlat )
         {
             if ( doubleFlat )
             {
-                return id + "bb";
+                return name + "bb";
             }
             else
             {
-                return id + "b";
+                return name + "b";
             }
         }
         else
         {
-            return id;
+            return name;
         }
     }
 
-    //function to change the note's id (ie. A, B, C) and then calls the ChangePrevNext function
-    public void SetId( string name )
+    //function to change the note's name (ie. A, B, C) and then calls the ChangePrevNext function
+    public void SetName( string n )
     {
-        id = name;
-        ChangePrevAndNextWholetone( id );
+        name = n;
+        ChangePrevAndNextWholetone( name );
     }
 
     //function that updates the nextWholetone/prevWholetone according to he given id
-    private void ChangePrevAndNextWholetone( string id )
+    private void ChangePrevAndNextWholetone( string name )
     {
-        switch ( id )
+        switch ( name )
         {
             case "A":
                 nextWholetone = 2;
