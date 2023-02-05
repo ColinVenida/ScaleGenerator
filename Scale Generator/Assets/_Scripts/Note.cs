@@ -6,8 +6,7 @@ using UnityEngine;
 public class Note 
 {
     //public char id;
-    private string id;
-    public int index;
+    private string id;    
     public int nextWholetone;
     public int prevWholetone;
     public bool usedSharp;
@@ -18,8 +17,7 @@ public class Note
     //constructor for a blank note
     public Note ()
     {
-        id = "";
-        index = 0;
+        id = "";       
         nextWholetone = 0;
         prevWholetone = 0;
         usedSharp = false;
@@ -28,10 +26,20 @@ public class Note
         doubleFlat = false;
     }
 
-    public Note( string name, int ind, int next, int prev)
+    public Note( string name )
     {
         id = name;
-        index = ind;
+        nextWholetone = 0;
+        prevWholetone = 0;
+        usedSharp = false;
+        usedFlat = false;
+        doubleSharp = false;
+        doubleFlat = false;
+    }
+
+    public Note( string name, int next, int prev)
+    {
+        id = name;        
         nextWholetone = next;
         prevWholetone = prev;
         usedSharp = false;
@@ -113,5 +121,10 @@ public class Note
             default:
                 break;
         }
-    }  
+    }
+
+    public override string ToString()
+    {
+        return GetNote();
+    }
 }

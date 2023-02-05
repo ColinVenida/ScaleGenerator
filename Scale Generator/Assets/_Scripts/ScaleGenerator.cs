@@ -16,7 +16,7 @@ public class ScaleGenerator : MonoBehaviour
     private int[] mixolydianFormula = { 0, 2, 2, 1, 2, 2, 1, 2 };
     private int[] locrianFormula = { 0, 1, 2, 2, 1, 2, 2, 2 };
 
-    private Dictionary<string, int> diatonicIntervals = new Dictionary<string, int>()
+    private Dictionary<string, int> natrualIntervals = new Dictionary<string, int>()
     {
         {"A", 2 },
         {"B", 1 },
@@ -39,7 +39,7 @@ public class ScaleGenerator : MonoBehaviour
 
 
     public int FindFamilyIndex( int note )
-    {
+    {        
         int index = 0;
 
         switch (note)
@@ -132,6 +132,14 @@ public class ScaleGenerator : MonoBehaviour
         int[] currentScale = GetScaleFormula( scale );
 
         ResetSharpsAndFlats( noteArray );
+
+        //****test creating a new musical scale!****
+        MusicScale testScale = new MusicScale( "C", ScaleFormulas.MAJOR_IONIAN );
+        Debug.Log( "***" );
+        MusicScale testScale2 = new MusicScale( "A", ScaleFormulas.MAJOR_IONIAN );
+        Debug.Log( "***" );
+        MusicScale testScale3 = new MusicScale( "F", ScaleFormulas.MAJOR_IONIAN );
+
 
         //adjusting the scaleTotal and usedSharp/Flat in case the scale starts on a sharp/flat note
         switch (root)

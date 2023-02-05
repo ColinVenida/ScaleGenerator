@@ -42,13 +42,13 @@ public static class ScaleFormulas
             scaleName = name;
             intervalDistances = new Dictionary<string, int>()
             {
-                { "One", one },
-                { "Two", two },
-                { "Three", three},
-                { "Four", four },
-                { "Five", five },
-                { "Six", six },
-                { "Seven", seven },
+                { "1", one },
+                { "2", two },
+                { "3", three},
+                { "4", four },
+                { "5", five },
+                { "6", six },
+                { "7", seven },
             };                
         }
     }

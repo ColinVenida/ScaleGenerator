@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //NoteArray is a data structure that holds all the notes to be referenced by the ScaleGenerator class
+//this class will soon be deprecated
 public class NoteArray : MonoBehaviour
 {
 
@@ -14,13 +15,12 @@ public class NoteArray : MonoBehaviour
         int semi = ToneTypes.SEMI_TONE;
 
         //populate the noteArray 
-        noteArray[0] = new Note( "A", 0, whole, whole );
-        noteArray[1] = new Note( "B", 0, semi, whole );
-        noteArray[2] = new Note( "C", 0, whole, semi );
-        noteArray[3] = new Note( "D", 0, whole, whole );
-        noteArray[4] = new Note( "E", 0, semi, whole );
-        noteArray[5] = new Note( "F", 0, whole, semi );
-        noteArray[6] = new Note( "G", 0, whole, whole );
-
+        noteArray[0] = new Note( "A", whole, whole );
+        noteArray[1] = new Note( "B", semi, whole );
+        noteArray[2] = new Note( "C", whole, semi );
+        noteArray[3] = new Note( "D", whole, whole );
+        noteArray[4] = new Note( "E", semi, whole );
+        noteArray[5] = new Note( "F", whole, semi );
+        noteArray[6] = new Note( "G", whole, whole );
     }
 }
