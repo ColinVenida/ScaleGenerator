@@ -32,15 +32,41 @@ public static class ScaleFormulas
         ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE,
         ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE );
 
+
+    public static ScaleFormula GetFormulaFromDropValue( int value )
+    {
+        switch ( value )
+        {
+            case 0:
+                return MAJOR_IONIAN;
+            case 1:
+                return MINOR_AEOLIAN;
+            case 2:
+                return DORIAN;
+            case 3:
+                return PHRYGIAN;
+            case 4:
+                return LYDIAN;
+            case 5:
+                return MIXOLYDIAN;
+            case 6:
+                return LOCRIAN;
+            default:
+                return MAJOR_IONIAN;
+        }
+    }
+
     public class ScaleFormula
     {
         public string scaleName { get; }
-        public Dictionary<string, int> intervalDistances { get; }
+        public Dictionary<string, int> scaleIntervals { get; }
 
         public ScaleFormula( string name, int one, int two, int three, int four, int five, int six, int seven )
         {
             scaleName = name;
-            intervalDistances = new Dictionary<string, int>()
+
+            //the distance between each of the scale's notes
+            scaleIntervals = new Dictionary<string, int>()
             {
                 { "1", one },
                 { "2", two },

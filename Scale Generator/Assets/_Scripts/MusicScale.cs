@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class MusicScale 
 {
     public string rootNote { get; }
     private Note rootNoteObject;
 
-    private Dictionary<string, string> notesInScale;
-    //private Dictionary<string, Note> notesInScale;
+    private Dictionary<string, Note> notesInScale;
 
+    //the distance between natural notes in music
     private Dictionary<string, int> naturalIntervals = new Dictionary<string, int>()
     {
         {"A", 2 },
@@ -25,35 +27,33 @@ public class MusicScale
     {
         rootNote = root;
         rootNoteObject = new Note( root );
-
-        notesInScale = new Dictionary<string, string>();
-        //notesInScale = new Dictionary<string, Note>();
+        
+        notesInScale = new Dictionary<string, Note>();
 
         PopulateNotesInScale();
-        AdjustSharpsOrFlats( formula );
+        AdjustSharpsOrFlatsInScale( formula );
         PrintNotesInScale();
     }
 
     private void PopulateNotesInScale()
     {
-        const int SCALE_LENGTH_NO_ROOT = 7;
+        //add the notes in the correct order 
+        notesInScale.Add( "1", rootNoteObject );
 
-        //add the notes in the correct order
-        notesInScale.Add( "1", rootNote );
-        //notesInScale.Add( "1", rootNoteObject );
-        string next = FindNextNote( rootNote );
+        const int REMAINING_NOTES = 7;
+        string nextName = FindNextNote( rootNoteObject.GetName() );        
 
-        for ( int i = 2; i <= SCALE_LENGTH_NO_ROOT; i++ )
+        for ( int i = 2; i <= REMAINING_NOTES; i++ )
         {
-            notesInScale.Add( i.ToString(), next );
-            next = FindNextNote( next );
-        }              
+            notesInScale.Add( i.ToString(), new Note( nextName ) );
+            nextName = FindNextNote( nextName );
+        }
     }
 
     private void PrintNotesInScale()
     {
         foreach ( var kvp in notesInScale )
-        {
+        {            
             Debug.Log( "key = " + kvp.Key + ", value = " + kvp.Value );
         }
     }
@@ -61,33 +61,28 @@ public class MusicScale
     private string FindNextNote( string note )
     {
         string next;
-        char firstChar = note[0];
-        if( note.Length > 1 )
-        {
-            //sharp/flat function here
-        }
 
-        switch ( firstChar )
+        switch ( note )
         {
-            case 'A':
+            case "A":
                 next = "B";
                 break;
-            case 'B':
+            case "B":
                 next = "C";
                 break;
-            case 'C':
+            case "C":
                 next = "D";
                 break;
-            case 'D':
+            case "D":
                 next = "E";
                 break;
-            case 'E':
+            case "E":
                 next = "F";
                 break;
-            case 'F':
+            case "F":
                 next = "G";
                 break;
-            case 'G':
+            case "G":
                 next = "A";
                 break;
             default:
@@ -96,85 +91,72 @@ public class MusicScale
         }
         return next;
     }
-
-    //private Note FindNextNote( Note note )
-    //{
-    //    Note nextNote;
-    //    string next;
-    //    char firstChar = note.ToString()[0];
-    //    //if ( note.Length > 1 )
-    //    //{
-    //    //    //sharp/flat function here
-    //    //}
-
-    //    switch ( firstChar )
-    //    {
-    //        case 'A':
-    //            next = "B";
-    //            break;
-    //        case 'B':
-    //            next = "C";
-    //            break;
-    //        case 'C':
-    //            next = "D";
-    //            break;
-    //        case 'D':
-    //            next = "E";
-    //            break;
-    //        case 'E':
-    //            next = "F";
-    //            break;
-    //        case 'F':
-    //            next = "G";
-    //            break;
-    //        case 'G':
-    //            next = "A";
-    //            break;
-    //        default:
-    //            next = "C";
-    //            break;
-    //    }
-    //    nextNote = new Note( next );
-    //    return nextNote;
-    //}
-
-    //function to handle sharp/flat quality here
-    private void AdjustSharpsOrFlats( ScaleFormulas.ScaleFormula formula )
+    
+    private void AdjustSharpsOrFlatsInScale( ScaleFormulas.ScaleFormula formula )
     {
-        //natrualIntervals["Note"] gives int; the distance between natural notes in music
-        //forumla.intervalDistance["interval"] gives int; distance between each of the scale's intervals
+        //***TODO need to program if the root note is already sharp/flat? will that affectd the math and if-conditions?***
 
-        string note = rootNote;
-        int natIntervals = 0;
+        string noteName = rootNoteObject.GetName();
+        int offset = GetPitchOffset( rootNoteObject.pitch );
+        int scaleSemitones = offset;
         int formulaIntervals = 0;
-        for( int i = 1; i < formula.intervalDistances.Count + 1; i++ )
+
+        for( int i = 1; i < formula.scaleIntervals.Count + 1; i++ )
         {
             //add up the intervals in the formula, and then compare to the intervals in the natural notes
             //any differences between the totals means the NEXT note needs to be sharp/flat
-            Debug.Log( "note = " + note );
-            natIntervals += naturalIntervals[note];
-            formulaIntervals += formula.intervalDistances[i.ToString()];
-            
-            
-            note = FindNextNote( note );
-            if( formulaIntervals > natIntervals )
-            {
-                //next note needs to be sharp
-                //Debug.Log( note + " needs to be SHARP in " + rootNote + " " + formula.scaleName );
-               
 
-            }
-            else if ( formulaIntervals < natIntervals )
-            {
-                //next note needs to be flat
-                //Debug.Log( note + " needs to be FLAT in " + rootNote + " " + formula.scaleName );
-                
-            }
-            else
-            {
-                //Debug.Log( note + " needs to be NATURAL in " + rootNote + " " + formula.scaleName );
-            }            
+            scaleSemitones += naturalIntervals[noteName];
+            formulaIntervals += formula.scaleIntervals[i.ToString()];
+
+            int nextInterval = i + 1;
+            if ( nextInterval > 7 )
+                nextInterval = 1;
+
+            AdjustPitchInNote( nextInterval, formulaIntervals, scaleSemitones );            
+            noteName = FindNextNote( noteName );
+        }
+    }
+    private int GetPitchOffset( PitchModifier mod )
+    {
+        switch ( mod )
+        {
+            case PitchModifier.Flat:        //next note needs one semitone MORE to get to the next natural note
+                return 1;
+            case PitchModifier.Natural:
+                return 0;
+            case PitchModifier.Sharp:       //next note needs one semitone LESS to get to the next natural note
+                return -1;
+            default:
+                return 0;
         }
     }
 
+    private void AdjustPitchInNote( int interval, int formulaIntervals, int scaleSemitones )
+    {
+        if ( formulaIntervals > scaleSemitones )
+        {
+            //note needs to be sharp                
+            notesInScale[interval.ToString()].pitch = PitchModifier.Sharp;
+        }
+        else if ( formulaIntervals < scaleSemitones )
+        {
+            //note needs to be flat                
+            notesInScale[interval.ToString()].pitch = PitchModifier.Flat;
+        }
+        else
+        {
+            //note is natural
+            notesInScale[interval.ToString()].pitch = PitchModifier.Natural;
+        }
+
+        notesInScale[interval.ToString()].hasDoubledPitchModifier = HasDoublePitchModifier( formulaIntervals, scaleSemitones );
+    }
+
+    private bool HasDoublePitchModifier( int formulaIntervals, int scaleSemitones )
+    {
+        int difference = Math.Abs( formulaIntervals - scaleSemitones );
+
+        return ( difference > 1 );
+    }
 }

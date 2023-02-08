@@ -32,10 +32,12 @@ public class Note
 
     public Note( string n )
     {
-        name = n;
+        //name = n;
+        //pitch = DeterminePitchMod( n );
+        ParseName( n );
         nextWholetone = 0;
         prevWholetone = 0;
-        pitch = PitchModifier.Natural;
+        
         
         usedSharp = false;
         usedFlat = false;
@@ -43,21 +45,46 @@ public class Note
         doubleFlat = false;
     }
 
-    public Note( string n, PitchModifier p )
-    {
-        name = n;
-        pitch = p;
-    }
-
     public Note( string n, int next, int prev)
     {
-        name = n;        
+        //name = n;
+        //pitch = DeterminePitchMod( n );
+        ParseName( n );
         nextWholetone = next;
         prevWholetone = prev;
         usedSharp = false;
         usedFlat = false;
         doubleSharp = false;
         doubleFlat = false;
+    }
+
+    private void ParseName( string n )
+    {        
+        if( n.Length == 1 )
+        {
+            name = n;
+            pitch = PitchModifier.Natural;
+        }
+        else if ( n[1] == '#' )
+        {
+            name = n.Substring(0, 1);
+            pitch = PitchModifier.Sharp;
+        }
+        else
+        {
+            name = n.Substring( 0, 1 );
+            pitch = PitchModifier.Flat;
+        }
+    }
+
+    private PitchModifier DeterminePitchMod( string n )
+    {
+        if ( n.Length == 1 )
+            return PitchModifier.Natural;
+        else if ( n[1] == '#' )
+            return PitchModifier.Sharp;
+        else
+            return PitchModifier.Flat;
     }
 
     public string GetNote ()
@@ -88,6 +115,11 @@ public class Note
         {
             return name;
         }
+    }
+
+    public string GetName()
+    {
+        return name;
     }
 
     //function to change the note's name (ie. A, B, C) and then calls the ChangePrevNext function
@@ -137,6 +169,22 @@ public class Note
 
     public override string ToString()
     {
-        return GetNote();
+        //return GetNote();
+        string pitchMod = "";
+
+        switch( pitch )
+        {
+            case PitchModifier.Flat:
+                pitchMod = "b";
+                break;
+            case PitchModifier.Sharp:
+                pitchMod = "#";
+                break;
+        }
+
+        if ( hasDoubledPitchModifier )
+            pitchMod += pitchMod;
+
+        return name + pitchMod;
     }
 }
