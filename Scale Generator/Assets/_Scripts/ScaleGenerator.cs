@@ -37,7 +37,6 @@ public class ScaleGenerator : MonoBehaviour
 
     public Text theoreticalWarning;
 
-
     public int FindFamilyIndex( int note )
     {        
         int index = 0;
@@ -134,13 +133,10 @@ public class ScaleGenerator : MonoBehaviour
         ResetSharpsAndFlats( noteArray );
 
         //****test creating a new musical scale!****
-        MusicScale testScale = new MusicScale( "C", ScaleFormulas.MAJOR_IONIAN );
-        Debug.Log( "***" );
-        MusicScale testScale2 = new MusicScale( "A", ScaleFormulas.MAJOR_IONIAN );
-        Debug.Log( "***" );
-        MusicScale testScale3 = new MusicScale( "F", ScaleFormulas.MAJOR_IONIAN );
-
-
+        //MusicScale testScale = new MusicScale( "C", ScaleFormulas.MAJOR_IONIAN );
+        MusicScale testScale2 = new MusicScale( "C#", ScaleFormulas.MAJOR_IONIAN );
+        MusicScale testScale3 = new MusicScale( "Bb", ScaleFormulas.MAJOR_IONIAN );
+        
         //adjusting the scaleTotal and usedSharp/Flat in case the scale starts on a sharp/flat note
         switch (root)
         {

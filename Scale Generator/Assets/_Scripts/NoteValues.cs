@@ -40,7 +40,7 @@ public static class NoteValues
                 noteName = "A";
                 break;
             case 2:
-                noteName = "A#"
+                noteName = "A#";
                 break;
             case 3:
                 noteName = "Bb";

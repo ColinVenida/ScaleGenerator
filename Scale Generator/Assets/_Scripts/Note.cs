@@ -167,6 +167,11 @@ public class Note
         }
     }
 
+    public bool IsSameNote_IgnorePitch( Note n )
+    {
+        return ( this.name == n.name );
+    }
+
     public override string ToString()
     {
         //return GetNote();
@@ -186,5 +191,19 @@ public class Note
             pitchMod += pitchMod;
 
         return name + pitchMod;
+    }
+
+    public override bool Equals(System.Object obj )
+    {
+        //Check for null and compare run-time types.
+        if ( ( obj == null ) || !this.GetType().Equals( obj.GetType() ) )
+        {
+            return false;
+        }
+        else
+        {
+            Note n = ( Note ) obj;
+            return ( this.name == n.name && this.pitch == n.pitch );            
+        }
     }
 }

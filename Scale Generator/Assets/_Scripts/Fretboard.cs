@@ -12,8 +12,10 @@ public class Fretboard : MonoBehaviour
     public Dropdown presetDrop;
     public Dropdown scaleDrop;
     public Dropdown rootDrop;    
+
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
+
     public TextFormatter textForm;
     public Image fretImage;
     public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.    
@@ -24,7 +26,10 @@ public class Fretboard : MonoBehaviour
     private int visibleStrings;
     private int fretImageIndex;
     private List<string> arpList;
-    
+
+    private MusicScale currentMusicScale;
+    public MusicScale CurrentMusicScale { get { return currentMusicScale; } }
+
 
     //*REMEMBER*  #1 String goes in index 0!!!!!
     private int[] GUITAR_STANDARD = { 11, 4, 15, 8, 1, 11 };
@@ -64,13 +69,17 @@ public class Fretboard : MonoBehaviour
         if ( !PlayerPrefs.HasKey( "presetValue" ) )
         {
             PlayerPrefs.SetInt( "presetValue", 0 );
-        }
+        }        
     }
 
     void Start()
-    {        
+    {
         scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
         rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
+
+        string rootNote = NoteValues.ConvertNote_IntToString( rootDrop.value );
+        ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
+        currentMusicScale = new MusicScale( rootNote, formula );
 
         LoadGuitStringTuning();      
         
@@ -112,6 +121,54 @@ public class Fretboard : MonoBehaviour
                     break;
             }
         }
+    }
+
+    //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
+    public void SetScale()
+    {
+
+        ResetArpeggio();
+
+        scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
+
+        string noteName = NoteValues.ConvertNote_IntToString( rootDrop.value );
+        ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
+        currentMusicScale = new MusicScale( noteName, formula );
+        SaveScalePrefs();
+
+        //update all the string's scales
+        for ( int i = 0; i < 8; i++ )
+        {
+            switch ( i )
+            {
+                case 0:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringOne" ) );
+                    break;
+                case 1:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringTwo" ) );
+                    break;
+                case 2:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringThree" ) );
+                    break;
+                case 3:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFour" ) );
+                    break;
+                case 4:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFive" ) );
+                    break;
+                case 5:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSix" ) );
+                    break;
+                case 6:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSeven" ) );
+                    break;
+                case 7:
+                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringEight" ) );
+                    break;
+            }//end switch
+        }
+        textForm.DisableArpeggioColor();
+        textForm.UpdateScale();
     }
 
     private void SaveScalePrefs()
@@ -240,49 +297,7 @@ public class Fretboard : MonoBehaviour
         PlayerPrefs.SetInt( "presetValue", presetDrop.value );
     }
 
-    //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
-    public void SetScale() 
-    {        
-        
-        ResetArpeggio();
 
-        scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
-        SaveScalePrefs();        
-
-        //update all the string's scales
-        for (int i = 0; i < 8; i++)
-        {          
-            switch (i)
-            {
-                case 0:                    
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringOne" ) );
-                    break;
-                case 1:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringTwo" ) );
-                    break;
-                case 2:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringThree" ) );
-                    break;
-                case 3:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFour" ) );
-                    break;
-                case 4:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFive" ) );
-                    break;
-                case 5:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSix" ) );
-                    break;
-                case 6:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSeven" ) );
-                    break;
-                case 7:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringEight" ) );
-                    break;
-            }//end switch
-        }        
-        textForm.DisableArpeggioColor();
-        textForm.UpdateScale();
-    }
 
     //function that sets the 2nd, 4th, and 6th notes inactive   
     public void SetArpeggio()
@@ -350,7 +365,6 @@ public class Fretboard : MonoBehaviour
                     guitStrings[i].textArray[j].fontStyle = FontStyle.Normal;
                 }
             }//end j
-
         }//end i
     }
 
