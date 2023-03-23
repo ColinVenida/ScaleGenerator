@@ -145,13 +145,13 @@ public class Fretboard : MonoBehaviour
                     guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringOne" ) );
                     break;
                 case 1:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringTwo" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringTwo" ) );
                     break;
                 case 2:
                     guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringThree" ) );
                     break;
                 case 3:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFour" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringFour" ) );
                     break;
                 case 4:
                     guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFive" ) );
@@ -212,8 +212,9 @@ public class Fretboard : MonoBehaviour
     private void SetTuning( int[] tuning )
     {
         GuitString.changePreset = false;
+        
         for( int i = 0; i < visibleStrings; i++ )
-        {           
+        {            
             guitStrings[i].noteSelect.value = tuning[i];
         }
         GuitString.changePreset = true;
