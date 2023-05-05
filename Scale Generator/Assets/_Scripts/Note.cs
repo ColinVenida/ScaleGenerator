@@ -4,12 +4,21 @@ using UnityEngine;
 
 
 public class Note 
-{
-    //public char name;
-    private string name;    
-    public int nextWholetone;
-    public int prevWholetone;
+{    
+    private string naturalName;    
+    public string NaturalName { get { return naturalName; } }
+
+    private int semitoneToNextNote;
+    public int SemitoneToNextNote { get { return semitoneToNextNote; } }
+
+    private int semitoneToPrevNote;
+    public int SemitoneToPrevNote { get { return semitoneToPrevNote; } }
+
+    private int pitchValue;
+    public int PitchValue {  get { return pitchValue; } }
+
     public PitchModifier pitch;
+    public PitchOverlap pitchOverlap = PitchOverlap.Natural_NONE;
     public bool hasDoubledPitchModifier = false;
 
     public bool usedSharp;
@@ -21,9 +30,7 @@ public class Note
     //constructor for a blank note
     public Note ()
     {
-        name = "";       
-        nextWholetone = 0;
-        prevWholetone = 0;
+        naturalName = "";               
         usedSharp = false;
         usedFlat = false;
         doubleSharp = false;
@@ -31,14 +38,8 @@ public class Note
     }
 
     public Note( string n )
-    {
-        //name = n;
-        //pitch = DeterminePitchMod( n );
-        ParseName( n );
-        nextWholetone = 0;
-        prevWholetone = 0;
-        
-        
+    {        
+        ParseName( n );       
         usedSharp = false;
         usedFlat = false;
         doubleSharp = false;
@@ -46,12 +47,8 @@ public class Note
     }
 
     public Note( string n, int next, int prev)
-    {
-        //name = n;
-        //pitch = DeterminePitchMod( n );
-        ParseName( n );
-        nextWholetone = next;
-        prevWholetone = prev;
+    {        
+        ParseName( n );       
         usedSharp = false;
         usedFlat = false;
         doubleSharp = false;
@@ -60,20 +57,109 @@ public class Note
 
     private void ParseName( string n )
     {        
-        if( n.Length == 1 )
+        if ( n.Length == 1 )
         {
-            name = n;
+            naturalName = n;
             pitch = PitchModifier.Natural;
         }
         else if ( n[1] == '#' )
         {
-            name = n.Substring(0, 1);
-            pitch = PitchModifier.Sharp;
+            naturalName = n.Substring(0, 1);
+            pitch = PitchModifier.Sharp;            
         }
         else
         {
-            name = n.Substring( 0, 1 );
+            naturalName = n.Substring( 0, 1 );
             pitch = PitchModifier.Flat;
+        }
+        SetPitchValue();
+        SetIntervalsToNextAndPrevNotes();
+    }
+
+    //need a separate function for to set up PitchValue because MusicScale creates the notes first,
+    //  then adjusts the sharps/flats after
+    public void RecalculatePitchValue()
+    {
+        SetPitchValue();
+        SetIntervalsToNextAndPrevNotes();
+    }
+
+    private void SetPitchValue()
+    {
+        pitchValue = PitchValues.AssignPitchValue( this );
+        pitchValue = pitchValue + CalculatePitchValueOffset();
+        CheckPitchValueBounds();
+    }
+
+    private int CalculatePitchValueOffset()
+    {
+        int offset = 0;
+        
+        switch( pitch )
+        {
+            case PitchModifier.Flat:
+                offset = -1;
+                break;
+            case PitchModifier.Sharp:
+                offset = 1;
+                break;
+        }        
+        return offset;
+    }
+
+    private void CheckPitchValueBounds()
+    {
+        if ( pitchValue < 0 )
+        {
+            pitchValue += 12;
+            pitchOverlap = PitchOverlap.FlatOverlap;
+        }
+        else if ( pitchValue > 11 )
+        {
+            pitchValue -= 12;
+            pitchOverlap = PitchOverlap.SharpOverlap;
+        }
+    }
+
+    private void SetIntervalsToNextAndPrevNotes()
+    {
+        int nextNoteOffset = 0;
+        int prevNoteOffset = 0;
+
+        switch ( this.pitch )
+        {
+            case PitchModifier.Flat:
+                nextNoteOffset = 1;
+                prevNoteOffset = -1;
+                break;
+            case PitchModifier.Sharp:
+                nextNoteOffset = -1;
+                prevNoteOffset = 1;
+                break;
+        }
+        
+        semitoneToNextNote = ( nextNoteOffset + NaturalIntervals.naturalIntervals[naturalName].NextNoteSemitone );
+        semitoneToPrevNote = ( prevNoteOffset + NaturalIntervals.naturalIntervals[naturalName].PrevNoteSemitone );        
+    }
+
+    public void SetDoublePitchModifier()
+    {
+        hasDoubledPitchModifier = true;        
+
+        switch ( this.pitch )
+        {
+            case PitchModifier.Flat:
+                semitoneToNextNote += 1;
+                semitoneToPrevNote += -1;
+                pitchValue -= 1; 
+                CheckPitchValueBounds();
+                break;
+            case PitchModifier.Sharp:
+                semitoneToNextNote += -1;
+                semitoneToPrevNote += 1;
+                pitchValue += 1;
+                CheckPitchValueBounds();
+                break;
         }
     }
 
@@ -93,83 +179,38 @@ public class Note
         {
             if( doubleSharp )
             {
-                return name + "##";
+                return naturalName + "##";
             }
             else 
             {
-                return name + "#";
+                return naturalName + "#";
             }            
         }
         else if ( usedFlat )
         {
             if ( doubleFlat )
             {
-                return name + "bb";
+                return naturalName + "bb";
             }
             else
             {
-                return name + "b";
+                return naturalName + "b";
             }
         }
         else
         {
-            return name;
+            return naturalName;
         }
     }
 
-    public string GetName()
+    public string GetNaturalName()
     {
-        return name;
-    }
-
-    //function to change the note's name (ie. A, B, C) and then calls the ChangePrevNext function
-    public void SetName( string n )
-    {
-        name = n;
-        ChangePrevAndNextWholetone( name );
-    }
-
-    //function that updates the nextWholetone/prevWholetone according to he given id
-    private void ChangePrevAndNextWholetone( string name )
-    {
-        switch ( name )
-        {
-            case "A":
-                nextWholetone = 2;
-                prevWholetone = 2;
-                break;
-            case "B":
-                nextWholetone = 1;
-                prevWholetone = 2;
-                break;
-            case "C":
-                nextWholetone = 2;
-                prevWholetone = 1;
-                break;
-            case "D":
-                nextWholetone = 2;
-                prevWholetone = 2;
-                break;
-            case "E":
-                nextWholetone = 1;
-                prevWholetone = 2;
-                break;
-            case "F":
-                nextWholetone = 2;
-                prevWholetone = 1;
-                break;
-            case "G":
-                nextWholetone = 2;
-                prevWholetone = 2;
-                break;
-            default:
-                break;
-        }
+        return naturalName;
     }
 
     public bool IsSameNote_IgnorePitch( Note n )
     {
-        return ( this.name == n.name );
+        return ( this.naturalName == n.naturalName );
     }
 
     public override string ToString()
@@ -190,7 +231,7 @@ public class Note
         if ( hasDoubledPitchModifier )
             pitchMod += pitchMod;
 
-        return name + pitchMod;
+        return naturalName + pitchMod;
     }
 
     public override bool Equals(System.Object obj )
@@ -203,7 +244,7 @@ public class Note
         else
         {
             Note n = ( Note ) obj;
-            return ( this.name == n.name && this.pitch == n.pitch );            
+            return ( this.naturalName == n.naturalName && this.pitch == n.pitch );            
         }
     }
 }

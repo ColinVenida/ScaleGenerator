@@ -1,10 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
+
 
 public class GuitString : MonoBehaviour
 {
@@ -25,6 +23,11 @@ public class GuitString : MonoBehaviour
 
     public void CalculateFrets_New( int dropValue )
     {
+        //workaround for avoiding the OnValueChanged event during Fretboard.Awake()
+        if ( !fBoard.AreGuitStringsInitialized )
+        {           
+            return;
+        }
         ResetUI();        
         SetCurrentTuning( dropValue );
         SaveTuning( dropValue );
@@ -35,29 +38,95 @@ public class GuitString : MonoBehaviour
         int startDegree;
         int startFret;
 
-        Debug.Log( "***Calculating a string tuned to " + currentTuning + "***" );
+        Debug.Log( "***new method! Calculating a string tuned to " + currentTuning + "***" );
 
         CompareGuitStringTuningToNoteInScale( currentScale, tuningScaleDegree, out startDegree, out startFret );
 
-        Debug.Log( "The " + currentTuning + " string has to start on the " + startFret
-            + " fret. The first note on the fretboard is " + currentScale.NotesInScale[startDegree.ToString()] );
+        int startDegree_new = CalculateStartScaleDegree( currentScale, tuningScaleDegree );
+        Debug.Log( "GuitString " + currentTuning.ToString() + " should start at the " + startDegree_new + " degree" );
+
+        UpdateButtonAndTextArray( currentScale, startFret, startDegree );
     }
 
-    /*
-    bug:
+    private int CalculateStartScaleDegree( MusicScale scale, int tuningScaleDegree )
+    {
+        //based on the currentTuning and the MusicScale, find out which scaleDegree we need to start at
+        int startScaleDegree = tuningScaleDegree;
+        Note noteInScale = scale.NotesInScale[tuningScaleDegree.ToString()];
+        int overlapOffset = CalculateOverlapOffset( noteInScale );
+       
+        int nextScaleDegree = FindNextScaleDegree( tuningScaleDegree );        
+        Note nextNote = scale.NotesInScale[nextScaleDegree.ToString()];
 
-    G Major scale( has F# in scale)
-    current (old): result of Gb is wrong
-    new: result of Gb is correct
+        if ( (noteInScale.PitchValue + overlapOffset) <= currentTuning.PitchValue )   
+        {
+            startScaleDegree = FindNextScaleDegree( startScaleDegree );
+            if ( AreNotesEnharmonic( nextNote, currentTuning ) )
+            {
+                startScaleDegree = FindNextScaleDegree( startScaleDegree );
+            }
+        }     
+
+        return startScaleDegree;
+    }
+
+    private int CalculateOverlapOffset( Note note )
+    {
+        int overlapOffset = 0;
+        switch( note.pitchOverlap)
+        {
+            case PitchOverlap.FlatOverlap:
+                overlapOffset = -12;
+                break;
+            case PitchOverlap.SharpOverlap:
+                overlapOffset = 12;
+                break;
+        }
+        return overlapOffset;
+    }
+    
+    //test data:        
+    //A# lydian: A#, B#, C##, D##, E#, F##, G##, E-tuning, D-tuning, F-tuning, Bb-tuning, Gb tuning, C-tuning
+    //is there any flat note that's enharmonic to a double sharp??
+    //Gb locrian:  Gb, Abb, Bbb, Cb, Dbb, Ebb, Fb, G-tuning, B-tuning, F#-tuning, 
+    // C major: C, D, E, F, G, A, B, 
+    private bool AreEnharmonicNotesPresent( MusicScale scale, int tuningScaleDegree )    
+    {       
+        int prevScaleDegree = FindPrevScaleDegree( tuningScaleDegree );
+        int nextScaleDegree = FindNextScaleDegree( tuningScaleDegree );
+
+        Note prevNote = scale.NotesInScale[prevScaleDegree.ToString()];
+        Note nextNote = scale.NotesInScale[nextScaleDegree.ToString()];
+        bool areEnharmonic = false;
+                        
+        areEnharmonic = ( currentTuning.PitchValue == nextNote.PitchValue || currentTuning.PitchValue == prevNote.PitchValue );        
+
+        return areEnharmonic;
+    }
+
+    private bool AreNotesEnharmonic( Note first, Note second )
+    {
+        return first.PitchValue == second.PitchValue;
+    }
+
+    private int CalculateStartFret( int startScaleDegree )
+    {
+        //determine whether the scaleDegree == the tuningScaleDegree, then go from there (incomplete thought, sorry)
+        int startFret = 0;
+
+        return startFret;
+    }
+
    
-    */
-        
+    //***LOGIC IS FLAWED, REFACTORING THIS METHOD WITH AreEnharmonicNotesPresent() and CalculateStartFret() METHODS***
     private void CompareGuitStringTuningToNoteInScale( MusicScale scale, int tuningScaleDegree, out int startScaleDegree, out int startFret )
     {
         startScaleDegree = tuningScaleDegree;
         startFret = 1;
         
-        Note noteInScale = scale.NotesInScale[tuningScaleDegree.ToString()];       
+        Note noteInScale = scale.NotesInScale[tuningScaleDegree.ToString()];
+
+        //Debug.Log( "Are There Enharmonic notes? " + AreEnharmonicNotesPresent( scale, tuningScaleDegree ) );
 
         if ( currentTuning.Equals(noteInScale) )
         {            
@@ -94,6 +163,16 @@ public class GuitString : MonoBehaviour
         return nextScaleDegree;
     }
 
+    private int FindPrevScaleDegree( int startDegree )
+    {
+        int nextScaleDegree = startDegree - 1;
+        if ( nextScaleDegree < 1 )
+        {
+            nextScaleDegree = 7;
+        }
+        return nextScaleDegree;
+    }
+       
     private int CalculateSemitoneOfNextInterval( MusicScale scale, int scaleDegree )
     {        
         int formulaInterval = scale.Formula.scaleIntervals[scaleDegree.ToString()];        
@@ -116,8 +195,7 @@ public class GuitString : MonoBehaviour
 
 
     private int ResolveFlatTuning( MusicScale scale, int tuneInterval )
-    {        
-        //check for theoretical scale here?
+    {                
         int startFret = 1;
         Note noteInScale = scale.NotesInScale[tuneInterval.ToString()];
         
@@ -126,7 +204,6 @@ public class GuitString : MonoBehaviour
         {
             startFret = 2;
         }
-
         
         return startFret;
     }
@@ -145,7 +222,6 @@ public class GuitString : MonoBehaviour
         return startScaleDegree;
     }
 
-
     private int ResolveSharpTuning( MusicScale scale, int tuningScaleDegree, ref int startScaleDegree)
     {        
         int startFret = (CalculateSemitoneOfNextInterval( scale, startScaleDegree ) - 1);
@@ -155,9 +231,38 @@ public class GuitString : MonoBehaviour
         {            
             startScaleDegree = FindNextScaleDegree( startScaleDegree );
         }
-
-        //check for theoretical scale here?
+        
         return startFret;
+    }
+
+    private void UpdateButtonAndTextArray( MusicScale scale, int startFret, int startScaleDegree )
+    {
+        int i = startFret - 1;
+        int scaleDegree = startScaleDegree;
+                
+        try
+        {
+            while ( i < buttonArray.Length )
+            {
+                //Debug.Log( "i = " + i );
+                string noteString = scale.NotesInScale[scaleDegree.ToString()].ToString();
+                buttonArray[i].gameObject.SetActive( true );
+                textArray[i].text = noteString;
+
+                i = i + scale.Formula.scaleIntervals[scaleDegree.ToString()];
+                scaleDegree = FindNextScaleDegree( scaleDegree );
+            }
+        }
+        catch ( IndexOutOfRangeException e)
+        {
+            Debug.Log( "i is out of range of the array: " + i );
+            Debug.Log( e.StackTrace );
+        }       
+
+        if ( fBoard.UseArpeggio() )
+        {
+            FilterArpeggio( fBoard.GetArplist() );
+        }
     }
     
     private void ResetUI()
@@ -171,11 +276,10 @@ public class GuitString : MonoBehaviour
         }
     }
 
-
-    //*****OLD ALGORITHM*****
+    //*****OLD ALGORITHM GOING TO BE DEPRECATED*****
     public void CalculateFrets( int drop )
     {
-        CalculateFrets_New( drop );
+        //CalculateFrets_New( drop );
 
         bool hasEnharmonic = false;
         bool includeFamilyNote = false;
@@ -355,8 +459,6 @@ public class GuitString : MonoBehaviour
         return interval;
     }
 
-
-
     public void FilterArpeggio( List<string> noteList )
     {
        
@@ -477,10 +579,7 @@ public class GuitString : MonoBehaviour
 
         return interval;
     }
-
-    //set the frets of the given notes inactive    
-    
-
+       
     private void SaveTuning( int drop )
     {
         switch( this.stringNumber )
@@ -517,98 +616,9 @@ public class GuitString : MonoBehaviour
         //int value comes from the noteSelect dropdown
     private void SetCurrentTuning ( int dropValue )
     {
-        string noteName = NoteValues.ConvertNote_IntToString( dropValue ); ;
+        string noteName = NoteValues.ConvertNote_IntToString( dropValue );       
         currentTuning = new Note( noteName );
-        //change the currentTuning's id
-        //switch ( dropValue )
-        //{
-        //    case 0:
-        //        currentTuning.SetName( "A" );
-        //        currentTuning.pitch = PitchModifier.Flat;
-        //        break;
-        //    case 1:
-        //        currentTuning.SetName( "A" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-        //    case 2:
-        //        currentTuning.SetName( "A" );
-        //        currentTuning.pitch = PitchModifier.Sharp;
-        //        break;
-
-
-        //    case 3:
-        //        currentTuning.SetName( "B" );
-        //        currentTuning.pitch = PitchModifier.Flat;
-        //        break;
-        //    case 4:
-        //        currentTuning.SetName( "B" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-
-
-        //    case 5:
-        //        currentTuning.SetName( "C" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-        //    case 6:
-        //        currentTuning.SetName( "C" );
-        //        currentTuning.pitch = PitchModifier.Sharp;
-        //        break;
-
-
-        //    case 7:
-        //        currentTuning.SetName( "D" );
-        //        currentTuning.pitch = PitchModifier.Flat;
-        //        break;
-        //    case 8:
-        //        currentTuning.SetName( "D" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-        //    case 9:
-        //        currentTuning.SetName( "D" );
-        //        currentTuning.pitch = PitchModifier.Sharp;
-        //        break;
-
-
-        //    case 10:
-        //        currentTuning.SetName( "E" );
-        //        currentTuning.pitch = PitchModifier.Flat;
-        //        break;
-        //    case 11:                
-        //        currentTuning.SetName( "E" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-
-
-        //    case 12:
-        //        currentTuning.SetName( "F" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-        //    case 13:                
-        //        currentTuning.SetName( "F" );
-        //        currentTuning.pitch = PitchModifier.Sharp;
-        //        break;
-
-
-        //    case 14:
-        //        currentTuning.SetName( "G" );
-        //        currentTuning.pitch = PitchModifier.Flat;
-        //        break;
-        //    case 15:
-        //        currentTuning.SetName( "G" );
-        //        currentTuning.pitch = PitchModifier.Natural;
-        //        break;
-        //    case 16:
-        //        currentTuning.SetName( "G" );
-        //        currentTuning.pitch = PitchModifier.Sharp;                
-        //        break;
-
-
-        //    default:
-        //        break;
-        //}
         
-
         //update the currentTuning's sharp/flat state
         switch ( dropValue )
         {

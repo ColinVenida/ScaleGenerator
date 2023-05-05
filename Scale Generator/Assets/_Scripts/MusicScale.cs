@@ -14,17 +14,12 @@ public class MusicScale
     private Dictionary<string, Note> notesInScale;
     public Dictionary<string, Note> NotesInScale { get { return notesInScale; } }
 
-    //the distance between natural notes in music
-    private Dictionary<string, int> naturalIntervals = new Dictionary<string, int>()
+    private bool isTheoretical = false;
+    public bool IsTheoretical 
     {
-        {"A", 2 },
-        {"B", 1 },
-        {"C", 2 },
-        {"D", 2 },
-        {"E", 1 },
-        {"F", 2 },
-        {"G", 2 },
-    };
+        get { return isTheoretical; }
+        private set { isTheoretical = value; }
+    }
 
     public MusicScale( string root, ScaleFormulas.ScaleFormula formula )
     {
@@ -35,9 +30,7 @@ public class MusicScale
         notesInScale = new Dictionary<string, Note>();
 
         PopulateNotesInScale();
-        AdjustSharpsOrFlatsInScale( formula );
-
-        //PrintNotesInScale();
+        AdjustSharpsOrFlatsInScale( formula );        
     }
 
     private void PopulateNotesInScale()
@@ -46,7 +39,7 @@ public class MusicScale
         notesInScale.Add( "1", rootNoteObject );
 
         const int REMAINING_NOTES = 7;
-        string nextName = FindNextNote( rootNoteObject.GetName() );        
+        string nextName = FindNextNote( rootNoteObject.GetNaturalName() );        
 
         for ( int i = 2; i <= REMAINING_NOTES; i++ )
         {
@@ -55,13 +48,6 @@ public class MusicScale
         }
     }
 
-    public void PrintNotesInScale()
-    {
-        foreach ( var kvp in notesInScale )
-        {            
-            Debug.Log( "key = " + kvp.Key + ", value = " + kvp.Value );
-        }
-    }
 
     private string FindNextNote( string note )
     {
@@ -99,7 +85,7 @@ public class MusicScale
     
     private void AdjustSharpsOrFlatsInScale( ScaleFormulas.ScaleFormula formula )
     {       
-        string noteName = rootNoteObject.GetName();
+        string noteName = rootNoteObject.GetNaturalName();
         int offset = GetPitchOffset( rootNoteObject.pitch );
         int scaleSemitones = offset;
         int formulaIntervals = 0;
@@ -108,18 +94,21 @@ public class MusicScale
         {
             //add up the intervals in the formula, and then compare to the natural note intervals
             //any differences between the totals means the NEXT note needs to be sharp/flat
-
-            scaleSemitones += naturalIntervals[noteName];
+            
+            scaleSemitones += NaturalIntervals.naturalIntervals[noteName].NextNoteSemitone;
             formulaIntervals += formula.scaleIntervals[i.ToString()];
 
             int nextScaleDegree = i + 1;
             if ( nextScaleDegree > 7 )
+            {
                 nextScaleDegree = 1;
-
+            }
+               
             AdjustPitchInNote( nextScaleDegree, formulaIntervals, scaleSemitones );            
             noteName = FindNextNote( noteName );
         }
     }
+    
     private int GetPitchOffset( PitchModifier mod )
     {
         switch ( mod )
@@ -153,14 +142,26 @@ public class MusicScale
             notesInScale[scaleDegree.ToString()].pitch = PitchModifier.Natural;
         }
 
-        notesInScale[scaleDegree.ToString()].hasDoubledPitchModifier = HasDoublePitchModifier( formulaIntervals, scaleSemitones );
+        notesInScale[scaleDegree.ToString()].RecalculatePitchValue();
+        DetermineDoublePitchModifier( formulaIntervals, scaleSemitones, notesInScale[scaleDegree.ToString()] );
     }
-
-    private bool HasDoublePitchModifier( int formulaIntervals, int scaleSemitones )
+        
+    private void DetermineDoublePitchModifier( int formulaIntervals, int scaleSemitones, Note note )
     {
         int difference = Math.Abs( formulaIntervals - scaleSemitones );
+        if ( difference > 1 )
+        {
+            note.SetDoublePitchModifier();
+            IsTheoretical = true;
+        }            
+    }
 
-        return ( difference > 1 );
+    public void PrintNotesInScale()
+    {
+        foreach ( var kvp in notesInScale )
+        {
+            Debug.Log( "key = " + kvp.Key + ", value = " + kvp.Value );
+        }
     }
 
     //find which scaleDegree in the music scale the given note is
@@ -168,11 +169,11 @@ public class MusicScale
     public int FindNoteScaleDegree( Note n )
     {
         int scaleDegree = 0;
-        string name = n.GetName();
+        string name = n.GetNaturalName();
 
         for( int i = 1; i < notesInScale.Count + 1; i++ )
         {
-            if ( name == notesInScale[i.ToString()].GetName() )
+            if ( name == notesInScale[i.ToString()].GetNaturalName() )
                 scaleDegree = i;                
         }
         //Debug.Log( "the note " + n + " is the " + scaleDegree + " scale degree in " + this );

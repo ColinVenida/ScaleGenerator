@@ -11,16 +11,16 @@ public class NoteArray : MonoBehaviour
 
     private void Awake ()
     {
-        int whole = ToneTypes.WHOLE_TONE;
-        int semi = ToneTypes.SEMI_TONE;
+        //int whole = ToneTypes.WHOLE_TONE;
+        //int semi = ToneTypes.SEMI_TONE;
 
-        //populate the noteArray 
-        noteArray[0] = new Note( "A", whole, whole );
-        noteArray[1] = new Note( "B", semi, whole );
-        noteArray[2] = new Note( "C", whole, semi );
-        noteArray[3] = new Note( "D", whole, whole );
-        noteArray[4] = new Note( "E", semi, whole );
-        noteArray[5] = new Note( "F", whole, semi );
-        noteArray[6] = new Note( "G", whole, whole );
+        ////populate the noteArray 
+        //noteArray[0] = new Note( "A", whole, whole );
+        //noteArray[1] = new Note( "B", semi, whole );
+        //noteArray[2] = new Note( "C", whole, semi );
+        //noteArray[3] = new Note( "D", whole, whole );
+        //noteArray[4] = new Note( "E", semi, whole );
+        //noteArray[5] = new Note( "F", whole, semi );
+        //noteArray[6] = new Note( "G", whole, whole );
     }
 }

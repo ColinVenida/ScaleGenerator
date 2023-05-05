@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
+//***CLASS IS BEING DEPRECATED***
 public class ScaleGenerator : MonoBehaviour
 {
     //formulas: [nothing, distance between root->2nd, distance between 2nd->3rd, 3rd->4th, ... ]
@@ -131,12 +133,7 @@ public class ScaleGenerator : MonoBehaviour
         int[] currentScale = GetScaleFormula( scale );
 
         ResetSharpsAndFlats( noteArray );
-
-        //****test creating a new musical scale!****
-        //MusicScale testScale = new MusicScale( "C", ScaleFormulas.MAJOR_IONIAN );
-        MusicScale testScale2 = new MusicScale( "C#", ScaleFormulas.MAJOR_IONIAN );
-        MusicScale testScale3 = new MusicScale( "Bb", ScaleFormulas.MAJOR_IONIAN );
-        
+                
         //adjusting the scaleTotal and usedSharp/Flat in case the scale starts on a sharp/flat note
         switch (root)
         {

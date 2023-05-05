@@ -18,7 +18,11 @@ public class Fretboard : MonoBehaviour
 
     public TextFormatter textForm;
     public Image fretImage;
-    public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.    
+    public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.
+                                         //
+
+    private bool areGuitStringsInitialized = false;
+    public bool AreGuitStringsInitialized { get { return areGuitStringsInitialized; } }
     
     private bool useArpeggio = false;
     
@@ -47,6 +51,8 @@ public class Fretboard : MonoBehaviour
 
     private void Awake()
     {
+        InitializeMusicScale();
+
         //check and set the PlayerPrefs
         if ( !PlayerPrefs.HasKey( "GuitStringsVisible" ) )
         {
@@ -69,28 +75,26 @@ public class Fretboard : MonoBehaviour
         if ( !PlayerPrefs.HasKey( "presetValue" ) )
         {
             PlayerPrefs.SetInt( "presetValue", 0 );
-        }        
+        }
     }
 
-    void Start()
+    private void InitializeMusicScale()
     {
-        scaleDrop.value = PlayerPrefs.GetInt( "scaleType" );
-        rootDrop.value = PlayerPrefs.GetInt( "rootNote" );
+        int scaleValue = PlayerPrefs.GetInt( "scaleType" );
+        int rootValue = PlayerPrefs.GetInt( "rootNote" );
 
-        string rootNote = NoteValues.ConvertNote_IntToString( rootDrop.value );
-        ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
+        string rootNote = NoteValues.ConvertNote_IntToString( rootValue );
+        ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleValue );
         currentMusicScale = new MusicScale( rootNote, formula );
 
-        LoadGuitStringTuning();      
-        
-        arpList = new List<string>();
-        SetScale();        
-        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
-        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );        
+        scaleDrop.value = scaleValue;
+        rootDrop.value = rootValue;
+
+        InitializeGuitStringTuning();
     }
 
-    private void LoadGuitStringTuning()
-    {        
+    private void InitializeGuitStringTuning()
+    {
         for ( int i = 0; i < guitStrings.Length; i++ )
         {
             switch ( i )
@@ -121,56 +125,67 @@ public class Fretboard : MonoBehaviour
                     break;
             }
         }
+        areGuitStringsInitialized = true;        
     }
 
-    //function to update the scale the GuitString displays when a new value of scaleDrop or RootDrop is selected
+    void Start()
+    {
+        arpList = new List<string>();
+        SetScale();        
+        visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
+        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );        
+    }    
+
+    //function to update the scale the GuitString displays when a new value of scaleDrop or rootDrop is selected
     public void SetScale()
     {
-
-        ResetArpeggio();
-
-        scaleGen.GenerateScale( rootDrop.value, scaleDrop.value, noteArray );
-
-        string noteName = NoteValues.ConvertNote_IntToString( rootDrop.value );
-        ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
-        currentMusicScale = new MusicScale( noteName, formula );
+        //workaround for avoiding the OnValueChanged event during Fretboard.Awake()
+        if ( !areGuitStringsInitialized )
+        {
+            return;
+        }
+        ResetArpeggio();        
         SaveScalePrefs();
+        UpdateGuitStringsWithNewScale();
 
-        //update all the string's scales
-        for ( int i = 0; i < 8; i++ )
+        textForm.DisableArpeggioColor();
+        textForm.UpdateScale();
+    }
+
+    private void UpdateGuitStringsWithNewScale()
+    {
+        for ( int i = 0; i < guitStrings.Length; i++ )
         {
             switch ( i )
             {
                 case 0:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringOne" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringOne" ) );
                     break;
                 case 1:
                     guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringTwo" ) );
                     break;
                 case 2:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringThree" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringThree" ) );
                     break;
                 case 3:
                     guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringFour" ) );
                     break;
                 case 4:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringFive" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringFive" ) );
                     break;
                 case 5:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSix" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringSix" ) );
                     break;
                 case 6:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringSeven" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringSeven" ) );
                     break;
                 case 7:
-                    guitStrings[i].CalculateFrets( PlayerPrefs.GetInt( "GuitStringEight" ) );
+                    guitStrings[i].CalculateFrets_New( PlayerPrefs.GetInt( "GuitStringEight" ) );
                     break;
-            }//end switch
+            }
         }
-        textForm.DisableArpeggioColor();
-        textForm.UpdateScale();
     }
-
+    
     private void SaveScalePrefs()
     {
         PlayerPrefs.SetInt( "scaleType", scaleDrop.value );
@@ -194,7 +209,8 @@ public class Fretboard : MonoBehaviour
                 guitStrings[i].gameObject.SetActive( false );
                 guitStrings[i].noteSelect.gameObject.SetActive( false );
             }
-        }        
+        }
+        visibleStrings = activeStrings;
         UpdateFretboardImage();
     }
     
@@ -219,7 +235,6 @@ public class Fretboard : MonoBehaviour
         }
         GuitString.changePreset = true;
     }
-
     
     public void AddGuitString()
     {
@@ -299,7 +314,7 @@ public class Fretboard : MonoBehaviour
     }
 
 
-
+    //***function is being deprecated with the new MusicScale system***
     //function that sets the 2nd, 4th, and 6th notes inactive   
     public void SetArpeggio()
     {

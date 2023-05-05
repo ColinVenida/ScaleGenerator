@@ -16,23 +16,19 @@ public class TextFormatter : MonoBehaviour
     private Color lightGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
     private Color darkGray = new Color( 0.196f, 0.196f, 0.196f );
 
+    //***BUG***
+    //UpdateScale does not update the last note in DisplayScales (the octave)
     public void UpdateScale ()
     {    
-        for (int j = 0; j < displayScales.Length; j++ )
+        for ( int j = 0; j < displayScales.Length; j++ )
         {
-            //**find the starting point of the scale here***
-            int familyIndex = fBoard.scaleGen.FindFamilyIndex( rootDrop.value );
-            for (int i = 0; i < 8; i++)
+            for( int i = 0; i < fBoard.CurrentMusicScale.NotesInScale.Count; i++ )
             {
-                displayScales[j].noteTexts[i].text = fBoard.noteArray.noteArray[familyIndex].GetNote();
-                familyIndex++;
-                if (familyIndex > 6)
-                {
-                    familyIndex = 0;
-                }
+                int key = i + 1;
+                displayScales[j].noteTexts[i].text = fBoard.CurrentMusicScale.NotesInScale[key.ToString()].ToString();
             }
-            AddChordQuality( j );            
-        }                  
+            AddChordQuality( j );
+        }        
     }
 
     private void AddChordQuality( int displayIndex )    

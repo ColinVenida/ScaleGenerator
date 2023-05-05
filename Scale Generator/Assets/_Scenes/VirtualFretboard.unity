@@ -4265,8 +4265,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 938041529}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4312,7 +4312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4832,8 +4832,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1008800857}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4857,7 +4857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5230,8 +5230,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1132039032}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7586,8 +7586,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 155970516}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14969,8 +14969,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1602017121}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17208,8 +17208,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 561208697}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17233,7 +17233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22006,8 +22006,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 906584524}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22031,7 +22031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22184,8 +22184,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613424035}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CalculateFrets
+        m_TargetAssemblyTypeName: GuitString, Assembly-CSharp
+        m_MethodName: CalculateFrets_New
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
