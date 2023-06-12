@@ -34,6 +34,8 @@ public class Fretboard : MonoBehaviour
     private MusicScale currentMusicScale;
     public MusicScale CurrentMusicScale { get { return currentMusicScale; } }
 
+    private bool hasStartMethodFinished = false;
+
 
     //*REMEMBER*  #1 String goes in index 0!!!!!
     private int[] GUITAR_STANDARD = { 11, 4, 15, 8, 1, 11 };
@@ -133,7 +135,8 @@ public class Fretboard : MonoBehaviour
         arpList = new List<string>();
         SetScale();        
         visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
-        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );        
+        ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
+        hasStartMethodFinished = true;
     }    
 
     //function to update the scale the GuitString displays when a new value of scaleDrop or rootDrop is selected
@@ -142,10 +145,20 @@ public class Fretboard : MonoBehaviour
         //workaround for avoiding the OnValueChanged event during Fretboard.Awake()
         if ( !areGuitStringsInitialized )
         {
+            Debug.Log( "GuitStrings not initialized!" );
             return;
         }
         ResetArpeggio();        
         SaveScalePrefs();
+
+        //workaround for avoiding the MusicSale being initialized during Start()
+        if ( !hasStartMethodFinished )
+        {
+            string rootNote = NoteValues.ConvertNote_IntToString( rootDrop.value );
+            ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
+            currentMusicScale = new MusicScale( rootNote, formula );
+        }
+
         UpdateGuitStringsWithNewScale();
 
         textForm.DisableArpeggioColor();
