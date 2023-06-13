@@ -6143,6 +6143,7 @@ MonoBehaviour:
   presetDrop: {fileID: 1022084628}
   scaleDrop: {fileID: 1941558776}
   rootDrop: {fileID: 882586487}
+  theoreticalWarning: {fileID: 885958053}
   scaleGen: {fileID: 1764589515}
   noteArray: {fileID: 1579013119}
   textForm: {fileID: 543725215}
@@ -11736,7 +11737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &885958053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11770,7 +11771,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*Theoretical Scale'
+  m_Text: '*Theoretical Scale*'
 --- !u!222 &885958054
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -11,15 +11,15 @@ public class Fretboard : MonoBehaviour
     public Button RemoveBtn;
     public Dropdown presetDrop;
     public Dropdown scaleDrop;
-    public Dropdown rootDrop;    
+    public Dropdown rootDrop;
+    public Text theoreticalWarning;
 
     public ScaleGenerator scaleGen;
     public NoteArray noteArray;
 
     public TextFormatter textForm;
     public Image fretImage;
-    public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.
-                                         //
+    public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.                                         
 
     private bool areGuitStringsInitialized = false;
     public bool AreGuitStringsInitialized { get { return areGuitStringsInitialized; } }
@@ -152,17 +152,18 @@ public class Fretboard : MonoBehaviour
         SaveScalePrefs();
 
         //workaround for avoiding the MusicSale being initialized during Start()
-        if ( !hasStartMethodFinished )
+        if ( hasStartMethodFinished )
         {
             string rootNote = NoteValues.ConvertNote_IntToString( rootDrop.value );
             ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
             currentMusicScale = new MusicScale( rootNote, formula );
         }
 
-        UpdateGuitStringsWithNewScale();
+        UpdateGuitStringsWithNewScale();        
 
         textForm.DisableArpeggioColor();
         textForm.UpdateScale();
+        UpdateTheoreticalWarning();
     }
 
     private void UpdateGuitStringsWithNewScale()
@@ -197,6 +198,12 @@ public class Fretboard : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void UpdateTheoreticalWarning()
+    {
+        bool isActive = currentMusicScale.IsTheoretical;
+        theoreticalWarning.gameObject.SetActive( isActive );
     }
     
     private void SaveScalePrefs()

@@ -8,11 +8,11 @@ public class Note
     private string naturalName;    
     public string NaturalName { get { return naturalName; } }
 
-    private int semitoneToNextNote;
-    public int SemitoneToNextNote { get { return semitoneToNextNote; } }
+    private int semitoneToNextNaturalNote;
+    public int SemitoneToNextNatrualNote { get { return semitoneToNextNaturalNote; } }
 
-    private int semitoneToPrevNote;
-    public int SemitoneToPrevNote { get { return semitoneToPrevNote; } }
+    private int semitoneToPrevNaturalNote;
+    public int SemitoneToPrevNatrualNote { get { return semitoneToPrevNaturalNote; } }
 
     private int pitchValue;
     public int PitchValue {  get { return pitchValue; } }
@@ -73,7 +73,7 @@ public class Note
             pitch = PitchModifier.Flat;
         }
         SetPitchValue();
-        SetIntervalsToNextAndPrevNotes();
+        SetIntervalsToNextAndPrevNaturalNotes();
     }
 
     //need a separate function for to set up PitchValue because MusicScale creates the notes first,
@@ -81,7 +81,7 @@ public class Note
     public void RecalculatePitchValue()
     {
         SetPitchValue();
-        SetIntervalsToNextAndPrevNotes();
+        SetIntervalsToNextAndPrevNaturalNotes();
     }
 
     private void SetPitchValue()
@@ -109,19 +109,19 @@ public class Note
 
     private void CheckPitchValueBounds()
     {
-        if ( pitchValue < 0 )
+        if ( pitchValue < PitchValues.LOWER_LIMIT )
         {
-            pitchValue += 12;
+            pitchValue += PitchValues.UPPER_LIMIT;
             pitchOverlap = PitchOverlap.FlatOverlap;
         }
-        else if ( pitchValue > 11 )
+        else if ( pitchValue > (PitchValues.UPPER_LIMIT - 1) )
         {
-            pitchValue -= 12;
+            pitchValue -= PitchValues.UPPER_LIMIT;
             pitchOverlap = PitchOverlap.SharpOverlap;
         }
     }
 
-    private void SetIntervalsToNextAndPrevNotes()
+    private void SetIntervalsToNextAndPrevNaturalNotes()
     {
         int nextNoteOffset = 0;
         int prevNoteOffset = 0;
@@ -138,8 +138,8 @@ public class Note
                 break;
         }
         
-        semitoneToNextNote = ( nextNoteOffset + NaturalIntervals.naturalIntervals[naturalName].NextNoteSemitone );
-        semitoneToPrevNote = ( prevNoteOffset + NaturalIntervals.naturalIntervals[naturalName].PrevNoteSemitone );        
+        semitoneToNextNaturalNote = ( nextNoteOffset + NaturalIntervals.naturalIntervals[naturalName].NextNoteSemitone );
+        semitoneToPrevNaturalNote = ( prevNoteOffset + NaturalIntervals.naturalIntervals[naturalName].PrevNoteSemitone );        
     }
 
     public void SetDoublePitchModifier()
@@ -149,14 +149,14 @@ public class Note
         switch ( this.pitch )
         {
             case PitchModifier.Flat:
-                semitoneToNextNote += 1;
-                semitoneToPrevNote += -1;
+                semitoneToNextNaturalNote += 1;
+                semitoneToPrevNaturalNote += -1;
                 pitchValue -= 1; 
                 CheckPitchValueBounds();
                 break;
             case PitchModifier.Sharp:
-                semitoneToNextNote += -1;
-                semitoneToPrevNote += 1;
+                semitoneToNextNaturalNote += -1;
+                semitoneToPrevNaturalNote += 1;
                 pitchValue += 1;
                 CheckPitchValueBounds();
                 break;

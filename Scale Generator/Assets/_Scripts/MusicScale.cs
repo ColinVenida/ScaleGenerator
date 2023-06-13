@@ -21,6 +21,7 @@ public class MusicScale
         private set { isTheoretical = value; }
     }
 
+
     public MusicScale( string root, ScaleFormulas.ScaleFormula formula )
     {
         rootNote = root;

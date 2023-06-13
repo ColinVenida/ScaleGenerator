@@ -12,6 +12,9 @@ public static class PitchValues
     public const int F = 9;
     public const int G = 11;
 
+    public const int LOWER_LIMIT = 0;
+    public const int UPPER_LIMIT = 12;
+
     public static int AssignPitchValue( Note note )
     {
         int value = 0;

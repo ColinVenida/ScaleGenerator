@@ -27,7 +27,7 @@ public class TextFormatter : MonoBehaviour
                 {
                     key = 1;
                 }
-                displayScales[j].noteTexts[i].text = fBoard.CurrentMusicScale.NotesInScale[key.ToString()].ToString();                
+                displayScales[j].noteTexts[i].text = fBoard.CurrentMusicScale.NotesInScale[key.ToString()].ToString();               
             }
             AddChordQuality( j );
         }        
