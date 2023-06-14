@@ -29,7 +29,11 @@ public class Fretboard : MonoBehaviour
     private string[] currentScale;
     private int visibleStrings;
     private int fretImageIndex;
+
     private List<string> arpList;
+    private const int SECOND_DEGREE = 2;
+    private const int FOURTH_DEGREE = 4;
+    private const int SIXTH_DEGREE = 6;
 
     private MusicScale currentMusicScale;
     public MusicScale CurrentMusicScale { get { return currentMusicScale; } }
@@ -333,36 +337,15 @@ public class Fretboard : MonoBehaviour
         PlayerPrefs.SetInt( "presetValue", presetDrop.value );
     }
 
-
-    //***function is being deprecated with the new MusicScale system***
-    //function that sets the 2nd, 4th, and 6th notes inactive   
+    //function that sets the 2nd, 4th, and 6th scale degrees inactive on the fretboard
     public void SetArpeggio()
     {
         useArpeggio = true;
         arpList.Clear();
-
-        //find the key of the scale; use the familyIndex to better fit with the rest of the program
-        int famIndex = scaleGen.FindFamilyIndex( rootDrop.value );      
-        
-        //find the 2nd, 4th, and 5th notes of the scale
-        int[] intervals =
-        {
-            famIndex + 1,
-            famIndex + 3,
-            famIndex + 5
-        };
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (intervals[i] > 6)
-            {
-                intervals[i] -= 7;
-            }
-        }
-        
-        arpList.Add( noteArray.noteArray[intervals[0]].GetNote() );
-        arpList.Add( noteArray.noteArray[intervals[1]].GetNote() );
-        arpList.Add( noteArray.noteArray[intervals[2]].GetNote() );
+       
+        arpList.Add( currentMusicScale.NotesInScale[SECOND_DEGREE.ToString()].ToString() );
+        arpList.Add( currentMusicScale.NotesInScale[FOURTH_DEGREE.ToString()].ToString() );
+        arpList.Add( currentMusicScale.NotesInScale[SIXTH_DEGREE.ToString()].ToString() );        
 
         for (int i = 0; i < 8; i++)
         {           

@@ -191,14 +191,12 @@ public class GuitString : MonoBehaviour
     }
 
     public void FilterArpeggio( List<string> noteList )
-    {
-       
+    {       
         for (int i = 0; i < buttonArray.Length; i++)
         {
             if (noteList.Contains( textArray[i].text ))
             {
                 buttonArray[i].gameObject.SetActive( false );
-
             }
         }
     }

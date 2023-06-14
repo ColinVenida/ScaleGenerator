@@ -124,7 +124,7 @@ public class TextFormatter : MonoBehaviour
         UpdateDisplayArpeggioColor( darkGray );
     }
 
-    //apply color to the 2, 4, and 6 intervals   
+    //apply color to the 2, 4, and 6 scale degrees   
     private void UpdateDisplayArpeggioColor( Color c )
     {
         for ( int i = 0; i < displayScales.Length; i++ )
