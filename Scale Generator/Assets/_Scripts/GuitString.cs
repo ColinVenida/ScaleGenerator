@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class GuitString : MonoBehaviour
 {
-    public Fretboard fBoard;    
-    public NoteArray noteArray;
+    public Fretboard fBoard;       
     public Dropdown noteSelect;    
     public Button[] buttonArray;
     public Text[] textArray; 
@@ -245,8 +244,7 @@ public class GuitString : MonoBehaviour
         PlayerPrefs.Save();        
     }
 
-    //function that changes the current tuning to the given int value
-        //int value comes from the noteSelect dropdown
+    
     private void SetCurrentTuning ( int dropValue )
     {
         string noteName = NoteValues.ConvertNote_IntToString( dropValue );       

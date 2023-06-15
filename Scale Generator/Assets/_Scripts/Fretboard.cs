@@ -14,9 +14,6 @@ public class Fretboard : MonoBehaviour
     public Dropdown rootDrop;
     public Text theoreticalWarning;
 
-    public ScaleGenerator scaleGen;
-    public NoteArray noteArray;
-
     public TextFormatter textForm;
     public Image fretImage;
     public Sprite[] fretboardImages;     //8-string fretboardImage is in [index 0], 7-string is in [index 1], etc.                                         

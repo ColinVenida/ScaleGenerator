@@ -1,260 +1,198 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScaleQuiz : MonoBehaviour
 {
-
-    private int[] quizIndexes = { 0, 0, 0, 0 };
-                                                
-    private int rootNote;
     private System.Random rnd = new System.Random();
-    private string[] currentScale;
-
-    public Note notes;
-    public ScaleGenerator scaleGen;
-    public NoteArray noteArray;
+   
     public Text questionText;
     public Text answerText;
-    public Toggle[] keyToggles;
+    public Toggle[] keyToggles; //index 0 = A, 1 = B, 2 = C, 3 = D, 4 = E, 5 = F, 6 = G
     public Toggle halfToggle;
     public Dropdown scaleDrop;
-     
-    public void GenerateQuestion ()
+
+    private List<MusicScale> scaleList;
+    private ScaleFormulas.ScaleFormula currentFormula;    
+
+    // Use this for initialization
+    void Start()
     {
-        //set rootNote of one of the whole notes 
-        int rootNote = GenerateRoot();
+        scaleList = new List<MusicScale>();
+        currentFormula = GetScaleFormulaFromDropdown( scaleDrop.value );
+        PopulateScaleList();
 
-        //create a new scale        
-        scaleGen.GenerateScale( rootNote, scaleDrop.value, noteArray );
-
-        //get  1-4 random values, values range form 1-7, values can't be equal twice in a row
-        int totalPositions = rnd.Next (1, 5 );     
-        
-        //if the answer is still showing, hide it for next question
-        if( answerText.enabled )
-        {
-            ShowAnswer();
-        }
-
-        //set the first index of quizIndexes
-        quizIndexes[0] = rnd.Next( 1, 7 );
-
-        for ( int i = 1; i < totalPositions; i++ )
-        {
-            int position = 0;
-
-            do
-            {
-                position = rnd.Next(1, 7);
-            }
-            while ( position == quizIndexes[i-1] );
-
-            quizIndexes[i] = position;
-            
-        }
-
-        //zero out the remaining array indexes
-        if (totalPositions < quizIndexes.Length)
-        {
-            for (int j = totalPositions; j < quizIndexes.Length; j++)
-            {
-                quizIndexes[j] = 0;
-            }
-        }
-
-        //find the associated notes based on random values and replace question and answer text
-        SetQuestionText( rootNote, quizIndexes );
-        SetAnswerText( rootNote, quizIndexes );
-                
+        GenerateQuestion();        
+       
+        answerText.enabled = false;
     }
 
-
-    //function to generate a root note that respects the filters    
-    private int GenerateRoot ()
-    {        
-        int key = 0;
-        int root = 0;
-
-        //find what key to set the quiz in based on the active toggles
-        do
-        {
-            key = rnd.Next( 0, 7 );
-        }
-        while (!keyToggles[key].isOn);
-
-        //convert that Key to another int to give to the ScaleGenerator
-        switch ( key )
-        {
-            case 0:     
-                root = 1;   //set to A natural
-                break;
-            case 1:     
-                root = 4;   //set to B
-                break;
-            case 2:     
-                root = 5;   //set to C
-                break;
-            case 3:
-                root = 8;   //set to D
-                break;
-            case 4:
-                root = 11;    //set to E
-                break;
-            case 5:
-                root = 12;    //set to F
-                break;
-            case 6:
-                root = 15;    //set to G
-                break;            
-            default:
-                Debug.Log( "default statement, defaulting to C" );
-                root = 5;
-                break;
-        }
-
-        //if the toggle is on, then add a sharp, flat, or nothing
-        if ( halfToggle.isOn )
-        {
-            root += rnd.Next( -1, 2 );  
-        }       
-                
-        return root;
-    }
-
-    private void SetQuestionText ( int root, int[] quiz )
+    private ScaleFormulas.ScaleFormula GetScaleFormulaFromDropdown( int value )
     {
-        string strRoot = "";
-        string sequence = "";
-        string scale;
+        ScaleFormulas.ScaleFormula formula;
 
-        //find the starting note/root note
-        int familyIndex = scaleGen.FindFamilyIndex( root );
-        strRoot = noteArray.noteArray[familyIndex].GetNote();
-                
-        //add to the question text based on the generated positions
-        for ( int i = 0; i < quiz.Length; i++ )
-        {
-            switch( quiz[i] )
-            {
-                case 0:
-                    break;
-                case 1:
-                    sequence += "2nd, ";
-                    break;
-                case 2:
-                    sequence += "3rd, ";
-                    break;
-                case 3:
-                    sequence += "4th, ";
-                    break;
-                case 4:
-                    sequence += "5th, ";
-                    break;
-                case 5:
-                    sequence += "6th, ";
-                    break;
-                case 6:
-                    sequence += "7th, ";
-                    break;                
-            }
-        }
-
-        if ( sequence.Length > 5 )
-        {            
-            sequence = sequence.Insert( sequence.Length - 5, "and " );
-        }
-
-        //remove the last comma
-        sequence = sequence.Remove( sequence.Length - 2, 1 );
-
-        switch( scaleDrop.value )
+        switch ( value )
         {
             case 0:
-                scale = " Major (Ionian) scale";
+                formula = ScaleFormulas.MAJOR_IONIAN;
                 break;
             case 1:
-                scale = " Minor (Aeolian) scale";
+                formula = ScaleFormulas.MINOR_AEOLIAN;
                 break;
             case 2:
-                scale = " Dorian scale";
+                formula = ScaleFormulas.DORIAN;
                 break;
             case 3:
-                scale = " Phrygian scale";
+                formula = ScaleFormulas.PHRYGIAN;
                 break;
             case 4:
-                scale = " Lydian scale";
+                formula = ScaleFormulas.LYDIAN;
                 break;
             case 5:
-                scale = " Mixolydian scale";
+                formula = ScaleFormulas.MIXOLYDIAN;
                 break;
             case 6:
-                scale = " Locrian scale";
+                formula = ScaleFormulas.LOCRIAN;
                 break;
-
             default:
-                Debug.Log( "default statement in SetQuestionText()" );
-                scale = " major scale";
+                formula = ScaleFormulas.MAJOR_IONIAN;
                 break;
         }
-        questionText.text = "Name the " + sequence + "note(s) in the " + strRoot + scale;
-    }   
+        return formula;
+    }
 
-    private void SetAnswerText ( int root, int[] quiz )
+    public void PopulateScaleList()
     {
-        string answer = "";
-        int familyIndex = scaleGen.FindFamilyIndex( root );
-        for (int i = 0; i < quiz.Length; i++)
+        for ( int i = 0; i < keyToggles.Length; i++ )
         {
-            
-            if (quiz[i] == 0)
+            if ( keyToggles[i].isOn )
             {
-                continue;
+                switch ( i )
+                {
+                    case 0:
+                        scaleList.Add( new MusicScale( "A", currentFormula ) );
+                        break;
+                    case 1:
+                        scaleList.Add( new MusicScale( "B", currentFormula ) );
+                        break;
+                    case 2:
+                        scaleList.Add( new MusicScale( "C", currentFormula ) );
+                        break;
+                    case 3:
+                        scaleList.Add( new MusicScale( "D", currentFormula ) );
+                        break;
+                    case 4:
+                        scaleList.Add( new MusicScale( "E", currentFormula ) );
+                        break;
+                    case 5:
+                        scaleList.Add( new MusicScale( "F", currentFormula ) );
+                        break;
+                    case 6:
+                        scaleList.Add( new MusicScale( "G", currentFormula ) );
+                        break;
+                }
             }
+        }
+    }
 
-            if (quiz[i] >= 7)
+    public void GenerateQuestion()
+    {        
+        int randomScaleIndex = rnd.Next( scaleList.Count );
+        int totalIndexes = rnd.Next( 1, 5 );
+
+        if ( answerText.isActiveAndEnabled )
+        {
+            ToggleAnswer();
+        }
+        List<int> randomScaleDegrees = GenerateRandomScaleDegrees( totalIndexes );
+        SetQuestionText( randomScaleIndex, randomScaleDegrees );
+        SetAnswerText( randomScaleIndex, randomScaleDegrees );    
+    }
+
+    private List<int> GenerateRandomScaleDegrees( int totalIndexes )
+    {
+        List<int> randoms = new List<int>();
+
+        int i = 0;
+        do
+        {
+            int randomDegree = rnd.Next( 1, 8 );
+
+            if ( !randoms.Contains( randomDegree ) )
             {
-                Debug.Log( "quiz[i] >= 7" );
+                randoms.Add( randomDegree );
+                i++;
             }
+        }
+        while ( i < totalIndexes );
 
-            int index = quiz[i] + familyIndex;
-            if ( index > 6 )
-            {
-                index -= 7;
-            }            
-            answer += noteArray.noteArray[index].GetNote() + ", ";
+        return randoms;
+    }
+
+    private void SetQuestionText( int scaleIndex, List<int> randomDegrees )
+    {        
+        string question;
+        if ( randomDegrees.Count != 1 )
+        {
+            question = GenerateQuestionText(  scaleIndex, randomDegrees );
+        }
+        else
+        {
+            question = GenerateQuestionText_OnlyOneIndex( scaleIndex, randomDegrees );
+        }        
+        questionText.text = question;
+    }
+
+    private string GenerateQuestionText( int scaleIndex, List<int> randomDegrees )
+    {
+        StringBuilder sb = new StringBuilder( "Name the " );
+
+        int lastIndex = randomDegrees.Count - 1;
+        for ( int i = 0; i < lastIndex; i++ )
+        {
+            sb.Append( randomDegrees[i].ToString() + ", " );
         }
 
-        //remove the last comma
-        answer = answer.Remove(answer.Length - 2, 1);
-        answerText.text = answer;
+        sb.Append( "and " + randomDegrees[lastIndex].ToString() );
+        sb.Append( " notes of " + scaleList[scaleIndex].ToString() );
 
-    }    
+        string question = sb.ToString();
 
-    public void ShowAnswer ()
+        return question;
+    }
+
+    private string GenerateQuestionText_OnlyOneIndex( int scaleIndex, List<int> randomDegrees  )
+    {
+        return ( "Name the " + randomDegrees[0] + " note of " + scaleList[scaleIndex].ToString() );
+    }
+
+    private void SetAnswerText( int scaleIndex, List<int> randomDegrees )
+    {
+        StringBuilder sb = new StringBuilder();
+       
+        foreach( int i in randomDegrees )
+        {
+            sb.Append( scaleList[scaleIndex].NotesInScale[i.ToString()].ToString() + ", ");
+        }
+
+        int lastCommaIndex = ( sb.Length - 2 );
+        sb.Remove( lastCommaIndex, 1 );
+                
+        answerText.text = sb.ToString();
+    }
+    
+    public void ToggleAnswer()
     {
         answerText.enabled = !answerText.enabled;
         if ( answerText.enabled )
         {
-            GameObject.Find("ShowButton").GetComponentInChildren<Text>().text = "Hide Answer";
+            GameObject.Find( "ShowButton" ).GetComponentInChildren<Text>().text = "Hide Answer";
         }
         else
         {
-            GameObject.Find("ShowButton").GetComponentInChildren<Text>().text = "Show Answer";
+            GameObject.Find( "ShowButton" ).GetComponentInChildren<Text>().text = "Show Answer";
         }
     }
-
-	// Use this for initialization
-	void Start () 
-	{
-        GenerateQuestion();
-        answerText.enabled = false;
-	}   
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
 }
