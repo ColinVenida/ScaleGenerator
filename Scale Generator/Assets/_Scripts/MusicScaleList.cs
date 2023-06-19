@@ -26,6 +26,17 @@ public class MusicScaleList
         {
             RemoveScales( root );
         }
+        PrintScaleList();
+    }
+
+    public void PrintScaleList()
+    {
+        Debug.Log( "===scaleList includes===" );
+
+        foreach ( MusicScale scale in scaleList )
+        {
+            Debug.Log( scale.rootNote + " " + scale.Formula.ToString() );
+        }
     }
 
     private bool ContainsScale( string rootNote )
@@ -42,16 +53,28 @@ public class MusicScaleList
     }
 
     public void AddScales( string root, ScaleFormulas.ScaleFormula formula )
-    {
-        scaleList.Add( new MusicScale( root, formula ) );
+    {        
+        MusicScale scale = new MusicScale( root, formula );
+        if ( !scale.IsTheoretical )
+        {
+            scaleList.Add( new MusicScale( root, formula ) );
+        }        
 
         if ( includeSharpKeys )
         {
-            scaleList.Add( new MusicScale( root + "#", formula ) );
+            MusicScale sharpScale = new MusicScale( root + "#", formula );
+            if ( !sharpScale.IsTheoretical )
+            {
+                scaleList.Add( new MusicScale( root + "#", formula ) );
+            }
         }
         if ( includeFlatKeys )
         {
-            scaleList.Add( new MusicScale( root + "b", formula ) );
+            MusicScale flatScale = new MusicScale( root + "b", formula );
+            if ( !flatScale.IsTheoretical )
+            {
+                scaleList.Add( new MusicScale( root + "b", formula ) );
+            }
         }
     }
 
@@ -66,12 +89,14 @@ public class MusicScaleList
         if ( includeFlatKeys )
         {
             RemoveScaleByRootNote( root + "b" );
-        }
+        }       
     }
 
     private void RemoveScaleByRootNote( string root )
     {
-        for ( int i = 0; i < scaleList.Count; i++ )
+        int lastIndex = scaleList.Count - 1;
+
+        for ( int i = lastIndex; i >= 0; i-- )
         {
             if ( scaleList[i].rootNote == root )
             {
@@ -96,6 +121,7 @@ public class MusicScaleList
     private void AddSharpKeys( ScaleFormulas.ScaleFormula formula )
     {
         int currentCount = scaleList.Count;
+
         for( int i = 0; i < currentCount; i++ )
         {
             if ( scaleList[i].NotesInScale[1.ToString()].pitch == PitchModifier.Natural )
@@ -108,9 +134,9 @@ public class MusicScaleList
 
     private void RemoveSharpKeys()
     {
-        int currentCount = scaleList.Count -1;
+        int lastIndex = scaleList.Count -1;
 
-        for ( int i = currentCount; i > 0; i-- )
+        for ( int i = lastIndex; i >= 0; i-- )
         {
             if ( scaleList[i].NotesInScale[1.ToString()].pitch == PitchModifier.Sharp )
             {
@@ -150,8 +176,8 @@ public class MusicScaleList
 
     public void RemoveFlatKeys()
     {
-        int currentCount = scaleList.Count - 1;
-        for ( int i = currentCount; i > 0; i-- )
+        int lastIndex = scaleList.Count - 1;
+        for ( int i = lastIndex; i >= 0; i-- )
         {
             if ( scaleList[i].NotesInScale[1.ToString()].pitch == PitchModifier.Flat )
             {
