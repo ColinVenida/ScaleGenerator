@@ -243,7 +243,6 @@ public class GuitString : MonoBehaviour
         }
         PlayerPrefs.Save();        
     }
-
     
     private void SetCurrentTuning ( int dropValue )
     {

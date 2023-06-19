@@ -185,4 +185,25 @@ public class MusicScale
     {
         return ( rootNote + " " + formula.scaleName );
     }
+
+    public override bool Equals( System.Object obj)
+    {
+        //Check for null and compare run-time types.
+        if ( ( obj == null ) || !this.GetType().Equals( obj.GetType() ) )
+        {
+            return false;
+        }
+        else
+        {
+            MusicScale scale = ( MusicScale )obj;
+            return ( ( this.rootNoteObject.NaturalName == scale.rootNoteObject.NaturalName ) &&
+                        ( this.rootNoteObject.pitch == scale.rootNoteObject.pitch ) ); 
+        }
+    }
+
+    public bool Equals_StringArgument( string rootNoteName )
+    {
+        //true if the "1" note in the dictionary has the same name
+        return ( rootNoteName == this.NotesInScale[1.ToString()].ToString() );
+    }
 }

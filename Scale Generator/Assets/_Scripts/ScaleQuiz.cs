@@ -14,13 +14,17 @@ public class ScaleQuiz : MonoBehaviour
     public Toggle halfToggle;
     public Dropdown scaleDrop;
 
-    private List<MusicScale> scaleList;
-    private ScaleFormulas.ScaleFormula currentFormula;    
+    //private List<MusicScale> scaleList;
+    private MusicScaleList scaleList;
+    private ScaleFormulas.ScaleFormula currentFormula;
+    private bool includeSharpKeys;
+    private bool includeFlatKeys;
+
 
     // Use this for initialization
     void Start()
     {
-        scaleList = new List<MusicScale>();
+        scaleList = new MusicScaleList();
         currentFormula = GetScaleFormulaFromDropdown( scaleDrop.value );
         PopulateScaleList();
 
@@ -72,34 +76,48 @@ public class ScaleQuiz : MonoBehaviour
                 switch ( i )
                 {
                     case 0:
-                        scaleList.Add( new MusicScale( "A", currentFormula ) );
+                        scaleList.AddScales( "A", currentFormula );
                         break;
                     case 1:
-                        scaleList.Add( new MusicScale( "B", currentFormula ) );
+                        scaleList.AddScales( "B", currentFormula );
                         break;
                     case 2:
-                        scaleList.Add( new MusicScale( "C", currentFormula ) );
+                        scaleList.AddScales( "C", currentFormula );
                         break;
                     case 3:
-                        scaleList.Add( new MusicScale( "D", currentFormula ) );
+                        scaleList.AddScales( "D", currentFormula );
                         break;
                     case 4:
-                        scaleList.Add( new MusicScale( "E", currentFormula ) );
+                        scaleList.AddScales( "E", currentFormula );
                         break;
                     case 5:
-                        scaleList.Add( new MusicScale( "F", currentFormula ) );
+                        scaleList.AddScales( "F", currentFormula );
                         break;
                     case 6:
-                        scaleList.Add( new MusicScale( "G", currentFormula ) );
+                        scaleList.AddScales( "G", currentFormula );
                         break;
                 }
             }
         }
     }
 
+    public void ChangeScale( int dropValue )
+    {
+        currentFormula = GetScaleFormulaFromDropdown( dropValue );
+        scaleList.ScaleList.Clear();
+        PopulateScaleList();
+    }
+
     public void GenerateQuestion()
     {        
-        int randomScaleIndex = rnd.Next( scaleList.Count );
+        if ( scaleList.ScaleList.Count == 0 )
+        {
+            questionText.text = "No Scale has been selected :(.";
+            answerText.text = "";
+            return;
+        }
+
+        int randomScaleIndex = rnd.Next( scaleList.ScaleList.Count );
         int totalIndexes = rnd.Next( 1, 5 );
 
         if ( answerText.isActiveAndEnabled )
@@ -156,7 +174,7 @@ public class ScaleQuiz : MonoBehaviour
         }
 
         sb.Append( "and " + randomDegrees[lastIndex].ToString() );
-        sb.Append( " notes of " + scaleList[scaleIndex].ToString() );
+        sb.Append( " notes of " + scaleList.ScaleList[scaleIndex].ToString() );
 
         string question = sb.ToString();
 
@@ -165,7 +183,7 @@ public class ScaleQuiz : MonoBehaviour
 
     private string GenerateQuestionText_OnlyOneIndex( int scaleIndex, List<int> randomDegrees  )
     {
-        return ( "Name the " + randomDegrees[0] + " note of " + scaleList[scaleIndex].ToString() );
+        return ( "Name the " + randomDegrees[0] + " note of " + scaleList.ScaleList[scaleIndex].ToString() );
     }
 
     private void SetAnswerText( int scaleIndex, List<int> randomDegrees )
@@ -174,7 +192,7 @@ public class ScaleQuiz : MonoBehaviour
        
         foreach( int i in randomDegrees )
         {
-            sb.Append( scaleList[scaleIndex].NotesInScale[i.ToString()].ToString() + ", ");
+            sb.Append( scaleList.ScaleList[scaleIndex].NotesInScale[i.ToString()].ToString() + ", ");
         }
 
         int lastCommaIndex = ( sb.Length - 2 );
@@ -195,4 +213,20 @@ public class ScaleQuiz : MonoBehaviour
             GameObject.Find( "ShowButton" ).GetComponentInChildren<Text>().text = "Show Answer";
         }
     }
+
+    //add or remove the given scale from scaleList. method is called from the Toggles in the scene.
+    public void ToggleScale( string scaleRootNote )
+    {        
+        scaleList.ToggleScale( scaleRootNote, currentFormula );
+    }
+
+    public void ToggleSharpKeys()
+    {
+        scaleList.ToggleSharpKeys( currentFormula );
+    }
+
+    public void ToggleFlatKeys()
+    {
+        scaleList.ToggleFlatKeys( currentFormula );
+    }    
 }
