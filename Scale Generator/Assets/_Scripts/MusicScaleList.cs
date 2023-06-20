@@ -25,8 +25,7 @@ public class MusicScaleList
         else
         {
             RemoveScales( root );
-        }
-        PrintScaleList();
+        }        
     }
 
     public void PrintScaleList()

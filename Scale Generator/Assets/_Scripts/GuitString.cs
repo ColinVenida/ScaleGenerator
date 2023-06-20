@@ -33,8 +33,7 @@ public class GuitString : MonoBehaviour
 
         MusicScale currentScale = fBoard.CurrentMusicScale;
         int tuningScaleDegree = currentScale.FindNoteScaleDegree( currentTuning );       
-
-        Debug.Log( "***new method! Calculating a string tuned to " + currentTuning + "***" );
+                
         int startDegree = CalculateStartScaleDegree( currentScale, tuningScaleDegree ); 
         int startFret = CalculateStartFret( currentScale, startDegree );
 

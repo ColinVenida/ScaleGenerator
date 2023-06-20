@@ -98,8 +98,7 @@ public class ScaleQuiz : MonoBehaviour
                         break;
                 }
             }
-        }
-        scaleList.PrintScaleList();
+        }        
     }
 
     public void ChangeScale( int dropValue )
