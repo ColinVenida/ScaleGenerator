@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/TitleScene.unity
     guid: a568959cd9f268d4a86cf20aae07462c
-  - enabled: 0
-    path: Assets/_Scenes/GeneratorScene.unity
-    guid: d2fa5f56f66a2764da438e2ada924be5
   - enabled: 1
     path: Assets/_Scenes/VirtualFretboard.unity
     guid: 679444ec4392c7b40aaaf19366ff0a59
