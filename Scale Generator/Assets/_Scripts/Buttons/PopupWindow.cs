@@ -9,6 +9,7 @@ public class PopupWindow : MonoBehaviour
     private bool stopAnim = false;
 
     public Button menuBtn;
+    public Button closeNavBtn;
     public GameObject menu;
 
     private Color WHITE = new Color( 1.0f, 1.0f, 1.0f );
@@ -22,10 +23,12 @@ public class PopupWindow : MonoBehaviour
         if ( showMenu )
         {
             ChangeButtonColor( DARK_GRAY );
+            closeNavBtn.interactable = false;
         }
         else
         {
             ChangeButtonColor( WHITE );
+            closeNavBtn.interactable = true;
         }
     }	
 
