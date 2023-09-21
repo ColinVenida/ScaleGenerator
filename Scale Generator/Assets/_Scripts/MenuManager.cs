@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-//behavior that opens/closes PopupMenus and dropdown windows in the scene
+//class that opens/closes PopupMenus and dropdown windows in the scene
 public class MenuManager : MonoBehaviour
 {
     public List<PopupWindow> windowList;

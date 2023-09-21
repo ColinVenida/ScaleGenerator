@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+//class that controls the position of a navigation bar
 public class NavMenu : MonoBehaviour
 {
 
