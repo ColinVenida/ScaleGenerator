@@ -13,6 +13,7 @@ public class Fretboard : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
     public Text theoreticalWarning;
+    public Text scaleTitle;
 
     public TextFormatter textForm;
     public Image fretImage;
@@ -21,9 +22,8 @@ public class Fretboard : MonoBehaviour
     private bool areGuitStringsInitialized = false;
     public bool AreGuitStringsInitialized { get { return areGuitStringsInitialized; } }
     
-    private bool useArpeggio = false;
+    private bool useArpeggio = false;    
     
-    private string[] currentScale;
     private int visibleStrings;
     private int fretImageIndex;
 
@@ -49,7 +49,6 @@ public class Fretboard : MonoBehaviour
 
     private int[] BASS_STANDARD = { 15, 8, 1, 11 };
     private int[] UKULELE_STANDARD = { 1, 11, 5, 15 };
-
 
 
     private void Awake()
@@ -94,6 +93,7 @@ public class Fretboard : MonoBehaviour
         rootDrop.value = rootValue;
 
         InitializeGuitStringTuning();
+        UpdateScaleTitle();
     }
 
     private void InitializeGuitStringTuning()
@@ -131,6 +131,12 @@ public class Fretboard : MonoBehaviour
         areGuitStringsInitialized = true;        
     }
 
+    private void UpdateScaleTitle()
+    {
+        scaleTitle.text = currentMusicScale.ToString();
+    }
+
+
     void Start()
     {
         arpList = new List<string>();
@@ -165,6 +171,7 @@ public class Fretboard : MonoBehaviour
         textForm.DisableArpeggioColor();
         textForm.UpdateScale();
         UpdateTheoreticalWarning();
+        UpdateScaleTitle();
     }
 
     private void UpdateGuitStringsWithNewScale()
@@ -382,6 +389,12 @@ public class Fretboard : MonoBehaviour
                 }
             }//end j
         }//end i
+    }
+
+    public void HighlightFrets( int scaleDegree )
+    {
+        string noteName = currentMusicScale.NotesInScale[scaleDegree.ToString()].ToString();        
+        HighlightFrets( noteName );
     }
 
     public List<string> GetArplist()

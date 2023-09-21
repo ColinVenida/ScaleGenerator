@@ -11,6 +11,7 @@ public class PopupWindow : MonoBehaviour
     public Button menuBtn;
     public Button closeNavBtn;
     public GameObject menu;
+    public int menuID;
 
     private Color WHITE = new Color( 1.0f, 1.0f, 1.0f );
     private Color DARK_GRAY = new Color( 0.5f, 0.5f, 0.5f );
@@ -32,9 +33,21 @@ public class PopupWindow : MonoBehaviour
         }
     }	
 
+    public void OpenMenu()
+    {
+        menu.SetActive( true );
+        ChangeButtonColor( DARK_GRAY );
+    }
+
+    public void CloseMenu()
+    {
+        menu.SetActive( false );
+        ChangeButtonColor( WHITE );
+    }
+
     private void ChangeButtonColor( Color color )
     {
-        Image menuImage = menuBtn.image;
-        menuImage.color = color;
+        Image menuBtnImage = menuBtn.image;
+        menuBtnImage.color = color;
     }
 }

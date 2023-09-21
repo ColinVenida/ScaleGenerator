@@ -12,23 +12,23 @@ public static class ScaleFormulas
         ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, 
         ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE );
 
-    public static readonly ScaleFormula DORIAN = new ScaleFormula( "DORIAN",
+    public static readonly ScaleFormula DORIAN = new ScaleFormula( "Dorian",
         ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE,
         ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE );
 
-    public static readonly ScaleFormula PHRYGIAN = new ScaleFormula( "PHRYGIAN",
+    public static readonly ScaleFormula PHRYGIAN = new ScaleFormula( "Phrygian",
         ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE,
         ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE );
 
-    public static readonly ScaleFormula LYDIAN = new ScaleFormula( "LYDIAN",
+    public static readonly ScaleFormula LYDIAN = new ScaleFormula( "Lydian",
         ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE,
         ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE );
 
-    public static readonly ScaleFormula MIXOLYDIAN = new ScaleFormula( "MIXOLYDIAN",
+    public static readonly ScaleFormula MIXOLYDIAN = new ScaleFormula( "Mixolydian",
         ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE,
         ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE );
 
-    public static readonly ScaleFormula LOCRIAN = new ScaleFormula( "LOCRIAN",
+    public static readonly ScaleFormula LOCRIAN = new ScaleFormula( "Locrian",
         ToneTypes.SEMI_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.SEMI_TONE,
         ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE, ToneTypes.WHOLE_TONE );
 
