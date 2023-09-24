@@ -19835,7 +19835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2fb42c5f624bbe40a023018c7881816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 1317414164}
 --- !u!114 &1399814759 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5928869646823672546, guid: f7c79e97a92a4e14ebdafe034253cb30,
