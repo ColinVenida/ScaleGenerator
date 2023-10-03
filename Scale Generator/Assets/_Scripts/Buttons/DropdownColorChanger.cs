@@ -31,6 +31,11 @@ public class DropdownColorChanger : MonoBehaviour, IPointerClickHandler, IDesele
         drop.colors = cb;
     }   
 
+    public void ChangeToOriginalColors()
+    {
+        drop.colors = originalColors;
+    }
+
     public void OnDeselect( BaseEventData baseEventData )
     {
         //Debug.Log( "deselected!" );

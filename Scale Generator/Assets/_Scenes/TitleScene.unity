@@ -194,7 +194,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 575
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -555,8 +555,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -18.08}
-  m_SizeDelta: {x: 1420.33, y: 416.56}
+  m_AnchoredPosition: {x: 0, y: -56}
+  m_SizeDelta: {x: 1707.8, y: 416.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &728839254
 MonoBehaviour:
@@ -578,7 +578,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Body Text here
+  m_text: 'This App is built using the Unity Engine.  Unity automatically collects
+    data from users such as device information, IP address, log information, cookies,
+    and other information.  Information is collected for the purposes of service
+    maintenance, service personalization, business reporting, security and other
+    legal purposes.  You may read Unity''s full Privacy Policy at https://unity.com/legal/game-player-and-app-user-privacy-policy,
+    or tap the button to visit the website.  This will open a tab in your web browser.
 
 '
   m_isRightToLeft: 0
@@ -607,8 +612,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 49.11
+  m_fontSizeBase: 49.11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -643,7 +648,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -0.00000010213382}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1010,8 +1015,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516580025}
-        m_TargetAssemblyTypeName: PopupWindow, Assembly-CSharp
+      - m_Target: {fileID: 2115539963}
+        m_TargetAssemblyTypeName: SimplePopupWindow, Assembly-CSharp
         m_MethodName: ToggleMenu
         m_Mode: 1
         m_Arguments:
@@ -1690,7 +1695,6 @@ GameObject:
   - component: {fileID: 1516580024}
   - component: {fileID: 1516580023}
   - component: {fileID: 1516580022}
-  - component: {fileID: 1516580025}
   m_Layer: 5
   m_Name: PrivacyPolicyBtn
   m_TagString: Untagged
@@ -1705,7 +1709,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516580020}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1716,7 +1720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -463}
+  m_AnchoredPosition: {x: 0, y: -445}
   m_SizeDelta: {x: 530.09, y: 99.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1516580022
@@ -1763,8 +1767,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516580025}
-        m_TargetAssemblyTypeName: PopupWindow, Assembly-CSharp
+      - m_Target: {fileID: 2115539963}
+        m_TargetAssemblyTypeName: SimplePopupWindow, Assembly-CSharp
         m_MethodName: ToggleMenu
         m_Mode: 1
         m_Arguments:
@@ -1813,20 +1817,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516580020}
   m_CullTransparentMesh: 1
---- !u!114 &1516580025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516580020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b48b5b0ac95d554782b8899fe1f99cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuBtn: {fileID: 1516580022}
-  menu: {fileID: 2115539959}
 --- !u!1 &1645136579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,7 +2413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -81}
+  m_AnchoredPosition: {x: 0, y: -0.0079956055}
   m_SizeDelta: {x: 1920.91, y: 837.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115539961
@@ -2439,7 +2429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7688679, b: 0.9444768, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2473,8 +2463,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2115539959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b48b5b0ac95d554782b8899fe1f99cb, type: 3}
+  m_Script: {fileID: 11500000, guid: dc3092d2fda4eaf4a993f67bb4450cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuBtn: {fileID: 1516580022}
-  menu: {fileID: 2115539959}

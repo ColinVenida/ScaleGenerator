@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class NavMenu : MonoBehaviour
 {
 
-    public RectTransform uiRectTransform;
+    public RawImage menuBtnGroup;
+    public RectTransform uiRectTransform;    
     public Button openBtn;
     public Button closeBtn;
 
@@ -23,6 +24,20 @@ public class NavMenu : MonoBehaviour
         upperY = uiRectTransform.rect.height;
         moveDown = true;
         inPlace = true;
+    }
+
+    public void OpenBtnGroup()
+    {
+        menuBtnGroup.gameObject.SetActive( true );
+        closeBtn.gameObject.SetActive( true );
+        openBtn.gameObject.SetActive( false );
+    }
+
+    public void CloseBtnGroup()
+    {
+        menuBtnGroup.gameObject.SetActive( false );
+        closeBtn.gameObject.SetActive( false );
+        openBtn.gameObject.SetActive( true );
     }
 
     public void OpenMenu()
