@@ -55,7 +55,7 @@ public static class ScaleFormulas
                 return MAJOR_IONIAN;
         }
     }
-
+    
     public class ScaleFormula
     {
         public string scaleName { get; }

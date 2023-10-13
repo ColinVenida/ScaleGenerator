@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 
 //methods copied from ScaleScene.cs
@@ -13,8 +14,10 @@ public class TextFormatter : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
+    private List<string> chordQualityList = new List<string> { "", "min", "min", "", "", "min", "dim" };    
     private Color lightGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
     private Color darkGray = new Color( 0.196f, 0.196f, 0.196f );
+
    
     public void UpdateScale ()
     {    
@@ -28,91 +31,131 @@ public class TextFormatter : MonoBehaviour
                     key = 1;
                 }
                 displayScales[j].noteTexts[i].text = fBoard.CurrentMusicScale.NotesInScale[key.ToString()].ToString();               
-            }
-            AddChordQuality( j );
+            }            
+            AddChordQualities( displayScales[j] );
+            UpdateScaleDegreeSymbols( displayScales[j] );
         }        
     }
 
-    private void AddChordQuality( int displayIndex )    
-    {        
-        //add minor/diminished
-        switch ( scaleDrop.value )
+    private void AddChordQualities( DisplayScale scale )
+    {
+        List<string> qualities = GetChordQualitiesBasedOnScale( scaleDrop.value );        
+        int lastIndex = scale.noteTexts.Length - 1;
+
+        for( int i = 0; i < qualities.Count; i++ )
         {
-            case 0: //ionian
-            case 4: //lydian
-            case 5: //mixolydian                
-                AddMajorScaleQualities( displayScales[displayIndex] );
+            scale.noteTexts[i].text += qualities[i];
+        }
+        scale.noteTexts[lastIndex].text += qualities[0];
+    }
+
+    private List<string> GetChordQualitiesBasedOnScale( int scaleDropValue )
+    {
+        List<string> qualities = new List<string>();
+        int scaleIndex = CalculateScaleModePosition( scaleDropValue );
+
+        for( int i = 0; i < chordQualityList.Count; i++ )
+        {
+            qualities.Add( chordQualityList[scaleIndex] );
+            scaleIndex++;
+
+            if( scaleIndex >= chordQualityList.Count )
+            {
+                scaleIndex = scaleIndex - 7;
+            }
+        }
+        return qualities;
+    }
+
+    //*NOTE* since the scales are out of order in the dropdown menu. We need a special function to find the correct starting point
+    private int CalculateScaleModePosition ( int dropValue )
+    {
+        int modePosition = 0;
+        switch( dropValue )
+        {
+            case 0:     //MAJOR
+                modePosition = 0;
                 break;
-            case 1: //aeolian
-            case 2: //dorian
-            case 3: //phrygian
-            case 6: //locrian
-                AddMinorScaleQualities( displayScales[displayIndex] );
+            case 1:     //MINOR
+                modePosition = 5;
+                break;
+            case 2:     //DORIAN
+                modePosition = 1;
+                break;
+            case 3:     //PHRYGIAN
+                modePosition = 2;
+                break;
+            case 4:     //LYDIAN
+                modePosition = 3;
+                break;
+            case 5:     //MIXOLYDIAN
+                modePosition = 4;
+                break;
+            case 6:     //LOCRIAN
+                modePosition = 6;
                 break;
         }
-        UpdatePositions( displayIndex, scaleDrop );
+        return modePosition;
     }
 
-    private void AddMajorScaleQualities( DisplayScale dScale )
+    private void UpdateScaleDegreeSymbols( DisplayScale scale )
     {
-        dScale.noteTexts[1].text += "m";
-        dScale.noteTexts[2].text += "m";
-        dScale.noteTexts[5].text += "m";
-        dScale.noteTexts[6].text += "dim";
+        for ( int i = 0; i < scale.intervalTexts.Length; i++ )
+        {            
+            scale.intervalTexts[i].text = ParseChordQuality( scale.noteTexts[i].text, i );
+        }
     }
 
-    private void AddMinorScaleQualities( DisplayScale dScale )
+    private string ParseChordQuality( string chord, int scaleDegree )
     {
-        dScale.noteTexts[0].text += "m";
-        dScale.noteTexts[1].text += "dim";
-        dScale.noteTexts[3].text += "m";
-        dScale.noteTexts[4].text += "m";
-        dScale.noteTexts[7].text += "m";
-    }
+        string scaleDegreeSymbol = CalculateScaleDegreeSymbol( scaleDegree );
 
-    private void UpdatePositions( int display, Dropdown scale )
-    {
-        switch ( scale.value )
+        if ( chord.Contains("min") || chord.Contains("dim") )
+        {            
+            scaleDegreeSymbol = scaleDegreeSymbol.ToLower();
+        }
+        else if ( chord.Contains("dim") )
         {
             //'\u2205' is for half-diminished symbol
             //unicode symbols found here https://www.fileformat.info/info/unicode/font/arial_unicode_ms/list.htm
-            case 0: //ionian
-            case 4: //lydian
-            case 5: //mixolydian                
-                ChangeDisplayScaleToMajorIntervals( displayScales[display] );
+            scaleDegreeSymbol += '\u2205';
+        }
+
+        return scaleDegreeSymbol;
+    }
+
+    private string CalculateScaleDegreeSymbol ( int degree )
+    {
+        string degreeSymbol = "";
+
+        switch( degree )
+        {
+            case 0:
+            case 7:
+                degreeSymbol = "I";
                 break;
-            case 1: //aeolian
-            case 2: //dorian
-            case 3: //phrygian
-            case 6: //locrian                
-                ChangeDisplayScaleToMinorIntervals( displayScales[display] );
+            case 1:
+                degreeSymbol = "II";
+                break;
+            case 2:
+                degreeSymbol = "III";
+                break;
+            case 3:
+                degreeSymbol = "IV";
+                break;
+            case 4:
+                degreeSymbol = "V";
+                break;
+            case 5:
+                degreeSymbol = "VI";
+                break;
+            case 6:
+                degreeSymbol = "VII";
                 break;
         }
-    }
 
-    private void ChangeDisplayScaleToMajorIntervals( DisplayScale dScale )
-    {
-        dScale.intervalTexts[0].text = "I";
-        dScale.intervalTexts[1].text = "ii";
-        dScale.intervalTexts[2].text = "iii";
-        dScale.intervalTexts[3].text = "IV";
-        dScale.intervalTexts[4].text = "V";
-        dScale.intervalTexts[5].text = "vi";
-        dScale.intervalTexts[6].text = "vii" + '\u2205';
-        dScale.intervalTexts[7].text = "I";
+        return degreeSymbol;
     }
-
-    private void ChangeDisplayScaleToMinorIntervals( DisplayScale dScale )
-    {
-        dScale.intervalTexts[0].text = "i";
-        dScale.intervalTexts[1].text = "ii" + '\u2205';
-        dScale.intervalTexts[2].text = "III";
-        dScale.intervalTexts[3].text = "iv";
-        dScale.intervalTexts[4].text = "v";
-        dScale.intervalTexts[5].text = "VI";
-        dScale.intervalTexts[6].text = "VII";
-        dScale.intervalTexts[7].text = "i";
-    }    
     
     public void EnableArpeggioColor()
     {
