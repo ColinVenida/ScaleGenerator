@@ -14,7 +14,7 @@ public class TextFormatter : MonoBehaviour
     public Dropdown scaleDrop;
     public Dropdown rootDrop;
 
-    private List<string> chordQualityList = new List<string> { "", "min", "min", "", "", "min", "dim" };    
+    private List<string> chordQualityList = new List<string> { "", "m", "m", "", "", "m", "dim" };    
     private Color lightGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
     private Color darkGray = new Color( 0.196f, 0.196f, 0.196f );
 
@@ -110,7 +110,7 @@ public class TextFormatter : MonoBehaviour
     {
         string scaleDegreeSymbol = CalculateScaleDegreeSymbol( scaleDegree );
 
-        if ( chord.Contains("min") || chord.Contains("dim") )
+        if ( chord.Contains("m") || chord.Contains("dim") )
         {            
             scaleDegreeSymbol = scaleDegreeSymbol.ToLower();
         }

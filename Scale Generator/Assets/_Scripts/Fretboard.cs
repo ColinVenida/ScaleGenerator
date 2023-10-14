@@ -50,6 +50,9 @@ public class Fretboard : MonoBehaviour
     private int[] BASS_STANDARD = { 15, 8, 1, 11 };
     private int[] UKULELE_STANDARD = { 1, 11, 5, 15 };
 
+    private Color TEAL = new Color( 0.0f, 0.8f, 0.6f );
+    private Color WHITE = new Color( 1.0f, 1.0f, 1.0f );
+
 
     private void Awake()
     {
@@ -367,26 +370,22 @@ public class Fretboard : MonoBehaviour
     }
     
     //change the color of all the fret texts that match the given note
-    public void HighlightFrets( string note )
+    public void HighlightFrets( string noteName )
     {
         for (int i = 0; i < guitStrings.Length; i++)
         {        
             for (int j = 0; j < guitStrings[i].textArray.Length; j++)
-            {                
-                if (guitStrings[i].buttonArray[j].image.color.Equals( new Color( 0.0f, 0.6f, 0.8f ) )) //always keep the blue root notes
-                {
-                    continue;
-                }
-                if (guitStrings[i].textArray[j].text == note)
+            {          
+                if (guitStrings[i].textArray[j].text == noteName )
                 {                    
-                    guitStrings[i].buttonArray[j].image.color = new Color( 0.0f, 0.8f, 0.6f );
+                    guitStrings[i].buttonArray[j].image.color = TEAL;
                     guitStrings[i].textArray[j].fontStyle = FontStyle.Bold;
                 }
-                else if (guitStrings[i].textArray[j].color != Color.blue)
-                {                    
-                    guitStrings[i].buttonArray[j].image.color = new Color( 1.0f, 1.0f, 1.0f );
+                else 
+                {
+                    guitStrings[i].buttonArray[j].image.color = WHITE;
                     guitStrings[i].textArray[j].fontStyle = FontStyle.Normal;
-                }
+                }                
             }//end j
         }//end i
     }
