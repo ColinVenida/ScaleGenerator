@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Fretboard : MonoBehaviour
 {
-
     public GuitString[] guitStrings;
     public Button AddBtn;
     public Button RemoveBtn;
@@ -172,7 +171,7 @@ public class Fretboard : MonoBehaviour
         UpdateGuitStringsWithNewScale();        
 
         textForm.DisableArpeggioColor();
-        textForm.UpdateScale();
+        textForm.UpdateDisplayScalesOnFretboard();
         UpdateTheoreticalWarning();
         UpdateScaleTitle();
     }

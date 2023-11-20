@@ -18,144 +18,17 @@ public class TextFormatter : MonoBehaviour
     private Color lightGray = new Color( 0.2f, 0.2f, 0.2f, 0.2f );
     private Color darkGray = new Color( 0.196f, 0.196f, 0.196f );
 
-   
-    public void UpdateScale ()
-    {    
-        for ( int j = 0; j < displayScales.Length; j++ )
-        {            
-            for ( int i = 0; i < displayScales[j].noteTexts.Length; i++ )
-            {                
-                int key = i + 1;
-                if( key > 7 )
-                {
-                    key = 1;
-                }
-                displayScales[j].noteTexts[i].text = fBoard.CurrentMusicScale.NotesInScale[key.ToString()].ToString();               
-            }            
-            AddChordQualities( displayScales[j] );
-            UpdateScaleDegreeSymbols( displayScales[j] );
-        }        
-    }
-
-    private void AddChordQualities( DisplayScale scale )
+    public void UpdateDisplayScalesOnFretboard()
     {
-        List<string> qualities = GetChordQualitiesBasedOnScale( scaleDrop.value );        
-        int lastIndex = scale.noteTexts.Length - 1;
+        MusicScale scale = fBoard.CurrentMusicScale;
+        int dropValue = fBoard.scaleDrop.value;
 
-        for( int i = 0; i < qualities.Count; i++ )
+        for ( int i = 0; i < displayScales.Length; i++ )
         {
-            scale.noteTexts[i].text += qualities[i];
+            displayScales[i].UpdateNotes( scale, dropValue );
+            displayScales[i].UpdateScaleDegreeSymbols();
         }
-        scale.noteTexts[lastIndex].text += qualities[0];
-    }
-
-    private List<string> GetChordQualitiesBasedOnScale( int scaleDropValue )
-    {
-        List<string> qualities = new List<string>();
-        int scaleIndex = CalculateScaleModePosition( scaleDropValue );
-
-        for( int i = 0; i < chordQualityList.Count; i++ )
-        {
-            qualities.Add( chordQualityList[scaleIndex] );
-            scaleIndex++;
-
-            if( scaleIndex >= chordQualityList.Count )
-            {
-                scaleIndex = scaleIndex - 7;
-            }
-        }
-        return qualities;
-    }
-
-    //*NOTE* since the scales are out of order in the dropdown menu. We need a special function to find the correct starting point
-    private int CalculateScaleModePosition ( int dropValue )
-    {
-        int modePosition = 0;
-        switch( dropValue )
-        {
-            case 0:     //MAJOR
-                modePosition = 0;
-                break;
-            case 1:     //MINOR
-                modePosition = 5;
-                break;
-            case 2:     //DORIAN
-                modePosition = 1;
-                break;
-            case 3:     //PHRYGIAN
-                modePosition = 2;
-                break;
-            case 4:     //LYDIAN
-                modePosition = 3;
-                break;
-            case 5:     //MIXOLYDIAN
-                modePosition = 4;
-                break;
-            case 6:     //LOCRIAN
-                modePosition = 6;
-                break;
-        }
-        return modePosition;
-    }
-
-    private void UpdateScaleDegreeSymbols( DisplayScale scale )
-    {
-        for ( int i = 0; i < scale.intervalTexts.Length; i++ )
-        {            
-            scale.intervalTexts[i].text = ParseChordQuality( scale.noteTexts[i].text, i );
-        }
-    }
-
-    private string ParseChordQuality( string chord, int scaleDegree )
-    {
-        string scaleDegreeSymbol = CalculateScaleDegreeSymbol( scaleDegree );
-
-        if ( chord.Contains("m") || chord.Contains("dim") )
-        {            
-            scaleDegreeSymbol = scaleDegreeSymbol.ToLower();
-        }
-        else if ( chord.Contains("dim") )
-        {
-            //'\u2205' is for half-diminished symbol
-            //unicode symbols found here https://www.fileformat.info/info/unicode/font/arial_unicode_ms/list.htm
-            scaleDegreeSymbol += '\u2205';
-        }
-
-        return scaleDegreeSymbol;
-    }
-
-    private string CalculateScaleDegreeSymbol ( int degree )
-    {
-        string degreeSymbol = "";
-
-        switch( degree )
-        {
-            case 0:
-            case 7:
-                degreeSymbol = "I";
-                break;
-            case 1:
-                degreeSymbol = "II";
-                break;
-            case 2:
-                degreeSymbol = "III";
-                break;
-            case 3:
-                degreeSymbol = "IV";
-                break;
-            case 4:
-                degreeSymbol = "V";
-                break;
-            case 5:
-                degreeSymbol = "VI";
-                break;
-            case 6:
-                degreeSymbol = "VII";
-                break;
-        }
-
-        return degreeSymbol;
-    }
+    }      
     
     public void EnableArpeggioColor()
     {
@@ -176,9 +49,9 @@ public class TextFormatter : MonoBehaviour
             displayScales[i].noteTexts[3].color = c;
             displayScales[i].noteTexts[5].color = c;
 
-            displayScales[i].intervalTexts[1].color = c;
-            displayScales[i].intervalTexts[3].color = c;
-            displayScales[i].intervalTexts[5].color = c;
+            displayScales[i].scaleDegreeTexts[1].color = c;
+            displayScales[i].scaleDegreeTexts[3].color = c;
+            displayScales[i].scaleDegreeTexts[5].color = c;
         }
     }
 }
