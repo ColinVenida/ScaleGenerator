@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Values to represent notes as integer/indexes WITHOUT overlap.  Every note has a unique value even if there pitch is technically
+//the same.  This is used to convert dropdown values into Note objects
 public static class NoteValues
 {
     public const int A_flat = 0;

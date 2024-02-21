@@ -11,6 +11,19 @@ public class DisplayScale : MonoBehaviour
     private List<string> chordQualityList = new List<string> { "", "m", "m", "", "", "m", "dim" };
 
     public void UpdateNotes( MusicScale currentScale, int scaleDropValue )
+    {        
+        UpdateNoteTexts( currentScale );
+        AddChordQualities( scaleDropValue );        
+        UpdateScaleDegreeSymbols();
+    }
+
+    public void UpdateNotes_NoScaleDegreeSymbols( MusicScale currentScale, int scaleDropValue )
+    {
+        UpdateNoteTexts( currentScale );
+        AddChordQualities( scaleDropValue );
+    }
+
+    private void UpdateNoteTexts( MusicScale currentScale )
     {
         for ( int i = 0; i < noteTexts.Length; i++ )
         {
@@ -21,8 +34,6 @@ public class DisplayScale : MonoBehaviour
             }
             noteTexts[i].text = currentScale.NotesInScale[key.ToString()].ToString();
         }
-        AddChordQualities( scaleDropValue );
-        UpdateScaleDegreeSymbols();
     }
 
     private void AddChordQualities( int scaleDropValue )

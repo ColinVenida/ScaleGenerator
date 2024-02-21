@@ -2,46 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Values to represent notes as integer/indexes WITH overlap.  Used for evaluating enharmonic notes
+//ie.
+//  G#/Ab = 0 (same value, meaning they are enharmonic),
+//  A = 1, 
+//  A#/Bb = 2
+//  B = 3
 public static class PitchValues 
-{
-    public const int A = 1;
-    public const int B = 3;
-    public const int C = 4;
-    public const int D = 6;
-    public const int E = 8;
-    public const int F = 9;
-    public const int G = 11;
+{   
+    public static Dictionary<string, int> PitchValueDicitonary_NaturalNotes = new Dictionary<string, int>()
+    {
+        { "A", 1 },
+        { "B", 3 },
+        { "C", 4 },
+        { "D", 6 },
+        { "E", 8 },
+        { "F", 9 },
+        { "G", 11 },
+    };
 
     public const int LOWER_LIMIT = 0;
-    public const int UPPER_LIMIT = 12;
-
-    public static int AssignPitchValue( Note note )
-    {
-        int value = 0;
-        switch ( note.NaturalName )
-        {
-            case "A":
-                value = A;
-                break;
-            case "B":
-                value = B;
-                break;
-            case "C":
-                value = C;
-                break;
-            case "D":
-                value = D;
-                break;
-            case "E":
-                value = E;
-                break;
-            case "F":
-                value = F;
-                break;
-            case "G":
-                value = G;
-                break;            
-        }
-        return value;
-    }
+    public const int UPPER_LIMIT = 12;    
 }

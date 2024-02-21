@@ -20,39 +20,23 @@ public class Note
     public PitchModifier pitch;
     public PitchOverlap pitchOverlap = PitchOverlap.Natural_NONE;
     public bool hasDoubledPitchModifier = false;
-
-    public bool usedSharp;
-    public bool usedFlat;
-    public bool doubleSharp;
-    public bool doubleFlat;
         
+
 
     //constructor for a blank note
     public Note ()
     {
-        naturalName = "";               
-        usedSharp = false;
-        usedFlat = false;
-        doubleSharp = false;
-        doubleFlat = false;
+        naturalName = "";   
     }
 
     public Note( string n )
     {        
-        ParseName( n );       
-        usedSharp = false;
-        usedFlat = false;
-        doubleSharp = false;
-        doubleFlat = false;
+        ParseName( n );               
     }
 
     public Note( string n, int next, int prev)
     {        
-        ParseName( n );       
-        usedSharp = false;
-        usedFlat = false;
-        doubleSharp = false;
-        doubleFlat = false;
+        ParseName( n ); 
     }
 
     private void ParseName( string n )
@@ -74,6 +58,13 @@ public class Note
         }
         SetPitchValue();
         SetIntervalsToNextAndPrevNaturalNotes();
+
+        //*usually notes are created by the MusicScale class, but this case refers to a note created by the 
+        //  SecondaryDominantCalculator**
+        if ( n.Length == 3 )
+        {
+            SetDoublePitchModifier();
+        }
     }
 
     //need a separate function for to set up PitchValue because MusicScale creates the notes first,
@@ -85,8 +76,8 @@ public class Note
     }
 
     private void SetPitchValue()
-    {
-        pitchValue = PitchValues.AssignPitchValue( this );
+    {        
+        pitchValue = PitchValues.PitchValueDicitonary_NaturalNotes[ this.NaturalName ];
         pitchValue = pitchValue + CalculatePitchValueOffset();
         CheckPitchValueBounds();
     }
@@ -172,45 +163,10 @@ public class Note
         else
             return PitchModifier.Flat;
     }
-
-    public string GetNote ()
-    {
-        if( usedSharp )
-        {
-            if( doubleSharp )
-            {
-                return naturalName + "##";
-            }
-            else 
-            {
-                return naturalName + "#";
-            }            
-        }
-        else if ( usedFlat )
-        {
-            if ( doubleFlat )
-            {
-                return naturalName + "bb";
-            }
-            else
-            {
-                return naturalName + "b";
-            }
-        }
-        else
-        {
-            return naturalName;
-        }
-    }
-
+        
     public string GetNaturalName()
     {
         return naturalName;
-    }
-
-    public bool IsSameNote_IgnorePitch( Note n )
-    {
-        return ( this.naturalName == n.naturalName );
     }
 
     public override string ToString()

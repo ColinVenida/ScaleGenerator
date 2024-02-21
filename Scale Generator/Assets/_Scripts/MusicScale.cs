@@ -14,6 +14,8 @@ public class MusicScale
     private Dictionary<string, Note> notesInScale;
     public Dictionary<string, Note> NotesInScale { get { return notesInScale; } }
 
+    
+
     private bool isTheoretical = false;
     public bool IsTheoretical 
     {
