@@ -11,9 +11,9 @@ public class SceneSwitch : MonoBehaviour
         SceneManager.LoadSceneAsync( "VirtualFretboard" );
     }
 
-    public void LoadScaleScene ()
+    public void LoadScaleComparerScene ()
     {
-        SceneManager.LoadSceneAsync( "GeneratorScene" );
+        SceneManager.LoadSceneAsync( "ScaleComparer" );
     }
 
     public void LoadQuizScene ()

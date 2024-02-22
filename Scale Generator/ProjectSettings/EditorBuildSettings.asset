@@ -14,4 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/QuizScene.unity
     guid: 942c80028cfc6934883cb50142482974
+  - enabled: 1
+    path: Assets/_Scenes/ScaleComparer.unity
+    guid: afe42f79c75d44541ad6dea2a605a654
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

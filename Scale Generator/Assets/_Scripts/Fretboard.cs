@@ -153,8 +153,7 @@ public class Fretboard : MonoBehaviour
     {
         //workaround for avoiding the OnValueChanged event during Fretboard.Awake()
         if ( !areGuitStringsInitialized )
-        {
-            Debug.Log( "GuitStrings not initialized!" );
+        {            
             return;
         }
         ResetArpeggio();        

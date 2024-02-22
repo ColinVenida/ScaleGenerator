@@ -11,20 +11,52 @@ public class ScaleComparable : MonoBehaviour
     public Text locrianWarning;
     public DisplayScale displayScale;
     public List<GameObject> secondaryDomObjects;
+    public int playerPrefID;
 
+    private string playerPrefName_root = "ScaleComparable_Root_";
+    private string playerPrefName_scale = "ScaleComparable_Scale_";
     private MusicScale musicScale;
     private List<Note> secondaryDominantNotes;
+    private bool isInitialized = false;
 
     public void Start()
     {
         secondaryDominantNotes = new List<Note>();
+        playerPrefName_root = "ScaleComparable_Root_" + playerPrefID;
+        playerPrefName_scale = "ScaleComparable_Scale_" + playerPrefID;
+
+        InitializeDropdownSettingFromPlayerPref();
+        //leave the secondaryDomToggle off by default?
         CalculateScale();        
     }
 
+    private void InitializeDropdownSettingFromPlayerPref()
+    {
+        if ( PlayerPrefs.HasKey(playerPrefName_root) )
+        {
+            rootDrop.value = PlayerPrefs.GetInt( playerPrefName_root );
+            scaleDrop.value = PlayerPrefs.GetInt( playerPrefName_scale );
+        }
+        else
+        {
+            PlayerPrefs.SetInt( playerPrefName_root, rootDrop.value );
+            PlayerPrefs.SetInt( playerPrefName_scale, scaleDrop.value );
+        }
+        isInitialized = true;
+    }  
+
     public void CalculateScale()
     {
+        if ( !isInitialized )
+        {
+            return;
+        }
         string root = NoteValues.ConvertNote_IntToString( rootDrop.value );
         ScaleFormulas.ScaleFormula formula = ScaleFormulas.GetFormulaFromDropValue( scaleDrop.value );
+
+        PlayerPrefs.SetInt( playerPrefName_root, rootDrop.value );
+        PlayerPrefs.SetInt( playerPrefName_scale, scaleDrop.value );
+
         musicScale = new MusicScale( root, formula );
 
         ToggleSecondaryDominants();
