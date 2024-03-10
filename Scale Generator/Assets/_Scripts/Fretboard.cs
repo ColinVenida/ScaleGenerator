@@ -56,34 +56,11 @@ public class Fretboard : MonoBehaviour
     private void Awake()
     {
         InitializeMusicScale();
-
-        //check and set the PlayerPrefs
-        if ( !PlayerPrefs.HasKey( "GuitStringsVisible" ) )
-        {
-            PlayerPrefs.SetInt( "GuitStringsVisible", 6 );
-        }
-
-        if ( !PlayerPrefs.HasKey( "GuitStringOne" ) )
-        {
-            //if it doesn't have the first one, then set them all
-            PlayerPrefs.SetInt( "GuitStringOne", 7 );
-            PlayerPrefs.SetInt( "GuitStringTwo", 2 );
-            PlayerPrefs.SetInt( "GuitStringThree", 10 );
-            PlayerPrefs.SetInt( "GuitStringFour", 5 );
-            PlayerPrefs.SetInt( "GuitStringFive", 0 );
-            PlayerPrefs.SetInt( "GuitStringSix", 7 );
-            PlayerPrefs.SetInt( "GuitStringSeven", 2 );
-            PlayerPrefs.SetInt( "GuitStringEight", 10 );
-        }
-
-        if ( !PlayerPrefs.HasKey( "presetValue" ) )
-        {
-            PlayerPrefs.SetInt( "presetValue", 0 );
-        }
     }
 
     private void InitializeMusicScale()
     {
+        InitializePlayerPrefs();
         int scaleValue = PlayerPrefs.GetInt( "scaleType" );
         int rootValue = PlayerPrefs.GetInt( "rootNote" );
 
@@ -93,9 +70,42 @@ public class Fretboard : MonoBehaviour
 
         scaleDrop.value = scaleValue;
         rootDrop.value = rootValue;
-
+        
         InitializeGuitStringTuning();
         UpdateScaleTitle();
+    }
+
+    private void InitializePlayerPrefs()
+    {
+        //check and set the PlayerPrefs
+        if ( !PlayerPrefs.HasKey( "GuitStringsVisible" ) )
+        {
+            PlayerPrefs.SetInt( "GuitStringsVisible", 6 );
+        }
+
+        if ( !PlayerPrefs.HasKey( "GuitStringOne" ) )
+        {
+            //if it doesn't have the first one, then set them all
+            PlayerPrefs.SetInt( "GuitStringOne", 11 );
+            PlayerPrefs.SetInt( "GuitStringTwo", 4 );
+            PlayerPrefs.SetInt( "GuitStringThree", 15 );
+            PlayerPrefs.SetInt( "GuitStringFour", 8 );
+            PlayerPrefs.SetInt( "GuitStringFive", 1 );
+            PlayerPrefs.SetInt( "GuitStringSix", 11 );
+            PlayerPrefs.SetInt( "GuitStringSeven", 4 );
+            PlayerPrefs.SetInt( "GuitStringEight", 15 );
+        }
+
+        if ( !PlayerPrefs.HasKey( "scaleType") )
+        {
+            PlayerPrefs.SetInt( "scaleType", 0 );
+            PlayerPrefs.SetInt( "rootNote", 5 );
+        }
+
+        if ( !PlayerPrefs.HasKey( "presetValue" ) )
+        {
+            PlayerPrefs.SetInt( "presetValue", 0 );
+        }
     }
 
     private void InitializeGuitStringTuning()

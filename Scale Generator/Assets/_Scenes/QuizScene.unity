@@ -1045,6 +1045,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2499723557169453069, guid: 6af818b14a5e22849aba1a7054846f45,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000017166
+      objectReference: {fileID: 0}
     - target: {fileID: 4379621398195296482, guid: 6af818b14a5e22849aba1a7054846f45,
         type: 3}
       propertyPath: closeNavMenuBtn

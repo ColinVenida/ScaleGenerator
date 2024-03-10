@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class ScrollSnap : MonoBehaviour
 {
-
-
     //TODO:  is there a way to get these references without setting them to public, and then drag-dropping them in the editor?
 
     public Dropdown parentDrop;             //referenct to the parent's dropdown component
