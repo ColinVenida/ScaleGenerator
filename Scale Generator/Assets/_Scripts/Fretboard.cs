@@ -179,8 +179,9 @@ public class Fretboard : MonoBehaviour
 
         UpdateGuitStringsWithNewScale();        
 
-        textForm.DisableArpeggioColor();
+        //textForm.DisableArpeggioColor();
         textForm.UpdateDisplayScalesOnFretboard();
+        textForm.UpdateArpeggioTextColor();
         UpdateTheoreticalWarning();
         UpdateScaleTitle();
     }
