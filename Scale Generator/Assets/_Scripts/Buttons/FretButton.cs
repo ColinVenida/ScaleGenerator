@@ -36,7 +36,8 @@ public class FretButton : MonoBehaviour
                     str = str.Remove( childText.text.Length - remove );
                 }                
             }
-            fBoard.HighlightFrets( str );
+            //fBoard.HighlightFrets( str );
+            fBoard.ToggleHighlight( str );
         }
     }       
 }

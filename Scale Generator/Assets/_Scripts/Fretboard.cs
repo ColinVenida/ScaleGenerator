@@ -49,13 +49,14 @@ public class Fretboard : MonoBehaviour
     private int[] BASS_STANDARD = { 15, 8, 1, 11 };
     private int[] UKULELE_STANDARD = { 1, 11, 5, 15 };
 
+    private string highlightedText;
     private Color TEAL = new Color( 0.0f, 0.8f, 0.6f );
     private Color WHITE = new Color( 1.0f, 1.0f, 1.0f );
 
 
     private void Awake()
     {
-        InitializeMusicScale();
+        InitializeMusicScale();        
     }
 
     private void InitializeMusicScale()
@@ -155,6 +156,7 @@ public class Fretboard : MonoBehaviour
         SetScale();        
         visibleStrings = PlayerPrefs.GetInt( "GuitStringsVisible" );
         ToggleStrings( PlayerPrefs.GetInt( "GuitStringsVisible" ) );
+        highlightedText = "";
         hasStartMethodFinished = true;
     }    
 
@@ -377,6 +379,20 @@ public class Fretboard : MonoBehaviour
             guitStrings[i].CancelArpeggio();
         }        
     }
+
+    public void ToggleHighlight( string noteName )
+    {
+        if ( highlightedText == noteName )
+        {
+            highlightedText = "";
+            RemoveHighlight();
+        }
+        else
+        {
+            highlightedText = noteName;
+            HighlightFrets( noteName );
+        }
+    }
     
     //change the color of all the fret texts that match the given note
     public void HighlightFrets( string noteName )
@@ -401,8 +417,21 @@ public class Fretboard : MonoBehaviour
 
     public void HighlightFrets( int scaleDegree )
     {
-        string noteName = currentMusicScale.NotesInScale[scaleDegree.ToString()].ToString();        
-        HighlightFrets( noteName );
+        string noteName = currentMusicScale.NotesInScale[scaleDegree.ToString()].ToString();
+        //HighlightFrets( noteName );
+        ToggleHighlight( noteName );
+    }
+
+    public void RemoveHighlight()
+    {
+        for ( int i = 0; i < guitStrings.Length; i++ )
+        {
+            for ( int j = 0; j < guitStrings[i].textArray.Length; j++ )
+            {
+                guitStrings[i].buttonArray[j].image.color = WHITE;
+                guitStrings[i].textArray[j].fontStyle = FontStyle.Normal;
+            }
+        }
     }
 
     public List<string> GetArplist()
