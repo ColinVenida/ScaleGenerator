@@ -62,7 +62,8 @@ public class ScaleComparable : MonoBehaviour
         ToggleSecondaryDominants();
         if ( UsingLocrian() )
         {            
-            Debug.Log( "Using Locrian!" );            
+            Debug.Log( "Using Locrian!" );
+            UpdateDisplayScale();
             return;
         }
         else
