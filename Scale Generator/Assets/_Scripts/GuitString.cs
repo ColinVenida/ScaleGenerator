@@ -20,6 +20,11 @@ public class GuitString : MonoBehaviour
     private int[] arpeggioFrets = { 0, 0, 0, 0 };
     private string[] arpeggioNotes = { "", "", "", "" };
 
+
+    //**BUG***
+    //**the frets do not update properly in Db Aeloian, and the string is tuned to A# or G#**
+    //**the frets do not update properly in D minor or D# minor when string is tuend to G#
+    // D# minor and G# tuning
     public void CalculateFrets_New( int dropValue )
     {
         //workaround for avoiding the OnValueChanged event during Fretboard.Awake()
